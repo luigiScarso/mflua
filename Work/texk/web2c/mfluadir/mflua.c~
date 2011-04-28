@@ -1,0 +1,511 @@
+#include "mflua.h"
+
+/**************************************************************/
+/*                                                            */
+/* type definitionss                                          */
+/*                                                            */
+/**************************************************************/
+typedef integer halfword;
+
+typedef integer strnumber;
+
+typedef unsigned char quarterword;
+
+typedef integer scaled;
+
+typedef integer angle ;
+
+typedef char smallnumber;
+
+typedef union
+{
+  struct
+  {
+#ifdef WORDS_BIGENDIAN
+    halfword RH, LH;
+#else
+    halfword LH, RH;
+#endif
+  } v;
+
+  struct
+  { /* Make B0,B1 overlap the most significant bytes of LH.  */
+#ifdef WORDS_BIGENDIAN
+    halfword junk;
+    short B0, B1;
+#else /* not WORDS_BIGENDIAN */
+  /* If 32-bit mem<ory words, have to do something.  */
+#if defined (SMALLTeX) || defined (SMALLMF) || defined (SMALLMP)
+    fixme
+#else
+    short B1, B0;
+#endif /* big memory words */
+#endif /* LittleEndian */
+  } u;
+} twohalves;
+
+
+
+typedef struct
+{
+  struct
+  {
+#ifdef WORDS_BIGENDIAN
+    quarterword B0, B1, B2, B3;
+#else
+    quarterword B3, B2, B1, B0;
+#endif
+  } u;
+} fourquarters;
+
+
+
+typedef union
+{
+#ifdef TeX
+  glueratio gr;
+  twohalves hh;
+#else
+  twohalves hhfield;
+#endif
+#ifdef XeTeX
+  voidpointer ptr;
+#endif
+#ifdef WORDS_BIGENDIAN
+  integer cint;
+  fourquarters qqqq;
+#else /* not WORDS_BIGENDIAN */
+  struct
+  {
+    //#if defined (TeX) && !defined (SMALLTeX) || defined (MF) && !defined (SMALLMF) || defined (MP) && !defined (SMALLMP)
+    halfword junk;
+    //#endif /* big {TeX,MF,MP} */
+    integer CINT;
+  } u;
+
+  struct
+  {
+#ifndef XeTeX
+    //#if defined (TeX) && !defined (SMALLTeX) || defined (MF) && !defined (SMALLMF) || defined (MP) && !defined (SMALLMP)
+    halfword junk;
+    //#endif /* big {TeX,MF,MP} */
+#endif
+    fourquarters QQQQ;
+  } v;
+#endif /* not WORDS_BIGENDIAN */
+} memoryword;
+
+
+#define EXTERN extern
+#define b0 u.B0
+#define b1 u.B1
+#define b2 u.B2
+#define b3 u.B3
+
+#define rh v.RH
+#define lhfield v.LH
+
+#ifndef WORDS_BIGENDIAN
+#define cint u.CINT
+#endif
+
+#ifndef WORDS_BIGENDIAN
+#define qqqq v.QQQQ
+#endif
+
+
+
+//#define printdiagnostic(s, t, nuline) zprintdiagnostic((strnumber) (s), (strnumber) (t), (boolean) (nuline))
+//#define print(s) zprint((integer) (s))
+//#define printarg(q, n, b) zprintarg((halfword) (q), (integer) (n), (halfword) (b)
+//memoryword  *mems[]  ;
+EXTERN memoryword  *mem  ;
+// Lazy 
+EXTERN void znsincos(int);
+
+
+
+/**************************************************************/
+/*                                                            */
+/* private functions                                          */
+/*                                                            */
+/**************************************************************/
+lua_State *Luas[];
+
+//EXTERN memoryword *mem  ;
+
+void priv_lua_reporterrors(lua_State *L, int status)
+{
+  if ( status!=0 ) {
+    Luas[0] = 0;     // Why ?
+    fprintf(stderr,"\n! %s\n",lua_tostring(L, -1));
+    lua_pop(L, 1); /* remove error message */
+  }
+}
+
+/*                                                            */ 
+/* These depend from mf0.c, so it's not a good idea           */
+/*                                                            */ 
+/*                                                            */ 
+/*                                                            */ 
+
+/* @d link(#) == mem[#].hh.rh {the |link| field of a memory word} */
+static int priv_mfweb_link(lua_State *L)
+{
+  halfword p,q;
+  p = (halfword) lua_tonumber(L,1);
+  q = mem [p ].hhfield.v.RH ;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+/* @d info(#) == mem[#].hh.lh {the |info| field of a memory word} */
+static int priv_mfweb_info(lua_State *L)
+{
+  halfword p,q;
+  p = (halfword) lua_tonumber(L,1);
+  q = mem [p ].hhfield.v.LH ;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+
+/* @d x_coord(#) == mem[#+1].sc {the |x| coordinate of this knot} */
+static int priv_mfweb_x_coord(lua_State *L)
+{
+  halfword p;
+  int q;
+  p = (halfword) lua_tonumber(L,1);
+  q = mem [p + 1 ].cint ;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+/* @d y_coord(#) == mem[#+2].sc {the |y| coordinate of this knot} */
+static int priv_mfweb_y_coord(lua_State *L)
+{
+  halfword p,q;
+  p = (halfword) lua_tonumber(L,1);
+  q = mem [p + 2 ].cint;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+
+/* @d left_type(#) == mem[#].hh.b0 {characterizes the path entering this knot} */
+static int priv_mfweb_left_type(lua_State *L)
+{
+  halfword p,q;
+  p = (halfword) lua_tonumber(L,1);
+  q = mem [p ].hhfield .b0;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+/* @d right_type(#) == mem[#].hh.b1 {characterizes the path leaving this knot} */
+static int priv_mfweb_right_type(lua_State *L)
+{
+  halfword p,q;
+  p = (halfword) lua_tonumber(L,1);
+  q = mem [p ].hhfield .b1;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+
+/* @d left_x(#) == mem[#+3].sc {the |x| coordinate of previous control point} */
+static int priv_mfweb_left_x(lua_State *L)
+{
+  halfword p;
+  integer q ;
+  p = (halfword) lua_tonumber(L,1);
+  q = (integer) mem[p + 3].cint ;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+
+/* @d left_y(#) == mem[#+4].sc {the |y| coordinate of previous control point} */
+static int priv_mfweb_left_y(lua_State *L)
+{
+  halfword p;
+  integer q ;
+  p = (halfword) lua_tonumber(L,1);
+  q = (integer) mem[p + 4].cint ;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+
+/* @d right_x(#) == mem[#+5].sc {the |x| coordinate of next control point} */
+static int priv_mfweb_right_x(lua_State *L)
+{
+  halfword p;
+  integer q ;
+  p = (halfword) lua_tonumber(L,1);
+  q = (integer) mem[p + 5].cint ;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+/* @d right_y(#) == mem[#+6].sc {the |y| coordinate of next control point} */
+static int priv_mfweb_right_y(lua_State *L)
+{
+  halfword p;
+  integer q;
+  p = (halfword) lua_tonumber(L,1);
+  q = (integer) mem[p + 6].cint ;
+  lua_pushnumber(L,q);
+  return 1;
+}
+
+/* @ Conversely, the |n_sin_cos| routine takes an |angle| and produces the sine */
+/* and cosine of that angle. The results of this routine are */
+/* stored in global integer variables |n_sin| and |n_cos|. */
+
+/* @<Glob...@>= */
+/* @!n_sin,@!n_cos:fraction; {results computed by |n_sin_cos|} */
+
+/* @ Given an integer |z| that is $2^{20}$ times an angle $\theta$ in degrees, */
+/* the purpose of |n_sin_cos(z)| is to set */
+/* |x=@t$r\cos\theta$@>| and |y=@t$r\sin\theta$@>| (approximately), */
+/* for some rather large number~|r|. The maximum of |x| and |y| */
+/* will be between $2^{28}$ and $2^{30}$, so that there will be hardly */
+/* any loss of accuracy. Then |x| and~|y| are divided by~|r|. */
+static int priv_mfweb_n_sin_cos(lua_State *L)
+{
+  angle z;
+  z = (angle) lua_tonumber(L,1);
+  znsincos(z);
+  return 0;
+}
+
+	   
+/* @ When a lot of work is being done on a particular edge structure, we plant */
+/* a pointer to its main header in the global variable |cur_edges|. */
+/* This saves us from having to pass this pointer as a parameter over and */
+/* over again between subroutines. */
+
+/* Similarly, |cur_wt| is a global weight that is being used by several */
+/* procedures at once. */
+
+/* @<Glob...@>= */
+/* @!cur_edges:pointer; {the edge structure of current interest} */
+/* @!cur_wt:integer; {the edge weight of current interest} */
+EXTERN halfword curedges;
+static int priv_mfweb_LUAGLOBALGET_cur_edges(lua_State *L)
+{
+  halfword p = curedges;
+  lua_pushnumber(L,p);
+  return 1;
+}
+
+/* @d mem_top==30000 {largest index in the |mem| array dumped by \.{INIMF}; */
+/*   must be substantially larger than |mem_min| */
+/*   and not greater than |mem_max|} */
+EXTERN integer memtop  ;
+static int priv_mfweb_LUAGLOBALGET_mem_top(lua_State *L)
+{
+  integer p = memtop;
+  lua_pushnumber(L,p);
+  return 1;
+}
+
+
+/**************************************************************/
+/*                                                            */
+/* mflua layer                                                */
+/*                                                            */
+/**************************************************************/
+
+int mfluainitialize()
+{
+  lua_State *L = luaL_newstate();
+  luaL_openlibs(L);
+  Luas[0] = L;
+  //mem = memweb;
+  //
+  /* register lua functions */
+  lua_pushcfunction(L, priv_mfweb_link);lua_setglobal(L, "link");
+  lua_pushcfunction(L, priv_mfweb_info);lua_setglobal(L, "info");
+  lua_pushcfunction(L, priv_mfweb_x_coord);lua_setglobal(L, "x_coord");
+  lua_pushcfunction(L, priv_mfweb_y_coord);lua_setglobal(L, "y_coord");
+  lua_pushcfunction(L, priv_mfweb_left_type);lua_setglobal(L, "left_type");
+  lua_pushcfunction(L, priv_mfweb_right_type);lua_setglobal(L, "right_type");
+  lua_pushcfunction(L, priv_mfweb_left_x);lua_setglobal(L, "left_x");
+  lua_pushcfunction(L, priv_mfweb_left_y);lua_setglobal(L, "left_y");
+  lua_pushcfunction(L, priv_mfweb_right_x);lua_setglobal(L, "right_x");
+  lua_pushcfunction(L, priv_mfweb_right_y);lua_setglobal(L, "right_y");
+  lua_pushcfunction(L, priv_mfweb_n_sin_cos);lua_setglobal(L, "n_sin_cos");
+  lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_cur_edges);lua_setglobal(L, "LUAGLOBALGET_cur_edges");
+  lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_mem_top);lua_setglobal(L, "LUAGLOBALGET_mem_top");
+  //lua_pushcfunction(L, priv_mfweb_SKELETON);lua_setglobal(L, "SKELETON");
+  // 
+  /* execute Lua external "mfluaini.lua" */
+  const char* file = "mfluaini.lua";
+  int res = luaL_loadfile(L, file);
+  if ( res==0 ) {
+      res = lua_pcall(L, 0, 0, 0);
+    }
+  //
+  //stackdump_g(L);
+
+  //
+  priv_lua_reporterrors(L, res);
+
+  return 0;
+}
+
+/* Not a good way: */
+/* 1) these definitions are taken from mfcoerc.h which is generated at run-time */
+/* 2) too much coupling with webc2c translation of mf.web*/
+/*                               */
+/* #define printdiagnostic(s, t, nuline) zprintdiagnostic((strnumber) (s), (strnumber) (t), (boolean) (nuline)) */
+/* #define print(s) zprint((integer) (s)) */
+/* #define printarg(q, n, b) zprintarg((halfword) (q), (integer) (n), (halfword) (b) */
+/* int mfluaprintpath P3C(halfword, h , strnumber, s , boolean, nuline) */
+/* { */
+/*   fprintf(stderr,"\n! %d \n",s); */
+/*   printdiagnostic ( 517 , s , nuline ) ; */
+/*   println () ; */
+/*   print ( 518 ) ; */
+/*   println () ; */
+/*   fprintf(stderr,"\n! %s\n","*end***************"); */
+
+/*   lua_State *L = Luas[0]; */
+/*   const char* file = "print_path.lua"; */
+/*   int res = luaL_loadfile(L, file); */
+/*   if ( res==0 ) { */
+/*       res = lua_pcall(L, 0, 0, 0); */
+/*     } */
+/*   // */
+/*   //stackdump_g(L); */
+
+/*   // */
+/*   priv_lua_reporterrors(L, res); */
+/*   return 0; */
+
+/* } */
+
+int mfluaprintpath P3C(halfword, h , strnumber, s , boolean, nuline)
+{
+  halfword p, q ;
+  EXTERN memoryword  *mem  ;
+
+  p = h ;
+  lua_State *L = Luas[0];
+  const char* file = "print_path.lua";
+  int res = luaL_loadfile(L, file);
+  if ( res==0 ){
+      res = lua_pcall(L, 0, 0, 0);
+      if (res==0){
+	lua_getglobal(L, "print_path");  /* function to be called */
+	lua_pushnumber(L, h);   /* push 1st argument */
+	lua_pushnumber(L, s);   /* push 2nd argument */
+	lua_pushnumber(L, nuline);   /* push 3nd argument */
+	/* do the call (3 arguments, 1 result) */
+	res = lua_pcall(L, 3, 1, 0) ;
+	if (res==0) {
+	  /* retrieve result */
+	  int z = 0;
+	  if (!lua_isnumber(L, -1)){
+	    fprintf(stderr,"\n! Error:function `print_path' must return a number\n",lua_tostring(L, -1));
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }else {
+	    z = lua_tonumber(L, -1);
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }
+	}
+      }
+  }
+  //
+  //stackdump_g(L);
+  //
+  priv_lua_reporterrors(L, res);
+  return 0;
+
+}
+
+ 
+int mfluaprintedges P4C (strnumber,s, boolean,nuline, integer, xoff, integer, yoff)
+{
+
+  lua_State *L = Luas[0];
+  const char* file = "print_edges.lua";
+  int res = luaL_loadfile(L, file);
+  if ( res==0 ){
+      res = lua_pcall(L, 0, 0, 0);
+      if (res==0){
+	lua_getglobal(L, "print_edges");  /* function to be called */
+	lua_pushnumber(L, s);   /* push 1st argument */
+	lua_pushnumber(L, nuline);   /* push 2nd argument */
+	lua_pushnumber(L, xoff);   /* push 3nd argument */
+	lua_pushnumber(L, yoff);   /* push 4nd argument */
+	/* do the call (4 arguments, 1 result) */
+	res = lua_pcall(L, 4, 1, 0) ;
+	if (res==0) {
+	  /* retrieve result */
+	  int z = 0;
+	  if (!lua_isnumber(L, -1)){
+	    fprintf(stderr,"\n! Error:function `print_edges' must return a number\n",lua_tostring(L, -1));
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }else {
+	    z = lua_tonumber(L, -1);
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }
+	}
+      }
+  }
+  //
+  //stackdump_g(L);
+  //
+  priv_lua_reporterrors(L, res);
+  return 0;
+
+}
+
+
+int mfluaoffsetprep P2C (halfword, c, halfword, h)
+{
+
+  lua_State *L = Luas[0];
+  const char* file = "offset_prep.lua";
+  int res = luaL_loadfile(L, file);
+  if ( res==0 ){
+      res = lua_pcall(L, 0, 0, 0);
+      if (res==0){
+	lua_getglobal(L, "offset_prep");  /* function to be called */
+	lua_pushnumber(L, c);   /* push 1st argument */
+	lua_pushnumber(L, h);   /* push 2nd argument */
+	/* do the call (2 arguments, 1 result) */
+	res = lua_pcall(L, 2, 1, 0) ;
+	if (res==0) {
+	  /* retrieve result */
+	  int z = 0;
+	  if (!lua_isnumber(L, -1)){
+	    fprintf(stderr,"\n! Error:function `offset_prep' must return a number\n",lua_tostring(L, -1));
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }else {
+	    z = lua_tonumber(L, -1);
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }
+	}
+      }
+  }
+  //
+  //stackdump_g(L);
+  //
+  priv_lua_reporterrors(L, res);
+  return 0;
+
+}
+
+
+
+

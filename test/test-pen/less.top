@@ -1,0 +1,27 @@
+% runtime options files (command line driven)
+\unprotect
+% feedback and basic job control
+% handy for special styles
+\startluacode
+document = document or { }
+document.arguments={
+}
+document.files={
+ "envelope.tex",
+ "less",
+ "out",
+}
+\stopluacode
+% process info
+\setupsystem[inputfile=envelope.tex]
+\setupsystem[\c!n=1,\c!m=1]
+% modes
+% options (not that important)
+\startsetups *runtime:options
+\setupoutput[pdftex]
+\stopsetups
+% styles and modules
+\startsetups *runtime:modules
+\stopsetups
+% done
+\protect \endinput

@@ -1,0 +1,1126 @@
+This is METAFONT, Version 2.718281 (Web2C 7.5.7) (base=mf 2011.1.16)  4 APR 2011 01:13
+**\mode=otcff; input mathsy
+(mathsy.mf
+>> font_setup
+! Isolated expression.
+<to be read again> 
+                   ;
+l.7 mode_setup; font_setup;
+                           
+? q
+OK, entering batchmode...
+>> hair
+! Internal quantity `autorounding' must receive a known value.
+<to be read again> 
+                   ;
+l.9 autorounding:=hair;
+                       
+I can't set an internal quantity to anything but a known
+numeric value, so I'll have to ignore this assignment.
+
+>> slant
+! Improper font parameter.
+<to be read again> 
+                   ;
+l.13 font_slant slant;
+                       font_x_height x_height#;
+I'm zeroing this one. Proceed, with fingers crossed.
+
+>> x_height#
+! Improper font parameter.
+<to be read again> 
+                   ;
+l.13 font_slant slant; font_x_height x_height#;
+                                               
+I'm zeroing this one. Proceed, with fingers crossed.
+
+>> monospace
+! Not implemented: not(unknown numeric).
+<to be read again> 
+                   :
+l.14 font_quad 18u# if not monospace:
+                                     +4letter_fit# fi;
+I'm afraid I don't know how to apply that operation to that
+particular type. Continue, and I'll simply return the
+argument (shown above) as the result of the operation.
+
+>> monospace
+! Undefined condition will be treated as `false'.
+<to be read again> 
+                   :
+l.14 font_quad 18u# if not monospace:
+                                     +4letter_fit# fi;
+The expression shown above should have had a definite
+true-or-false value. I'm changing it to `false'.
+
+>> 18u#
+! Improper font parameter.
+<to be read again> 
+                   ;
+l.14 ...ad 18u# if not monospace:+4letter_fit# fi;
+                                                  
+I'm zeroing this one. Proceed, with fingers crossed.
+
+ (symbol.mf
+>> cmchar
+! Isolated expression.
+<to be read again> 
+                   "Double leftward arrow"
+l.298 cmchar "Double leftward arrow"
+                                    ;
+I couldn't find an `=' or `:=' after the
+expression that is shown above this error message,
+so I guess I'll just ignore it and carry on.
+
+! Extra tokens will be flushed.
+<to be read again> 
+                   "Double leftward arrow"
+l.298 cmchar "Double leftward arrow"
+                                    ;
+I've just read as much of that statement as I could fathom,
+so a semicolon should have been next. It's very puzzling...
+but I'll try to get myself back together, by ignoring
+everything up to the next `;'. Please insert a semicolon
+now in front of anything that you don't want me to delete.
+(See Chapter 27 of The METAFONTbook for an example.)
+
+>> compute_spread
+! Isolated expression.
+<to be read again> 
+                   (
+l.299 compute_spread(
+                     .45x_height#,.55x_height#);
+I couldn't find an `=' or `:=' after the
+expression that is shown above this error message,
+so I guess I'll just ignore it and carry on.
+
+! Extra tokens will be flushed.
+<to be read again> 
+                   (
+l.299 compute_spread(
+                     .45x_height#,.55x_height#);
+I've just read as much of that statement as I could fathom,
+so a semicolon should have been next. It's very puzzling...
+but I'll try to get myself back together, by ignoring
+everything up to the next `;'. Please insert a semicolon
+now in front of anything that you don't want me to delete.
+(See Chapter 27 of The METAFONTbook for an example.)
+
+! Missing `,' has been inserted.
+<to be read again> 
+                   (
+l.300 beginchar(oct"050",18u#,v_center(
+                                       spread#+rule_thickness#));
+I've finished reading a macro argument and am about to
+read another; the arguments weren't delimited correctly.
+You might want to delete some tokens before continuing.
+
+>> 18u#
+! Internal quantity `charwd' must receive a known value.
+<to be read again> 
+                   ;
+beginchar->...byte(EXPR0)else:0fi;charwd:=(EXPR1);
+                                                  charht:=(EXPR2);chardp:=(E...
+l.300 ...",18u#,v_center(spread#+rule_thickness#))
+                                                  ;
+I can't set an internal quantity to anything but a known
+numeric value, so I'll have to ignore this assignment.
+
+>> v_center
+! Internal quantity `charht' must receive a known value.
+<to be read again> 
+                   ;
+beginchar->...0fi;charwd:=(EXPR1);charht:=(EXPR2);
+                                                  chardp:=(EXPR3);w:=hround(...
+l.300 ...",18u#,v_center(spread#+rule_thickness#))
+                                                  ;
+I can't set an internal quantity to anything but a known
+numeric value, so I'll have to ignore this assignment.
+
+>> rule_thickness#+spread#
+! Internal quantity `chardp' must receive a known value.
+<to be read again> 
+                   ;
+beginchar->...R1);charht:=(EXPR2);chardp:=(EXPR3);
+                                                  w:=hround(charwd*hppp);h:=...
+l.300 ...",18u#,v_center(spread#+rule_thickness#))
+                                                  ;
+I can't set an internal quantity to anything but a known
+numeric value, so I'll have to ignore this assignment.
+
+>> adjust_fit
+! Isolated expression.
+<to be read again> 
+                   (
+l.301 adjust_fit(
+                 0,0); pickup rule.nib;
+I couldn't find an `=' or `:=' after the
+expression that is shown above this error message,
+so I guess I'll just ignore it and carry on.
+
+! Extra tokens will be flushed.
+<to be read again> 
+                   (
+l.301 adjust_fit(
+                 0,0); pickup rule.nib;
+I've just read as much of that statement as I could fathom,
+so a semicolon should have been next. It's very puzzling...
+but I'll try to get myself back together, by ignoring
+everything up to the next `;'. Please insert a semicolon
+now in front of anything that you don't want me to delete.
+(See Chapter 27 of The METAFONTbook for an example.)
+
+>> rule.nib
+! Improper subscript has been replaced by zero.
+numeric_pickup_->if.unknown.pen_[(EXPR0)]
+                                         :errmessage"Unknown pen";clearpen.e...
+<to be read again> 
+                   ;
+l.301 adjust_fit(0,0); pickup rule.nib;
+                                       
+A bracketed subscript must have a known numeric value;
+unfortunately, what I found was the value that appears just
+above this error message. So I'll try a zero subscript.
+
+! Unknown pen.
+<to be read again> 
+                   ;
+numeric_pickup_->...PR0)]:errmessage"Unknown pen";
+                                                  clearpen.else:currentpen:=...
+<to be read again> 
+                   ;
+l.301 adjust_fit(0,0); pickup rule.nib;
+                                       
+This error message was generated by an `errmessage'
+command, so I can't give any explicit help.
+Pretend that you're Miss Marple: Examine all clues,
+and deduce the truth by inspired guesses.
+
+>> u+0.5
+! Not implemented: floor(unknown numeric).
+<to be read again> 
+                   endgroup
+<to be read again> 
+                   -
+l.302 lft x7=hround u-
+                      eps; x8=x7; x1=x2=w-x7;
+I'm afraid I don't know how to apply that operation to that
+particular type. Continue, and I'll simply return the
+argument (shown above) as the result of the operation.
+
+>> -x7
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+l.304 draw z1--
+               z7; draw z2--z8;  % bars
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y1
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+l.304 draw z1--
+               z7; draw z2--z8;  % bars
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x7
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   ;
+l.304 draw z1--z7;
+                   draw z2--z8;  % bars
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y1
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   ;
+l.304 draw z1--z7;
+                   draw z2--z8;  % bars
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -x7
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+l.304 draw z1--z7; draw z2--
+                            z8;  % bars
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y2
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+l.304 draw z1--z7; draw z2--
+                            z8;  % bars
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x7
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   ;
+l.304 draw z1--z7; draw z2--z8;
+                                 % bars
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y2
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   ;
+l.304 draw z1--z7; draw z2--z8;
+                                 % bars
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> crisp.nib
+! Improper subscript has been replaced by zero.
+numeric_pickup_->if.unknown.pen_[(EXPR0)]
+                                         :errmessage"Unknown pen";clearpen.e...
+<to be read again> 
+                   ;
+l.305 pickup crisp.nib;
+                        lft x0=hround u-eps; y0=good.y math_axis;
+A bracketed subscript must have a known numeric value;
+unfortunately, what I found was the value that appears just
+above this error message. So I'll try a zero subscript.
+
+! Unknown pen.
+<to be read again> 
+                   ;
+numeric_pickup_->...PR0)]:errmessage"Unknown pen";
+                                                  clearpen.else:currentpen:=...
+<to be read again> 
+                   ;
+l.305 pickup crisp.nib;
+                        lft x0=hround u-eps; y0=good.y math_axis;
+(That was another `errmessage'.)
+
+>> x7+0.00049
+! Not implemented: floor(unknown numeric).
+<to be read again> 
+                   endgroup
+<to be read again> 
+                   -
+l.305 pickup crisp.nib; lft x0=hround u-
+                                        eps; y0=good.y math_axis;
+I'm afraid I don't know how to apply that operation to that
+particular type. Continue, and I'll simply return the
+argument (shown above) as the result of the operation.
+
+>> 0.5y2+0.5y1+0.5
+! Not implemented: floor(unknown numeric).
+<to be read again> 
+                   endgroup
+<to be read again> 
+                   -
+good.y->begingroup.vround((EXPR2)+pen_top)-
+                                           pen_top.endgroup
+<to be read again> 
+                   ;
+l.305 ...lft x0=hround u-eps; y0=good.y math_axis;
+                                                  
+I'm afraid I don't know how to apply that operation to that
+particular type. Continue, and I'll simply return the
+argument (shown above) as the result of the operation.
+
+>> pos3
+! Isolated expression.
+<to be read again> 
+                   (
+l.306 pos3(
+           rule_thickness,0); pos4(rule_thickness,0);
+I couldn't find an `=' or `:=' after the
+expression that is shown above this error message,
+so I guess I'll just ignore it and carry on.
+
+! Extra tokens will be flushed.
+<to be read again> 
+                   (
+l.306 pos3(
+           rule_thickness,0); pos4(rule_thickness,0);
+I've just read as much of that statement as I could fathom,
+so a semicolon should have been next. It's very puzzling...
+but I'll try to get myself back together, by ignoring
+everything up to the next `;'. Please insert a semicolon
+now in front of anything that you don't want me to delete.
+(See Chapter 27 of The METAFONTbook for an example.)
+
+>> pos4
+! Isolated expression.
+<to be read again> 
+                   (
+l.306 pos3(rule_thickness,0); pos4(
+                                   rule_thickness,0);
+I couldn't find an `=' or `:=' after the
+expression that is shown above this error message,
+so I guess I'll just ignore it and carry on.
+
+! Extra tokens will be flushed.
+<to be read again> 
+                   (
+l.306 pos3(rule_thickness,0); pos4(
+                                   rule_thickness,0);
+I've just read as much of that statement as I could fathom,
+so a semicolon should have been next. It's very puzzling...
+but I'll try to get myself back together, by ignoring
+everything up to the next `;'. Please insert a semicolon
+now in front of anything that you don't want me to delete.
+(See Chapter 27 of The METAFONTbook for an example.)
+
+>> pos5
+! Isolated expression.
+<to be read again> 
+                   (
+l.308 pos5(
+           rule_thickness,angle(z4-z0)); z5l=z0;
+I couldn't find an `=' or `:=' after the
+expression that is shown above this error message,
+so I guess I'll just ignore it and carry on.
+
+! Extra tokens will be flushed.
+<to be read again> 
+                   (
+l.308 pos5(
+           rule_thickness,angle(z4-z0)); z5l=z0;
+I've just read as much of that statement as I could fathom,
+so a semicolon should have been next. It's very puzzling...
+but I'll try to get myself back together, by ignoring
+everything up to the next `;'. Please insert a semicolon
+now in front of anything that you don't want me to delete.
+(See Chapter 27 of The METAFONTbook for an example.)
+
+>> pos6
+! Isolated expression.
+<to be read again> 
+                   (
+l.309 pos6(
+           rule_thickness,angle(z3-z0)); z6l=z0;
+I couldn't find an `=' or `:=' after the
+expression that is shown above this error message,
+so I guess I'll just ignore it and carry on.
+
+! Extra tokens will be flushed.
+<to be read again> 
+                   (
+l.309 pos6(
+           rule_thickness,angle(z3-z0)); z6l=z0;
+I've just read as much of that statement as I could fathom,
+so a semicolon should have been next. It's very puzzling...
+but I'll try to get myself back together, by ignoring
+everything up to the next `;'. Please insert a semicolon
+now in front of anything that you don't want me to delete.
+(See Chapter 27 of The METAFONTbook for an example.)
+
+>> 0.14285x3+0.42809
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   ..
+<argument> filldraw.z0..
+                        {z3-z9}z3--(0,y3)--(0,y4)--z4{z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.5y2+0.5y1+0.5
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   ..
+<argument> filldraw.z0..
+                        {z3-z9}z3--(0,y3)--(0,y4)--z4{z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.32741x3-0.16351
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   }
+<argument> filldraw.z0..{z3-z9}
+                               z3--(0,y3)--(0,y4)--z4{z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.24asc_height-0.5y2+0.5y1-0.1905
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   }
+<argument> filldraw.z0..{z3-z9}
+                               z3--(0,y3)--(0,y4)--z4{z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x3
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+<argument> filldraw.z0..{z3-z9}z3--
+                                   (0,y3)--(0,y4)--z4{z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.24asc_height+y1+0.00049
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+<argument> filldraw.z0..{z3-z9}z3--
+                                   (0,y3)--(0,y4)--z4{z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.24asc_height+y1+0.00049
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+<argument> filldraw.z0..{z3-z9}z3--(0,y3)--
+                                           (0,y4)--z4{z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.24asc_height+y2-0.00049
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+<argument> ...draw.z0..{z3-z9}z3--(0,y3)--(0,y4)--
+                                                  z4{z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x3-0.00002
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   {
+<argument> ...w.z0..{z3-z9}z3--(0,y3)--(0,y4)--z4{
+                                                  z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.24asc_height+y2-0.00049
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+<argument> ...w.z0..{z3-z9}z3--(0,y3)--(0,y4)--z4{
+                                                  z9-z4}..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.32741x3+0.16353
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   }
+<argument> ...{z3-z9}z3--(0,y3)--(0,y4)--z4{z9-z4}
+                                                  ..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.24asc_height-0.5y2+0.5y1+0.19148
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   }
+<argument> ...{z3-z9}z3--(0,y3)--(0,y4)--z4{z9-z4}
+                                                  ..z0&cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.14285x3+0.42809
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   &
+<argument> ...9}z3--(0,y3)--(0,y4)--z4{z9-z4}..z0&
+                                                  cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.5y2+0.5y1+0.5
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   &
+<argument> ...9}z3--(0,y3)--(0,y4)--z4{z9-z4}..z0&
+                                                  cycle
+erase->...up.interim.default_wt_:=_;cullit;(TEXT0)
+                                                  withweight._;cullit;endgroup
+<to be read again> 
+                   ;
+l.312  --(0,y4)--z4{z9-z4}..z0 & cycle;
+                                         % erase excess
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x4r
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   {
+l.313 numeric t; path p; p=z4r{
+                               z9-z4}..z6r;
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y4r
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+l.313 numeric t; path p; p=z4r{
+                               z9-z4}..z6r;
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.32741x3+0.16353
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.313 numeric t; path p; p=z4r{z9-z4}
+                                     ..z6r;
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.24asc_height-0.5y2+0.5y1+0.19148
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.313 numeric t; path p; p=z4r{z9-z4}
+                                     ..z6r;
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x6r
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   ;
+l.313 numeric t; path p; p=z4r{z9-z4}..z6r;
+                                           
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y6r
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   ;
+l.313 numeric t; path p; p=z4r{z9-z4}..z6r;
+                                           
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.5y2+0.5y1+0.5
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+l.314 t=xpart(p intersectiontimes((0,y0)--
+                                          (w,y0)));
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.5y2+0.5y1+0.5
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   )
+l.314 t=xpart(p intersectiontimes((0,y0)--(w,y0))
+                                                 );
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.14285x3+0.42809
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   ..
+l.315 filldraw z0..
+                   {z4-z9}z4l--subpath (0,t) of\\(z4r{z9-z4}..z6r)
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.5y2+0.5y1+0.5
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   ..
+l.315 filldraw z0..
+                   {z4-z9}z4l--subpath (0,t) of\\(z4r{z9-z4}..z6r)
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.32741x3-0.16353
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.315 filldraw z0..{z4-z9}
+                          z4l--subpath (0,t) of\\(z4r{z9-z4}..z6r)
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.24asc_height+0.5y2-0.5y1-0.19148
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.315 filldraw z0..{z4-z9}
+                          z4l--subpath (0,t) of\\(z4r{z9-z4}..z6r)
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x4l
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+l.315 filldraw z0..{z4-z9}z4l--
+                               subpath (0,t) of\\(z4r{z9-z4}..z6r)
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y4l
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+--->{
+     curl1}..{curl1}
+l.315 filldraw z0..{z4-z9}z4l--
+                               subpath (0,t) of\\(z4r{z9-z4}..z6r)
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x4r
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   {
+l.315 ...w z0..{z4-z9}z4l--subpath (0,t) of\\(z4r{
+                                                  z9-z4}..z6r)
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y4r
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+l.315 ...w z0..{z4-z9}z4l--subpath (0,t) of\\(z4r{
+                                                  z9-z4}..z6r)
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.32741x3+0.16353
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.315 ...{z4-z9}z4l--subpath (0,t) of\\(z4r{z9-z4}
+                                                  ..z6r)
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.24asc_height-0.5y2+0.5y1+0.19148
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.315 ...{z4-z9}z4l--subpath (0,t) of\\(z4r{z9-z4}
+                                                  ..z6r)
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x6r
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   )
+l.315 ...}z4l--subpath (0,t) of\\(z4r{z9-z4}..z6r)
+                                                  
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y6r
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   )
+l.315 ...}z4l--subpath (0,t) of\\(z4r{z9-z4}..z6r)
+                                                  
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x3r
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   {
+l.316  --subpath (t,0) of\\(z3r{
+                                z9-z3}..z5r)--z3l{z9-z3}..z0 & cycle;  % arr...
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y3r
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+l.316  --subpath (t,0) of\\(z3r{
+                                z9-z3}..z5r)--z3l{z9-z3}..z0 & cycle;  % arr...
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.32741x3+0.16351
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.316  --subpath (t,0) of\\(z3r{z9-z3}
+                                      ..z5r)--z3l{z9-z3}..z0 & cycle;  % arr...
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.24asc_height+0.5y2-0.5y1+0.1905
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.316  --subpath (t,0) of\\(z3r{z9-z3}
+                                      ..z5r)--z3l{z9-z3}..z0 & cycle;  % arr...
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x5r
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   )
+l.316  --subpath (t,0) of\\(z3r{z9-z3}..z5r)
+                                            --z3l{z9-z3}..z0 & cycle;  % arr...
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y5r
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   )
+l.316  --subpath (t,0) of\\(z3r{z9-z3}..z5r)
+                                            --z3l{z9-z3}..z0 & cycle;  % arr...
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> x3l
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   {
+l.316  --subpath (t,0) of\\(z3r{z9-z3}..z5r)--z3l{
+                                                  z9-z3}..z0 & cycle;  % arr...
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> y3l
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   {
+l.316  --subpath (t,0) of\\(z3r{z9-z3}..z5r)--z3l{
+                                                  z9-z3}..z0 & cycle;  % arr...
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.32741x3+0.16351
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.316 ...h (t,0) of\\(z3r{z9-z3}..z5r)--z3l{z9-z3}
+                                                  ..z0 & cycle;  % arrowhead
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> -0.24asc_height+0.5y2-0.5y1+0.1905
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   }
+l.316 ...h (t,0) of\\(z3r{z9-z3}..z5r)--z3l{z9-z3}
+                                                  ..z0 & cycle;  % arrowhead
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.14285x3+0.42809
+! Undefined x coordinate has been replaced by 0.
+<to be read again> 
+                   &
+l.316 ...) of\\(z3r{z9-z3}..z5r)--z3l{z9-z3}..z0 &
+                                                   cycle;  % arrowhead
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+>> 0.5y2+0.5y1+0.5
+! Undefined y coordinate has been replaced by 0.
+<to be read again> 
+                   &
+l.316 ...) of\\(z3r{z9-z3}..z5r)--z3l{z9-z3}..z0 &
+                                                   cycle;  % arrowhead
+I need a `known' y value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
+
+ [40])
+>> monospace
+! Not implemented: not(unknown numeric).
+<to be read again> 
+                   :
+l.22 if not monospace:
+                      
+I'm afraid I don't know how to apply that operation to that
+particular type. Continue, and I'll simply return the
+argument (shown above) as the result of the operation.
+
+>> monospace
+! Undefined condition will be treated as `false'.
+<to be read again> 
+                   :
+l.22 if not monospace:
+                      
+The expression shown above should have had a definite
+true-or-false value. I'm changing it to `false'.
+
+ )
+Font metrics written on mathsy.tfm.
+Output written on mathsy.4000gf (1 character, 100 bytes).

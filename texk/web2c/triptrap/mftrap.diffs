@@ -1,0 +1,91 @@
+cd /home/texlive/karl/Build/source/Work/texk/web2c/
+make trap
+rm -f trap.mf trap.base
+rm -f mftrapin.fot mftrapin.log
+rm -f mftrap.fot mftrap.log mftrap.tfm
+rm -f mftrap.pl trap.72270gf trap.typ
+>>> See ../../../texk/web2c/triptrap/mftrap.diffs for example of acceptable diffs.
+ln -s ../../../texk/web2c/triptrap/trap.mf . # get same filename in log
+/bin/sh -c 'TEXMFCNF=../../../texk/web2c/triptrap ./mf --progname=inimf <../../../texk/web2c/triptrap/mftrap1.in >mftrapin.fot'
+make: [trap] Error 1 (ignored)
+mv trap.log mftrapin.log
+diff ../../../texk/web2c/triptrap/mftrapin.log mftrapin.log
+1c1
+< This is METAFONT, Version 2.718281 (INIMF)  15 MAR 2008 02:23
+---
+> This is METAFONT, Version 2.718281 (Web2C 7.5.6) (INIMF)  25 APR 2008 19:08
+150c150
+< String usage 26&83 (891&11438 still untouched)
+---
+> String usage 30&98 (6387&79485 still untouched)
+176,177c176,177
+<  (preloaded base=trap 2008.3.15)
+< 1117 strings of total length 20614
+---
+>  (base=trap 2008.4.25)
+> 1122 strings of total length 20566
+make: [trap] Error 1 (ignored)
+/bin/sh -c 'TEXMFCNF=../../../texk/web2c/triptrap ./mf --progname=inimf <../../../texk/web2c/triptrap/mftrap2.in >mftrap.fot'
+make: [trap] Error 1 (ignored)
+mv trap.log mftrap.log
+mv trap.tfm mftrap.tfm
+diff ../../../texk/web2c/triptrap/mftrap.fot mftrap.fot
+1,3c1,2
+< This is METAFONT, Version 2.718281 (INIMF)
+< ** &trap  trap 
+< (trap.mf
+---
+> This is METAFONT, Version 2.718281 (Web2C 7.5.6) (INIMF)
+> **(trap.mf
+39c38
+< String usage 41&161 (815&7634 still untouched)
+---
+> String usage 50&202 (6301&75641 still untouched)
+make: [trap] Error 1 (ignored)
+diff ../../../texk/web2c/triptrap/mftrap.log mftrap.log
+1c1
+< This is METAFONT, Version 2.718281 (preloaded base=trap 2008.3.15)  15 MAR 2008 02:23
+---
+> This is METAFONT, Version 2.718281 (Web2C 7.5.6) (base=trap 2008.4.25)  25 APR 2008 19:08
+1825c1825
+< String usage 24&92 (858&11309 still untouched)
+---
+> String usage 30&119 (6347&79309 still untouched)
+2738c2738
+< Calling BLANKRECTANGLE(100,100,0,1)
+---
+> Calling BLANKRECTANGLE(1664,1664,0,1)
+4235c4235
+< String usage 41&161 (815&7634 still untouched)
+---
+> String usage 50&202 (6301&75641 still untouched)
+4251,4252c4251,4252
+<  68 strings out of 883
+<  3752 string characters out of 11386
+---
+>  77 strings out of 6378
+>  3793 string characters out of 79434
+4254,4255c4254,4255
+<  289 symbolic tokens out of 2100
+<  8i,43n,14r,8p,167b stack positions out of 30i,100n,300r,150p,500b
+---
+>  289 symbolic tokens out of 9500
+>  8i,43n,14r,8p,167b stack positions out of 300i,300n,1000r,150p,500b
+4263c4263
+<   out of 256w,16h,16d,64i,5000l,500k,256e,50p)
+---
+>   out of 256w,16h,16d,64i,15000l,2500k,256e,60p)
+make: [trap] Error 1 (ignored)
+./tftopl ./mftrap.tfm mftrap.pl
+diff ../../../texk/web2c/triptrap/mftrap.pl mftrap.pl
+/bin/sh -c 'TEXMFCNF=../../../texk/web2c/triptrap ./gftype -m -i ./trap.72270gf >trap.typ'
+diff ../../../texk/web2c/triptrap/trap.typ trap.typ
+1c1
+< This is GFtype, Version 3.1
+---
+> This is GFtype, Version 3.1 (Web2C 7.5.6)
+3c3
+< ' METAFONT output 2008.03.15:0223'
+---
+> ' METAFONT output 2008.04.25:1908'
+make: [trap] Error 1 (ignored)

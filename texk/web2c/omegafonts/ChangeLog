@@ -1,0 +1,22 @@
+2008-03-13  Karl Berry  <karl@tug.org>
+
+	* font_routines.c (font_no_incr): change test to avoid reported
+	segfault on http://norgz.info/download/gregorio.ovp.  Report
+	from Elie Roux, 11 Mar 2008 17:19:46, fix from Arthur Reutenauer.
+
+2008-03-02  Karl Berry  <karl@tug.org>
+
+	* Makefile.in (omfonts.o): depend on y_tab.h.
+	From Alexis Ballier, 29 Feb 2008 19:27:23, via
+	https://bugs.gentoo.org/show_bug.cgi?id=209362.
+
+2008-01-29  Peter Breitenlohner  <peb@mppmu.mpg.de>
+
+	* Makefile.in: Add @configure_input@ line.
+
+2006-05-25  Roozbeh Pournader  <roozbeh@farsiweb.info>
+
+	* font_routines.c (clear_map_font): fixed default value of font_at.
+
+	* parse_ofm.c (ofm_organize): replaced magic number with constant.
+	  (ofm_read_simple): fixed a 1-off offset.

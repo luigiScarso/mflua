@@ -1,0 +1,1792 @@
+# $Id: Makefile.in 8409 2008-05-29 20:59:08Z karl $
+# Makefile.aux. Generated from Makefile.in by configure.
+# @configure_input@
+# Makefile for kpathsea.  Public domain.
+version = @KPSEVERSION@
+
+# Add -DNO_DEBUG to disable debugging, for vanishingly better performance.
+
+# paths.mk -- installation directories.
+# $Id: paths.mk 10296 2008-08-12 23:46:59Z karl $
+
+# Do not change prefix and exec_prefix in Makefile.in!
+# configure doesn't propagate the change to the other Makefiles.
+# Instead, give the -prefix/-exec-prefix options to configure.
+# (See kpathsea/INSTALL for more details.) This is arguably
+# a bug, but it's not likely to change soon.
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+# Architecture-dependent executables.
+bindir = @bindir@
+
+# Architecture-independent executables.
+scriptdir = $(bindir)
+
+# Architecture-dependent files, such as lib*.a files.
+libdir = @libdir@
+
+# Architecture-independent files.
+datarootdir = @datarootdir@
+datadir = @datadir@
+
+# Header files.
+includedir = @includedir@
+
+# GNU .info* files.
+infodir = @infodir@
+
+# Unix man pages.
+manext = 1
+mandir = @mandir@
+man1dir = $(mandir)/man$(manext)
+man5dir = $(mandir)/man5
+
+# modifiable single-machine data.
+localstatedir = @localstatedir@
+
+# read-only single-machine data (configuration).
+sysconfdir = @sysconfdir@
+
+# executables that other programs run.
+libexecdir = @libexecdir@
+
+
+# TeX system-specific directories. Not all of the following are relevant
+# for all programs, but it seems cleaner to collect everything in one place.
+
+# The default paths are in kpathsea/texmf.cnf. Passing all the paths to
+# sub-makes can make the arg list too long.  If you make
+# changes below, you will have to make the corresponding changes to
+# texmf.cnf yourself.
+
+# The root of the main tree.
+texmf = @texmfmain@
+
+# The directory used by varfonts.
+vartexfonts = /var/tmp/texfonts
+
+# Regular input files.
+texinputdir = $(texmf)/tex
+mfinputdir = $(texmf)/metafont
+mpinputdir = $(texmf)/metapost
+mftinputdir = $(texmf)/mft
+
+# dvips's epsf.tex, rotate.tex, etc. get installed here;
+# ditto for dvilj's fonts support.
+dvips_plain_macrodir = $(texinputdir)/plain/dvips
+dvilj_latex2e_macrodir = $(texinputdir)/latex/dvilj
+
+# mktex.cnf, texmf.cnf, etc.
+web2cdir = $(texmf)/web2c
+
+# The top-level font directory.
+fontdir = $(texmf)/fonts
+
+# Memory dumps (.fmt/.base/.mem).
+fmtdir = $(web2cdir)/tex
+basedir = $(web2cdir)/metafont
+memdir = $(web2cdir)/metapost
+
+# Pool files.
+texpooldir = $(web2cdir)
+mfpooldir = $(texpooldir)
+mppooldir = $(texpooldir)
+
+# Where the .map files from fontname are installed.
+fontnamedir = $(texmf)/fontname
+
+# For dvips configuration files, psfonts.map, etc.
+dvipsdir = $(texmf)/dvips
+
+# For dvips .pro files, gsftopk's render.ps, etc.
+psheaderdir = $(dvipsdir)
+
+# If a font can't be found close enough to its stated size, we look for
+# each of these sizes in the order given.  This colon-separated list is
+# overridden by the envvar TEXSIZES, and by a program-specific variable
+# (e.g., XDVISIZES), and perhaps by a config file (e.g., in dvips).
+# This list must be sorted in ascending order.
+default_texsizes = 600
+
+# End of paths.mk.
+# makevars.mk -- the directory names we pass.
+# It's important that none of these values contain [ @%], for the sake
+# of kpathsea/texmf.sed.
+makevars = prefix=$(prefix) exec_prefix=$(exec_prefix) \
+  bindir=$(bindir) scriptdir=$(scriptdir) libdir=$(libdir) \
+  datadir=$(datadir) infodir=$(infodir) includedir=$(includedir) \
+  mandir=$(mandir) manext=$(manext) man1dir=$(man1dir) \
+  sysconfdir=$(sysconfdir) localstatedir=$(localstatedir) \
+  libexecdir=$(libexecdir) \
+  texmf=$(texmf) web2cdir=$(web2cdir) vartexfonts=$(vartexfonts)\
+  texinputdir=$(texinputdir) mfinputdir=$(mfinputdir) mpinputdir=$(mpinputdir)\
+  fontdir=$(fontdir) fmtdir=$(fmtdir) basedir=$(basedir) memdir=$(memdir) \
+  texpooldir=$(texpooldir) mfpooldir=$(mfpooldir) mppooldir=$(mppooldir) \
+  dvips_plain_macrodir=$(dvips_plain_macrodir) \
+  dvilj_latex2e_macrodir=$(dvilj_latex2e_macrodir) \
+  dvipsdir=$(dvipsdir) psheaderdir=$(psheaderdir) \
+  default_texsizes='$(default_texsizes)'
+# End of makevars.mk.
+# common.mk -- used by all Makefiles.
+SHELL = /bin/sh
+@SET_MAKE@
+top_srcdir = @top_srcdir@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+CC = @CC@
+CFLAGS = @CFLAGS@ $(XCFLAGS)
+CPPFLAGS = @CPPFLAGS@ $(XCPPFLAGS)
+DEFS = @DEFS@ $(XDEFS)
+LDFLAGS = @LDFLAGS@ $(XLDFLAGS)
+
+# Kpathsea needs this for compiling, programs need it for linking.
+LIBTOOL = $(SHELL) $(kpathsea_parent)/libtool
+
+# You can change [X]CPPFLAGS, [X]CFLAGS, or [X]DEFS, but
+# please don't change ALL_CPPFLAGS or ALL_CFLAGS.
+# prog_cflags is set by subdirectories of web2c.
+ALL_CPPFLAGS = $(DEFS) -I. -I$(srcdir) -I$(kpathsea_parent) \
+  -I$(kpathsea_srcdir_parent) $(prog_cflags) $(CPPFLAGS)
+ALL_CFLAGS = $(ALL_CPPFLAGS) $(CFLAGS)
+ALL_CXXFLAGS = $(ALL_CPPFLAGS) $(CXXFLAGS)
+compile = $(CC) $(ALL_CFLAGS)
+
+.SUFFIXES:
+.SUFFIXES: .c .o .lo # in case the suffix list has been cleared, e.g., by web2c
+.c.o:
+	$(compile) -c $< -o $@
+
+# Installation.
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_LIBTOOL_LIBS = $(LIBTOOL) --mode=install $(INSTALL_DATA)
+INSTALL_LIBTOOL_PROG = $(LIBTOOL) --mode=install $(INSTALL_PROGRAM)
+
+# Creating (symbolic) links.
+LN = @LN_S@
+
+# Removing files.
+RM = rm -f
+
+# Uninstall.
+UNINSTALL = $(RM)
+UNINSTALL_PROGRAM = $(RM)
+UNINSTALL_SCRIPT = $(RM)
+UNINSTALL_DATA = $(RM)
+UNINSTALL_LIBTOOL_LIBS = $(LIBTOOL) --mode=uninstall $(RM)
+UNINSTALL_LIBTOOL_PROG = $(LIBTOOL) --mode=uninstall $(RM)
+
+# We use these for many things.
+kpathsea_parent = ..
+kpathsea_dir = $(kpathsea_parent)/kpathsea
+kpathsea_srcdir_parent = $(top_srcdir)/..
+kpathsea_srcdir = $(kpathsea_srcdir_parent)/kpathsea
+kpathsea = $(kpathsea_dir)/libkpathsea.la
+
+@MAINT@ifeq ($(CC), gcc)
+@MAINT@XDEFS = -Wpointer-arith $(warn_more)
+@MAINT@CFLAGS = -g $(XCFLAGS)
+@MAINT@endif
+# End of common.mk.
+# library.mk -- stuff only useful for libraries.
+AR = @AR@
+ARFLAGS = @ARFLAGS@
+RANLIB = @RANLIB@
+# End of library.mk.
+# programs.mk -- used by Makefiles for executables only.
+
+# Don't include $(CFLAGS), since ld -g under Linux forces
+# static libraries, e.g., libc.a and libX*.a.
+LDFLAGS = @LDFLAGS@ $(XLDFLAGS)
+
+# proglib is for web2c; 
+# XLOADLIBES is for the installer.
+LIBS = @LIBS@
+LOADLIBES = $(proglib) $(kpathsea) $(LIBS) $(XLOADLIBES)
+
+# May as well separate linking from compiling, just in case.
+CCLD = $(CC)
+link_command = $(CCLD) -o $@ $(LDFLAGS) 
+
+# When we link with Kpathsea, have to take account that it might be a
+# shared library, etc.
+kpathsea_link = $(LIBTOOL) --mode=link $(link_command)
+# End of programs.mk.
+# texi.mk -- making .dvi and .info from .texi.
+@MAINT@MAKEINFO = makeinfo
+@MAINT@MAKEINFO_FLAGS = --paragraph-indent=2 -I$(srcdir)
+
+@MAINT@TEXI2DVI = texi2dvi
+@MAINT@# To make sure that generation of the dvi files succeeds on the
+@MAINT@# maintainer's system.
+@MAINT@TEXI2DVI = TEXMFCNF=$(web2cdir) texi2dvi
+
+@MAINT@TEXI2HTML = texi2html
+@MAINT@TEXI2HTML_FLAGS = -expandinfo -number -menu -split_chapter
+# If you prefer one big .html file instead of several, remove
+# -split-node or replace it by -split_chapter.
+
+# For making normal text files out of Texinfo source.
+@MAINT@one_info = --no-headers --no-split --no-validate
+
+@MAINT@.SUFFIXES: .info .dvi .html .texi
+@MAINT@.texi.info:
+@MAINT@	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+@MAINT@.texi.dvi:
+@MAINT@	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+@MAINT@.texi.html:
+@MAINT@	$(TEXI2HTML) $(TEXI2HTML_FLAGS) $< 
+# End of texi.mk.
+
+@MAINT@warn_more = -Wmissing-prototypes -Wwrite-strings -Wshadow
+@MAINT@MAKEINFO_FLAGS := $(MAKEINFO_FLAGS) --no-split
+
+# Install these header files (except acconfig.h).
+install_headers = *.h $(srcdir)/*.h
+
+# Put tex-file.o first, because it's what depends on the paths, and may
+# reduce frustration if the paths are wrong by doing it first.
+
+objects = tex-file.lo absolute.lo atou.lo cnf.lo concat.lo concat3.lo \
+concatn.lo db.lo debug.lo dir.lo elt-dirs.lo expand.lo extend-fname.lo \
+file-p.lo find-suffix.lo fn.lo fontmap.lo getopt.lo getopt1.lo hash.lo \
+kdefault.lo line.lo magstep.lo make-suffix.lo path-elt.lo \
+pathsearch.lo proginit.lo progname.lo readable.lo rm-suffix.lo \
+str-list.lo str-llist.lo tex-glyph.lo tex-hush.lo tex-make.lo \
+tilde.lo truncate.lo uppercasify.lo variable.lo version.lo xbasename.lo \
+xcalloc.lo xdirname.lo xfopen.lo xfseek.lo xfseeko.lo xftell.lo xftello.lo xgetcwd.lo xmalloc.lo \
+xopendir.lo xputenv.lo xrealloc.lo xstat.lo xstrdup.lo $(liblobjs) $(malloc)
+liblobjs = @LTLIBOBJS@
+
+library = kpathsea
+
+# We want to compile almost everything with libtool ...
+KPATHSEA_CC = $(LIBTOOL) --mode=compile $(CC)
+.SUFFIXES: .lo
+.c.lo:
+	$(KPATHSEA_CC) $(ALL_CFLAGS) -DMAKE_KPSE_DLL -c $<
+
+default all: kpsewhich kpsestat kpseaccess kpsereadlink $(library).info manfiles
+
+kpsewhich: $(kpathsea) kpsewhich.o
+	$(kpathsea_link) kpsewhich.o $(LOADLIBES)
+
+kpsestat: kpsestat.o
+	$(link_command) kpsestat.o
+
+kpseaccess: access.o
+	$(link_command) access.o
+
+kpsereadlink: readlink.o
+	$(link_command) readlink.o
+
+$(kpathsea): $(objects)
+	$(kpathsea_link) -rpath $(libdir) -version-info @KPSE_LT_VERS@ $(objects)
+
+# First null out comments and leading/trailing whitespace, then remove
+# lines that define invalid C identifiers, then remove blank lines and
+# lines that define lowercase values (those are never path values). Each
+# line remaining looks like
+# <name> = <value>
+# (but = and surrounding spaces are optional, hence can't remove all spaces).
+# Change this to #ifndef DEFAULT_name@#define DEFAULT_name "value"@#endif,
+# then change the @'s to newlines (sed isn't good at multiline replacements).
+# 
+# No backslash-newline escapes in the long sed replacement because that
+# will turn into a space in the output.
+# 
+# We replace the $TEXMF* references with nonexisting directories.  These
+# are the compile-time defaults and are not useful in the native TL
+# builds; we rely completely on the self-location.  (Previously, the
+# random build-time paths would get included in the binaries, to
+# consequent confusion.)
+# 
+# We preserve the $SELFAUTO* references, since the selfauto-using
+# compile-time path for cnf files is how texmf.cnf gets found, which
+# determines everything else.
+# 
+# The definition of DEFAULT_TEXMF (and other variables)
+# that winds up in the final paths.h will not be used.
+#
+# We don't want to rewrite paths.h when we have only changed comments
+# in texmf.cnf that have no effect on paths.h, since that would cause
+# almost everything to be rebuilt.
+#
+# We also replace all semicolons with colons in the paths.
+# The path-splitting code should be changed to understand both.
+#
+$(kpathsea_dir)/paths.h: stamp-paths
+stamp-paths: $(srcdir)/texmf.cnf
+	echo "/* paths.h: Generated from texmf.cnf. */" >paths.tmp
+	sed -e 's/%.*//' -e 's/^[ 	]*//' -e 's/[ 	]*$$//' $(srcdir)/texmf.cnf \
+	| grep '^[ 	]*[A-Z0-9_]*[ 	=]' \
+	| sed '/^$$/d' \
+	| sed 's/^\([^ 	=]*\)[ 	]*=*[ 	]*\(.*\)/#ifndef DEFAULT_\1%#define DEFAULT_\1 "\2"%#endif/' \
+	| tr '%' '\012' \
+	| sed -e 's%\$$TEXMFCONFIG%/nonesuch/texmfconfig%g' \
+	      -e 's%\$$TEXMFDIST%/nonesuch/texmfdist%g' \
+	      -e 's%\$$TEXMFDOCDIR%/nonesuch/texmfdocdir%g' \
+	      -e 's%\$$TEXMFLOCAL%/nonesuch/texmflocal%g' \
+	      -e 's%\$$TEXMFMAIN%/nonesuch/texmfmain%g' \
+	      -e 's%\$$TEXMFSYSCONFIG%/nonesuch/texmfsysconfig%g' \
+	      -e 's%\$$TEXMFSYSVAR%/nonesuch/texmfsysvar%g' \
+	      -e 's%\$$TEXMFVAR%/nonesuch/texmfvar%g' \
+	      -e 's%\$$TEXMF%/nonesuch/texmf%g' \
+	      -e 's%\$$VARTEXFONTS%/nonesuch/vartexfonts%g' \
+	| sed -e 's%;%:%g' \
+	>>paths.tmp
+	@if cmp -s paths.h paths.tmp 2>/dev/null; then \
+	  echo "paths.h is unchanged"; \
+	else \
+	  echo "cp paths.tmp paths.h"; \
+	  cp paths.tmp paths.h; \
+	fi
+	rm -f paths.tmp
+	date >stamp-paths
+
+# Need an extra definition for this. Dependencies included below.
+tex-file.o:
+	$(KPATHSEA_CC) -DDEFAULT_FONT_SIZES='\"$(default_texsizes)\"' $(srcdir)/tex-file.c
+
+check: kpsewhich
+	./kpsewhich -expand-var '$$TEXMF'
+
+install: install-exec install-data
+uninstall: uninstall-exec uninstall-data
+
+install-exec: kpsewhich
+	$(SHELL) $(top_srcdir)/../mkinstalldirs $(bindir) $(scriptdir) \
+	  $(libdir) $(web2cdir)
+	if grep 'original mktexpk --' $(scriptdir)/mktexpk >/dev/null 2>&1\
+	   || test ! -r $(scriptdir)/mktexpk; then \
+	  $(INSTALL_SCRIPT) $(srcdir)/mktexpk $(scriptdir)/mktexpk; \
+	else true; fi
+	if grep 'original mktexmf --' $(scriptdir)/mktexmf >/dev/null 2>&1\
+	   || test ! -r $(scriptdir)/mktexmf; then \
+	  $(INSTALL_SCRIPT) $(srcdir)/mktexmf $(scriptdir)/mktexmf; \
+	else true; fi
+	if grep 'original mktextfm --' $(scriptdir)/mktextfm >/dev/null 2>&1\
+	   || test ! -r $(scriptdir)/mktextfm; then \
+	  $(INSTALL_SCRIPT) $(srcdir)/mktextfm $(scriptdir)/mktextfm; \
+	else true; fi
+	if grep 'original mktexlsr --' $(scriptdir)/mktexlsr >/dev/null 2>&1\
+	   || test ! -r $(scriptdir)/mktexlsr; then \
+	  $(INSTALL_SCRIPT) $(srcdir)/mktexlsr $(scriptdir)/mktexlsr; \
+	else true; fi
+	$(INSTALL_DATA) $(srcdir)/mktex.opt $(web2cdir)/mktex.opt
+	$(INSTALL_SCRIPT) $(srcdir)/mktexdir $(web2cdir)/mktexdir
+	$(INSTALL_DATA) $(srcdir)/mktexdir.opt $(web2cdir)/mktexdir.opt
+	$(INSTALL_SCRIPT) $(srcdir)/mktexnam $(web2cdir)/mktexnam
+	$(INSTALL_DATA) $(srcdir)/mktexnam.opt $(web2cdir)/mktexnam.opt
+	$(INSTALL_SCRIPT) $(srcdir)/mktexupd $(web2cdir)/mktexupd
+	$(INSTALL_LIBTOOL_LIBS) lib$(library).la $(libdir)
+	$(INSTALL_LIBTOOL_PROG) kpsewhich $(bindir)
+	$(INSTALL_PROGRAM) kpsestat $(bindir)
+	$(INSTALL_PROGRAM) kpseaccess $(bindir)
+	$(INSTALL_PROGRAM) kpsereadlink $(bindir)
+uninstall-exec:
+	$(UNINSTALL_LIBTOOL_LIBS) $(libdir)/lib$(library).la
+	$(UNINSTALL_LIBTOOL_PROG) $(bindir)/kpsewhich
+	$(UNINSTALL_PROGRAM) $(bindir)/kpsestat
+	$(UNINSTALL_PROGRAM) $(bindir)/kpseaccess
+	$(UNINSTALL_PROGRAM) $(bindir)/kpsereadlink
+
+install-data: $(srcdir)/texmf.cnf kpathsea.info install-man
+	$(SHELL) $(top_srcdir)/../mkinstalldirs $(texmf) $(infodir) $(web2cdir)
+	if grep 'original texmf.cnf --' $(web2cdir)/texmf.cnf >/dev/null 2>&1 \
+	   || test ! -r $(web2cdir)/texmf.cnf; then \
+	  $(INSTALL_DATA) $(srcdir)/texmf.cnf $(web2cdir)/texmf.cnf; \
+	else true; fi
+# Info files.
+	$(INSTALL_DATA) $(srcdir)/kpathsea.i* $(infodir)/
+# Should we install the headers?  They are not just system-dependent,
+# which is bad enough, but even compiler-dependent.
+	$(SHELL) $(top_srcdir)/../mkinstalldirs $(includedir)/kpathsea
+	for f in $(install_headers); do \
+	  $(INSTALL_DATA) $$f $(includedir)/kpathsea/; done
+	rm -f $(includedir)/kpathsea/acconfig.h
+# Post.
+	$(POST_INSTALL)
+	if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
+	  install-info --info-dir=$(infodir) $(infodir)/kpathsea.info; \
+	else true; fi
+
+uninstall-data:
+	$(PRE_UNINSTALL)
+	if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
+	  install-info --delete --info-dir=$(infodir) $(infodir)/kpathsea.info; \
+	else true; fi
+	$(NORMAL_UNINSTALL)
+	rm -f $(infodir)/kpathsea.i*
+#	for f in $(install_headers); do rm -f $(includedir)/`basename $$f`; done
+
+# distdir is used by other distributions; they define $(distdir).
+distdir: doc $(library).dvi $(library).h
+	rm -rf $(distdir)
+	mkdir -p $(distdir)
+	ln $(ln_files) $(distdir)
+	touch *.info*
+	ln mktex* *.info* *.texi *.ftp $(library).aux $(library).cps $(distdir)
+	rm -f $(distdir)/*.1 $(distdir)/*.man
+	ln *.man $(distdir)
+	ln BUGS README.CONFIGURE HIER PROJECTS *.ac $(distdir)
+	touch kpathsea.h # to avoid .cps.h rule on Solaris
+	cd $(distdir) && rm -f paths.h
+
+# I don't use this, but other programmers want it.  acconfig.h is an
+# autoheader input file, not an includable C header. Bad name.
+$(library).h: always
+	rm -f $@
+	echo '/* This is a generated file */' >$@
+	echo '/* collecting all kpathsea headers. */' >>$@
+	echo '#include <kpathsea/config.h>' >>$@
+	ls -1 *.h \
+	  | grep -v '\(acconfig\|config\|kpathsea\|win32lib\)\.h' \
+	  | sed -e 's,^,#include <kpathsea/,' -e s',$$,>,' >>$@
+	touch -r `ls -1t *.h | tail +2 | head -1` $@ 
+always:
+.PHONY: always
+
+# config.mk -- autoconf rules to remake the Makefile, c-auto.h, etc.
+@MAINT@# BTW, xt.ac isn't really required for dvipsk or dviljk, but it doesn't
+@MAINT@# seem worth the trouble.
+@MAINT@# 
+@MAINT@configure_in = $(top_srcdir)/configure.in $(kpathsea_srcdir)/common.ac \
+@MAINT@  $(kpathsea_srcdir)/withenable.ac $(kpathsea_srcdir)/xt.ac \
+@MAINT@  $(kpathsea_srcdir_parent)/libtool.m4 $(top_srcdir)/../m4/*.m4
+@MAINT@
+@MAINT@aclocal_m4 = $(top_srcdir)/stamp-aclocal $(top_srcdir)/aclocal.m4
+@MAINT@
+@MAINT@$(top_srcdir)/stamp-aclocal: $(configure_in)
+@MAINT@	cd $(top_srcdir) && aclocal -I ../m4
+@MAINT@	date >$(top_srcdir)/stamp-aclocal
+@MAINT@# For the case that aclocal.m4 is missing
+@MAINT@$(top_srcdir)/aclocal.m4:
+@MAINT@	cd $(top_srcdir) && aclocal -I ../m4
+@MAINT@	date >$(top_srcdir)/stamp-aclocal
+@MAINT@
+@MAINT@$(top_srcdir)/stamp-configure: $(configure_in) $(aclocal_m4)
+@MAINT@	cd $(top_srcdir) && autoconf
+@MAINT@	date >$(top_srcdir)/stamp-configure
+@MAINT@# For the case that configure is missing
+@MAINT@$(top_srcdir)/configure:
+@MAINT@	cd $(top_srcdir) && autoconf
+@MAINT@	date >$(top_srcdir)/stamp-configure
+@MAINT@
+@MAINT@$(top_srcdir)/c-auto.in: $(top_srcdir)/stamp-auto.in
+@MAINT@$(top_srcdir)/stamp-auto.in: $(configure_in) $(aclocal_m4)
+@MAINT@	cd $(top_srcdir) && autoheader
+@MAINT@	date >$(top_srcdir)/stamp-auto.in
+
+config.status: $(top_srcdir)/stamp-configure $(top_srcdir)/configure
+	$(SHELL) $@ --recheck
+
+# FIXME: Shouldn't this be $(top_builddir)/config.status
+Makefile: config.status $(srcdir)/Makefile.in $(top_srcdir)/../make/*.mk
+	$(SHELL) $<
+
+# This rule isn't used for the top-level Makefile, but it doesn't hurt.
+# We don't depend on config.status because configure always rewrites
+# config.status, even when it doesn't change. Thus it might be newer
+# than c-auto.h when we don't need to remake the latter.
+c-auto.h: stamp-auto
+stamp-auto: $(srcdir)/c-auto.in
+	$(SHELL) config.status
+	date >stamp-auto
+
+# End of config.mk.
+
+info: $(library).info
+dvi: $(library).dvi
+
+$(library).info: bugs.texi hier.texi install.texi unixtex.texi
+
+@MAINT@INSTALL: install.texi
+@MAINT@	$(MAKEINFO) $(one_info) $(MAKEINFO_FLAGS) $< -o $@
+@MAINT@	$(top_srcdir)/../add-info-toc $@
+@MAINT@BUGS: bugs.texi
+@MAINT@	$(MAKEINFO) $(one_info) $(MAKEINFO_FLAGS) $< -o $@
+@MAINT@	$(top_srcdir)/../add-info-toc $@
+@MAINT@HIER: hier.texi
+@MAINT@	$(MAKEINFO) $(one_info) $(MAKEINFO_FLAGS) $< -o $@
+@MAINT@unixtex.ftp: unixtex.texi
+@MAINT@	$(MAKEINFO) $(one_info) $(MAKEINFO_FLAGS) $< -o $@
+@MAINT@doc: info HIER BUGS INSTALL unixtex.ftp
+
+# clean.mk -- cleaning.
+mostlyclean::
+	rm -f *.o
+
+clean:: mostlyclean
+	-$(LIBTOOL) --mode=clean rm -f $(program) $(programs)
+	rm -f $(library).a squeeze *.bad *.dvi *.lj
+
+distclean:: extraclean clean
+	rm -f Makefile Makefile.aux
+	rm -f config.status config.log config.cache c-auto.h libtool
+	rm -rf conftest*
+	rm -f stamp-auto stamp-tangle stamp-ctangle
+	rm -rf .libs
+
+# Although we can remake configure and c-auto.in, we don't remove
+# them, since many people may lack Autoconf.  Use configclean for that.
+maintainer-clean:: distclean
+	rm -f *.info*
+
+extraclean::
+	rm -f *.aux *.bak *.bbl *.blg *.dvi *.log *.pl *.tfm *.vf *.vpl
+	rm -f *.*pk *.*gf *.mpx *.i *.s *~ *.orig  *.rej *\#*
+	rm -f CONTENTS.tex a.out core mfput.* texput.* mpout.*
+
+configclean:
+	rm -f configure c-auto.in c-auto.h stamp-*
+# End of clean.mk.
+
+mostlyclean::
+	rm -f kpsewhich kpsestat kpseaccess kpsereadlink *.lo
+	$(LIBTOOL) --mode=clean $(RM) lib$(library).la
+distclean::
+	rm -f paths.h stamp-paths
+
+# The manual pages
+manfiles = kpseaccess.1 kpsestat.1 kpsewhich.1 kpsereadlink.1 \
+           mktexlsr.1 mktexmf.1 mktextfm.1 mktexpk.1
+
+# man.mk: Makefile fragment for web2c manual pages.
+
+#DITROFF = ditroff
+DITROFF = groff
+
+# The edited file always has extension .1; we change it when we install.
+.SUFFIXES: .man .1 .txt .ps .dvi
+.man.1:
+	sed -f sedscript $< >$@
+.1.dvi:
+	$(DITROFF) -Tdvi -man $< >$@
+.1.ps:
+	$(DITROFF) -Tps -man $< >$@
+.1.txt:
+	$(DITROFF) -Tascii -man $< | col -b | expand >$@
+
+all: $(manfiles)
+.PHONY: dw
+
+$(manfiles): sedscript
+
+manfiles: $(manfiles)
+dvi: $(manfiles:.1=.dvi)
+ps: $(manfiles:.1=.ps)
+txt: $(manfiles:.1=.txt)
+
+# We do not depend on the top-level Makefile since the top-level
+# Makefile can change for reasons that do not affect the man pages.
+# At present, all but VERSION should be unused.
+sedscript:
+	cp /dev/null sedscript
+	for f in $(kpathsea_dir)/paths.h; do \
+	  sed -n -e '/^#define/s/#define[ 	][ 	]*\([A-Z_a-z][A-Z_a-z]*\)[ 	][ 	]*\(.*\)/s%@\1@%\2%/p' \
+		$$f \
+	  | sed -e 's/"//g' -e 's/[ 	]*\/\*[^*]*\*\///g' >>sedscript;\
+	done
+	echo 's%@VERSION@%$(version)%'		>>sedscript
+	echo 's%@BINDIR@%$(bindir)%'		>>sedscript
+	echo 's%@INFODIR@%$(infodir)%'		>>sedscript
+	echo 's%@TEXINPUTDIR@%$(texinputdir)%'	>>sedscript
+	echo 's%@MFINPUTDIR@%$(mfinputdir)%'	>>sedscript
+	echo 's%@MPINPUTDIR@%$(mpinputdir)%'	>>sedscript
+	echo 's%@FONTDIR@%$(fontdir)%'		>>sedscript
+	echo 's%@FMTDIR@%$(fmtdir)%'		>>sedscript
+	echo 's%@BASEDIR@%$(basedir)%'		>>sedscript
+	echo 's%@MEMDIR@%$(memdir)%'		>>sedscript
+	echo 's%@TEXPOOLDIR@%$(texpooldir)%'	>>sedscript
+	echo 's%@MFPOOLDIR@%$(mfpooldir)%'	>>sedscript
+	echo 's%@MPPOOLDIR@%$(mppooldir)%'	>>sedscript
+	echo 's%@FONTMAPDIR@%$(dvipsdir)%'	>>sedscript
+	echo 's%@LOCALMODES@%$(localmodes)%'	>>sedscript
+
+install-man: manfiles
+	$(top_srcdir)/../mkinstalldirs $(man1dir)
+	for nameone in $(manfiles); do					\
+          name=`basename $${nameone} .1`;				\
+          $(INSTALL_DATA) $${name}.1 $(man1dir)/$${name}.$(manext);	\
+        done
+
+uninstall-man:
+	for nameone in $(manfiles); do					\
+	  name=`basename $${nameone} .1`;				\
+	  rm -f $(man1dir)/$${name}.$(manext);				\
+	done
+
+install-data: install-man
+uninstall-data: uninstall-man
+
+mostlyclean::
+	rm -f *.1
+
+clean::
+	rm -f sedscript
+
+# end of man.mk
+
+# rdepend.mk -- rules for remaking the dependencies.  Public domain.
+# $Id: rdepend.mk 4681 2007-07-28 23:16:42Z karl $
+@MAINT@# 
+@MAINT@# Have to use -M, not -MM, since we use <kpathsea/...> instead of
+@MAINT@# "kpathsea/..." in the sources.	 But that means we have to remove the
+@MAINT@# directory prefixes and all the system include files.
+@MAINT@# And <kpathsea/paths.h> is generated, not part of the distribution.
+@MAINT@# We also remove any ../texk/kpathsea path component, since that comes
+@MAINT@# from VPATH when srcdir != builddir.
+@MAINT@# 
+@MAINT@# There's no need for any installer/user to ever run this, it can
+@MAINT@# only cause trouble. So comment it out by default.
+@MAINT@# 
+@MAINT@ifndef c_auto_h_dir
+@MAINT@c_auto_h_dir = .
+@MAINT@endif
+@MAINT@
+@MAINT@depend depend.mk:: $(c_auto_h_dir)/c-auto.h \
+@MAINT@	 $(top_srcdir)/../make/rdepend.mk 
+@MAINT@	$(CC) -M $(ALL_CPPFLAGS) \
+@MAINT@		-I$(c_auto_h_dir) \
+@MAINT@		-I$(top_srcdir)/../../libs/libgsw32 \
+@MAINT@		$(srcdir)/*.c \
+@MAINT@	  | sed -e 's,\(\.\./\)\+texk/kpathsea/,,g' \
+@MAINT@		-e 's,\(\.\./\)\+kpathsea/,$$(kpathsea_srcdir)/,g' \
+@MAINT@		-e 's,$$(kpathsea_srcdir)/c-auto.h,$$(kpathsea_dir)/c-auto.h,g' \
+@MAINT@		-e 's,$$(kpathsea_srcdir)/paths.h,$$(kpathsea_dir)/paths.h,g' \
+@MAINT@		-e 's, /[^ ]*,,g' \
+@MAINT@		-e 's, [^ ]*/\.\./libs/[^ ]*,,g' \
+@MAINT@		-e 's, \./, ,g' \
+@MAINT@		-e 's,dvi2xx.o,dvilj.o dvilj2p.o dvilj4.o dvilj4l.o,' \
+@MAINT@		-e 's,lex.yy,$$(LEX_OUTPUT_ROOT),g' \
+@MAINT@	  | $(top_srcdir)/../unbackslsh.awk \
+@MAINT@	  >depend.mk
+@MAINT@# If kpathsea, we're making .lo library objects instead of .o's.
+@MAINT@	pwd | grep -v kpathsea >/dev/null \
+@MAINT@	  || (sed -e 's/\.o:/.lo:/' \
+@MAINT@		  -e 's/kpsewhich.lo:/kpsewhich.o:/' \
+@MAINT@		  -e 's/kpsestat.lo:/kpsestat.o:/' \
+@MAINT@		  -e 's/access.lo:/access.o:/' \
+@MAINT@		  -e 's/readlink.lo:/readlink.o:/' \
+@MAINT@	      <depend.mk >depend-tmp.mk; mv depend-tmp.mk depend.mk)
+@MAINT@.PHONY: depend
+
+# Let's stick a rule for TAGS here, just in case someone wants them.
+# (We don't put them in the distributions, to keep them smaller.)
+TAGS: *.c *.h
+	pwd | grep kpathsea >/dev/null && append=../kpathsea/TAGS; \
+	  etags $$append *.[ch]
+
+# Prevent GNU make 3.[59,63) from overflowing arg limit on system V.
+.NOEXPORT:
+
+# End of rdepend.mk.
+absolute.lo: absolute.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/absolute.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h
+access.o: access.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+atou.lo: atou.c config.h \
+  $(kpathsea_dir)/c-auto.h $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+cnf.lo: cnf.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-fopen.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/cnf.h \
+  $(kpathsea_srcdir)/db.h \
+  $(kpathsea_srcdir)/str-list.h \
+  $(kpathsea_srcdir)/hash.h \
+  $(kpathsea_srcdir)/line.h $(kpathsea_dir)/paths.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/recorder.h \
+  $(kpathsea_srcdir)/tex-file.h \
+  $(kpathsea_srcdir)/c-vararg.h \
+  $(kpathsea_srcdir)/variable.h
+concat.lo: concat.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+concat3.lo: concat3.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+concatn.lo: concatn.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/concatn.h \
+  $(kpathsea_srcdir)/c-vararg.h
+db.lo: db.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/absolute.h \
+  $(kpathsea_srcdir)/c-stat.h \
+  $(kpathsea_srcdir)/c-fopen.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/db.h \
+  $(kpathsea_srcdir)/str-list.h \
+  $(kpathsea_srcdir)/hash.h \
+  $(kpathsea_srcdir)/line.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/readable.h \
+  $(kpathsea_srcdir)/tex-file.h \
+  $(kpathsea_srcdir)/c-vararg.h \
+  $(kpathsea_srcdir)/variable.h
+debug.lo: debug.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+dir.lo: dir.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-dir.h \
+  $(kpathsea_srcdir)/c-stat.h \
+  $(kpathsea_srcdir)/hash.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h
+elt-dirs.lo: elt-dirs.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/expand.h \
+  $(kpathsea_srcdir)/fn.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/xopendir.h \
+  $(kpathsea_srcdir)/c-dir.h 
+expand.lo: expand.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/expand.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/tilde.h \
+  $(kpathsea_srcdir)/variable.h \
+  $(kpathsea_srcdir)/concatn.h \
+  $(kpathsea_srcdir)/c-vararg.h \
+  $(kpathsea_srcdir)/absolute.h \
+  $(kpathsea_srcdir)/str-list.h
+extend-fname.lo: extend-fname.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+file-p.lo: file-p.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/xstat.h \
+  $(kpathsea_srcdir)/c-stat.h 
+find-suffix.lo: find-suffix.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h
+fn.lo: fn.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/fn.h
+fontmap.lo: fontmap.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/c-fopen.h \
+  $(kpathsea_srcdir)/fontmap.h \
+  $(kpathsea_srcdir)/hash.h \
+  $(kpathsea_srcdir)/line.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/str-list.h \
+  $(kpathsea_srcdir)/recorder.h \
+  $(kpathsea_srcdir)/tex-file.h \
+  $(kpathsea_srcdir)/c-vararg.h
+getopt.lo: getopt.c config.h \
+  $(kpathsea_dir)/c-auto.h $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h 
+getopt1.lo: getopt1.c \
+  config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  getopt.h
+hash.lo: hash.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/hash.h \
+  $(kpathsea_srcdir)/str-list.h
+kdefault.lo: kdefault.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/default.h
+kpsestat.o: kpsestat.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-stat.h 
+kpsewhich.o: kpsewhich.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/expand.h \
+  $(kpathsea_srcdir)/getopt.h \
+  $(kpathsea_srcdir)/line.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/proginit.h \
+  $(kpathsea_srcdir)/str-list.h \
+  $(kpathsea_srcdir)/tex-file.h \
+  $(kpathsea_srcdir)/c-vararg.h \
+  $(kpathsea_srcdir)/tex-glyph.h \
+  $(kpathsea_srcdir)/variable.h
+line.lo: line.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/line.h
+magstep.lo: magstep.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/magstep.h
+make-suffix.lo: make-suffix.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h
+path-elt.lo: path-elt.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h
+pathsearch.lo: pathsearch.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/c-fopen.h \
+  $(kpathsea_srcdir)/absolute.h \
+  $(kpathsea_srcdir)/expand.h \
+  $(kpathsea_srcdir)/db.h \
+  $(kpathsea_srcdir)/str-list.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/readable.h \
+  $(kpathsea_srcdir)/variable.h
+proginit.lo: proginit.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/proginit.h \
+  $(kpathsea_srcdir)/tex-file.h \
+  $(kpathsea_srcdir)/c-vararg.h
+progname.lo: progname.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/absolute.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/c-stat.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/tex-file.h \
+  $(kpathsea_srcdir)/c-vararg.h
+putenv.lo: putenv.c
+readable.lo: readable.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-stat.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/readable.h \
+  $(kpathsea_srcdir)/tex-hush.h \
+  $(kpathsea_srcdir)/truncate.h
+readlink.o: readlink.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathmx.h \
+  $(kpathsea_srcdir)/c-stat.h 
+rm-suffix.lo: rm-suffix.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+str-list.lo: str-list.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/str-list.h
+str-llist.lo: str-llist.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/str-llist.h
+strcasecmp.lo: strcasecmp.c \
+  config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+strstr.lo: strstr.c
+strtol.lo: strtol.c config.h \
+  $(kpathsea_dir)/c-auto.h $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+tex-file.lo: tex-file.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-fopen.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/c-vararg.h \
+  $(kpathsea_srcdir)/cnf.h \
+  $(kpathsea_srcdir)/concatn.h \
+  $(kpathsea_srcdir)/default.h \
+  $(kpathsea_srcdir)/expand.h \
+  $(kpathsea_srcdir)/fontmap.h \
+  $(kpathsea_srcdir)/hash.h $(kpathsea_dir)/paths.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/tex-file.h \
+  $(kpathsea_srcdir)/tex-make.h \
+  $(kpathsea_srcdir)/variable.h
+tex-glyph.lo: tex-glyph.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/absolute.h \
+  $(kpathsea_srcdir)/expand.h \
+  $(kpathsea_srcdir)/fontmap.h \
+  $(kpathsea_srcdir)/hash.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/tex-glyph.h \
+  $(kpathsea_srcdir)/tex-file.h \
+  $(kpathsea_srcdir)/c-vararg.h \
+  $(kpathsea_srcdir)/tex-make.h \
+  $(kpathsea_srcdir)/variable.h
+tex-hush.lo: tex-hush.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/pathsearch.h \
+  $(kpathsea_srcdir)/str-llist.h \
+  $(kpathsea_srcdir)/tex-hush.h \
+  $(kpathsea_srcdir)/variable.h
+tex-make.lo: tex-make.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-fopen.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/concatn.h \
+  $(kpathsea_srcdir)/c-vararg.h \
+  $(kpathsea_srcdir)/db.h \
+  $(kpathsea_srcdir)/str-list.h \
+  $(kpathsea_srcdir)/fn.h \
+  $(kpathsea_srcdir)/magstep.h \
+  $(kpathsea_srcdir)/readable.h \
+  $(kpathsea_srcdir)/tex-make.h \
+  $(kpathsea_srcdir)/tex-file.h \
+  $(kpathsea_srcdir)/variable.h
+tilde.lo: tilde.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/tilde.h
+truncate.lo: truncate.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-namemx.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/c-pathmx.h \
+  $(kpathsea_srcdir)/truncate.h
+uppercasify.lo: uppercasify.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-ctype.h
+variable.lo: variable.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-ctype.h \
+  $(kpathsea_srcdir)/cnf.h \
+  $(kpathsea_srcdir)/fn.h \
+  $(kpathsea_srcdir)/tilde.h \
+  $(kpathsea_srcdir)/variable.h
+version.lo: version.c c-auto.h \
+  $(kpathsea_srcdir)/c-proto.h
+xbasename.lo: xbasename.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h
+xcalloc.lo: xcalloc.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+xdirname.lo: xdirname.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathch.h \
+  $(kpathsea_srcdir)/c-ctype.h
+xfopen.lo: xfopen.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+xfseek.lo: xfseek.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+xfseeko.lo: xfseeko.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+xftell.lo: xftell.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+xftello.lo: xftello.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+xgetcwd.lo: xgetcwd.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/c-pathmx.h
+xmalloc.lo: xmalloc.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+xopendir.lo: xopendir.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/xopendir.h \
+  $(kpathsea_srcdir)/c-dir.h 
+xputenv.lo: xputenv.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+xrealloc.lo: xrealloc.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
+xstat.lo: xstat.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h \
+  $(kpathsea_srcdir)/xstat.h \
+  $(kpathsea_srcdir)/c-stat.h 
+xstrdup.lo: xstrdup.c \
+  $(kpathsea_srcdir)/config.h $(kpathsea_dir)/c-auto.h \
+  $(kpathsea_srcdir)/c-std.h \
+  $(kpathsea_srcdir)/c-unistd.h \
+  $(kpathsea_srcdir)/systypes.h \
+  getopt.h \
+  $(kpathsea_srcdir)/c-memstr.h \
+  $(kpathsea_srcdir)/c-errno.h \
+  $(kpathsea_srcdir)/c-minmax.h \
+  $(kpathsea_srcdir)/c-limits.h \
+  $(kpathsea_srcdir)/c-proto.h \
+  $(kpathsea_srcdir)/debug.h \
+  $(kpathsea_srcdir)/types.h \
+  $(kpathsea_srcdir)/lib.h \
+  $(kpathsea_srcdir)/progname.h
