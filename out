@@ -1,0 +1,964 @@
+checking whether make sets $(MAKE)... yes
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking for flex... flex
+checking lex output file root... lex.yy
+checking lex library... -lfl
+checking whether yytext is a pointer... yes
+checking for bison... bison -y
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking target system type... i686-pc-linux-gnu
+checking whether to define additional compiler specific flags... no
+checking for sys/wait.h that is POSIX.1 compatible... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether make sets $(MAKE)... (cached) yes
+checking whether ln -s works... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for ranlib... ranlib
+checking for X... libraries , headers 
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking for loader (symbol LD)... ld
+checking for archiver (symbol AR)... ar
+checking for archiver options (symbol ARFLAGS)... rc
+checking where the main texmf tree is located... checking for connect... yes
+configure: creating ./config.status
+config.status: creating Makefile
+=== configuring in texk (/opt/luatex/metafont-2.718281/Work/texk)
+configure: running /bin/bash ../../texk/configure --disable-option-checking '--prefix=/opt/luatex/metafont-2.718281/inst'  '--datadir=/opt/luatex/metafont-2.718281/inst' '--with-xdvi-x-toolkit=xaw' '--disable-threads' '--with-old-mac-fonts' '--without-xindy' '--enable-tetex-build' '--bindir=${exec_prefix}/bin/i686-pc-linux-gnu' '--libdir=${exec_prefix}/lib/i686-pc-linux-gnu' --cache-file=/dev/null --srcdir=../../texk
+checking whether make sets $(MAKE)... yes
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for strerror in -lcposix... no
+checking whether ln -s works... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking for loader (symbol LD)... ld
+checking for archiver (symbol AR)... ar
+checking for archiver options (symbol ARFLAGS)... rc
+checking where the main texmf tree is located... checking for connect... yes
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking for ld used by GCC... ld
+checking if the linker (ld) is GNU ld... yes
+checking for ld option to reload object files... -r
+checking for BSD-compatible nm... /usr/bin/nm -B
+checking for a sed that does not truncate output... /bin/sed
+checking how to recognise dependent libraries... pass_all
+checking command to parse /usr/bin/nm -B output... ok
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking dlfcn.h usability... yes
+checking dlfcn.h presence... yes
+checking for dlfcn.h... yes
+checking for ranlib... ranlib
+checking for strip... strip
+checking for objdir... .libs
+checking for gcc option to produce PIC... -fPIC
+checking if gcc PIC flag -fPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.lo... yes
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking whether the linker (ld) supports shared libraries... yes
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... no
+checking whether to build static libraries... yes
+creating libtool
+configure: creating ./config.status
+config.status: creating Makefile.aux
+config.status: creating Makefile
+=== configuring in kpathsea (/opt/luatex/metafont-2.718281/Work/texk/kpathsea)
+configure: running /bin/bash ../../../texk/kpathsea/configure --disable-option-checking '--prefix=/opt/luatex/metafont-2.718281/inst'  '--datadir=/opt/luatex/metafont-2.718281/inst' '--with-xdvi-x-toolkit=xaw' '--disable-threads' '--with-old-mac-fonts' '--without-xindy' '--enable-tetex-build' '--bindir=${exec_prefix}/bin/i686-pc-linux-gnu' '--libdir=${exec_prefix}/lib/i686-pc-linux-gnu' --cache-file=/dev/null --srcdir=../../../texk/kpathsea
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether ln -s works... yes
+checking whether make sets $(MAKE)... yes
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for BSD-compatible nm... /usr/bin/nm -B
+checking for a sed that does not truncate output... /bin/sed
+checking how to recognise dependent libraries... pass_all
+checking command to parse /usr/bin/nm -B output... ok
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking dlfcn.h usability... yes
+checking dlfcn.h presence... yes
+checking for dlfcn.h... yes
+checking for ranlib... ranlib
+checking for strip... strip
+checking for objdir... .libs
+checking for gcc option to produce PIC... -fPIC
+checking if gcc PIC flag -fPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.lo... yes
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking whether the linker (/usr/bin/ld) supports shared libraries... yes
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... no
+checking whether to build static libraries... yes
+creating libtool
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... 64
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking for ANSI C header files... (cached) yes
+checking whether closedir returns void... no
+checking assert.h usability... yes
+checking assert.h presence... yes
+checking for assert.h... yes
+checking float.h usability... yes
+checking float.h presence... yes
+checking for float.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking for memory.h... (cached) yes
+checking pwd.h usability... yes
+checking pwd.h presence... yes
+checking for pwd.h... yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for strings.h... (cached) yes
+checking sys/param.h usability... yes
+checking sys/param.h presence... yes
+checking for sys/param.h... yes
+checking for unistd.h... (cached) yes
+checking whether strstr is declared... yes
+checking for putenv... yes
+checking for strcasecmp... yes
+checking for strtol... yes
+checking for strstr... yes
+checking for bcmp... yes
+checking for bcopy... yes
+checking for bzero... yes
+checking for getcwd... yes
+checking for getwd... yes
+checking for index... yes
+checking for memcmp... yes
+checking for memcpy... yes
+checking for rindex... yes
+checking for strchr... yes
+checking for strrchr... yes
+checking for an ANSI C-conforming const... yes
+checking for struct stat.st_mtim... yes
+checking whether the compiler accepts prototypes... yes
+checking whether program_invocation_name is predefined... yes
+checking whether getcwd uses fork or vfork... no
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking for loader (symbol LD)... /usr/bin/ld
+checking for archiver (symbol AR)... ar
+checking for archiver options (symbol ARFLAGS)... rc
+checking where the main texmf tree is located... checking for main in -lm... yes
+configure: creating ./config.status
+config.status: creating Makefile.aux
+config.status: creating Makefile
+config.status: creating c-auto.h
+=== configuring in web2c (/opt/luatex/metafont-2.718281/Work/texk/web2c)
+configure: running /bin/bash ../../../texk/web2c/configure --disable-option-checking '--prefix=/opt/luatex/metafont-2.718281/inst'  '--datadir=/opt/luatex/metafont-2.718281/inst' '--with-xdvi-x-toolkit=xaw' '--disable-threads' '--with-old-mac-fonts' '--without-xindy' '--enable-tetex-build' '--bindir=${exec_prefix}/bin/i686-pc-linux-gnu' '--libdir=${exec_prefix}/lib/i686-pc-linux-gnu' --cache-file=/dev/null --srcdir=../../../texk/web2c
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether ln -s works... yes
+checking whether make sets $(MAKE)... yes
+checking for bison... bison -y
+checking for flex... flex
+checking lex output file root... lex.yy
+checking lex library... -lfl
+checking whether yytext is a pointer... yes
+checking for ranlib... ranlib
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking sys/timeb.h usability... yes
+checking sys/timeb.h presence... yes
+checking for sys/timeb.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking for strerror... yes
+checking for gettimeofday... yes
+checking for ftime... yes
+checking for mkstemp... yes
+checking for mktemp... yes
+checking for setlocale... yes
+checking for strlcat... no
+checking for strlcpy... no
+checking for fmax... no
+checking return type of signal handlers... void
+checking whether gcc asm needs underscore... no
+checking for inline... inline
+checking for loader (symbol LD)... ld
+checking for archiver (symbol AR)... ar
+checking for archiver options (symbol ARFLAGS)... rc
+checking whether char is unsigned... no
+checking whether byte ordering is bigendian... no
+checking size of long... 4
+checking for connect... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking for loader (symbol LD)... (cached) ld
+checking for archiver (symbol AR)... (cached) ar
+checking for archiver options (symbol ARFLAGS)... (cached) rc
+checking where the main texmf tree is located... checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking for statically linking C++ runtime library... ok using -nodefaultlibs -Wl,-Bstatic -lstdc++ -Wl,-Bdynamic -lm -lgcc_eh -lgcc -lc -lgcc_eh -lgcc
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking for the pthreads library -lpthreads... no
+checking whether pthreads work without any flags... no
+checking whether pthreads work with -Kthread... no
+checking whether pthreads work with -kthread... no
+checking for the pthreads library -llthread... no
+checking whether pthreads work with -pthread... yes
+checking for joinable pthread attribute... PTHREAD_CREATE_JOINABLE
+checking if more special flags are required for pthreads... no
+checking for Apple Carbon framework... no
+checking for fontconfig header files... yes
+checking for FcInit in -lfontconfig... yes
+checking for X... libraries , headers 
+checking for gethostbyname... yes
+checking for connect... (cached) yes
+checking for remove... yes
+checking for shmat... yes
+checking for IceConnectionNumber in -lICE... yes
+checking for XextCreateExtension in -lXext... yes
+checking for main in -lm... yes
+configure: creating ./config.status
+config.status: creating omegafonts/Makefile.aux
+config.status: creating omegafonts/Makefile
+config.status: creating otps/Makefile.aux
+config.status: creating otps/Makefile
+config.status: creating pdftexdir/Makefile.aux
+config.status: creating pdftexdir/Makefile
+config.status: creating luatexdir/Makefile.aux
+config.status: creating luatexdir/Makefile
+config.status: creating Makefile.aux
+config.status: creating Makefile
+config.status: creating doc/Makefile.aux
+config.status: creating doc/Makefile
+config.status: creating lib/Makefile.aux
+config.status: creating lib/Makefile
+config.status: creating man/Makefile.aux
+config.status: creating man/Makefile
+config.status: creating mpware/Makefile.aux
+config.status: creating mpware/Makefile
+config.status: creating mpdir/Makefile.aux
+config.status: creating mpdir/Makefile
+config.status: creating web2c/Makefile.aux
+config.status: creating web2c/Makefile
+config.status: creating window/Makefile.aux
+config.status: creating window/Makefile
+config.status: creating c-auto.h
+9.23user 5.49system 0:15.42elapsed 95%CPU (0avgtext+0avgdata 0maxresident)k
+0inputs+25024outputs (0major+2054275minor)pagefaults 0swaps
+esubdirs=" texk"; \
+	  for dir in $esubdirs; do \
+	    echo making all in $dir; \
+	    (if test -f $dir/Makefile; then cd $dir && make all; else true; fi) || exit 1; \
+	  done
+making all in texk
+make[1]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk'
+cd ./kpathsea && make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS='' prefix=/opt/luatex/metafont-2.718281/inst exec_prefix=/opt/luatex/metafont-2.718281/inst bindir=/opt/luatex/metafont-2.718281/inst/bin/i686-pc-linux-gnu scriptdir=/opt/luatex/metafont-2.718281/inst/bin/i686-pc-linux-gnu libdir=/opt/luatex/metafont-2.718281/inst/lib/i686-pc-linux-gnu datadir=/opt/luatex/metafont-2.718281/inst infodir=/opt/luatex/metafont-2.718281/inst/share/info includedir=/opt/luatex/metafont-2.718281/inst/include mandir=/opt/luatex/metafont-2.718281/inst/share/man manext=1 man1dir=/opt/luatex/metafont-2.718281/inst/share/man/man1 sysconfdir=/opt/luatex/metafont-2.718281/inst/etc localstatedir=/opt/luatex/metafont-2.718281/inst/var libexecdir=/opt/luatex/metafont-2.718281/inst/libexec texmf=/opt/luatex/metafont-2.718281/inst/texmf web2cdir=/opt/luatex/metafont-2.718281/inst/texmf/web2c vartexfonts=/var/tmp/texfonts texinputdir=/opt/luatex/metafont-2.718281/inst/texmf/tex mfinputdir=/opt/luatex/metafont-2.718281/inst/texmf/metafont mpinputdir=/opt/luatex/metafont-2.718281/inst/texmf/metapost fontdir=/opt/luatex/metafont-2.718281/inst/texmf/fonts fmtdir=/opt/luatex/metafont-2.718281/inst/texmf/web2c/tex basedir=/opt/luatex/metafont-2.718281/inst/texmf/web2c/metafont memdir=/opt/luatex/metafont-2.718281/inst/texmf/web2c/metapost texpooldir=/opt/luatex/metafont-2.718281/inst/texmf/web2c mfpooldir=/opt/luatex/metafont-2.718281/inst/texmf/web2c mppooldir=/opt/luatex/metafont-2.718281/inst/texmf/web2c dvips_plain_macrodir=/opt/luatex/metafont-2.718281/inst/texmf/tex/plain/dvips dvilj_latex2e_macrodir=/opt/luatex/metafont-2.718281/inst/texmf/tex/latex/dvilj dvipsdir=/opt/luatex/metafont-2.718281/inst/texmf/dvips psheaderdir=/opt/luatex/metafont-2.718281/inst/texmf/dvips default_texsizes='600' 
+make[2]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/kpathsea'
+echo "/* paths.h: Generated from texmf.cnf. */" >paths.tmp
+sed -e 's/%.*//' -e 's/^[ 	]*//' -e 's/[ 	]*$//' ../../../texk/kpathsea/texmf.cnf \
+	| grep '^[ 	]*[A-Z0-9_]*[ 	=]' \
+	| sed '/^$/d' \
+	| sed 's/^\([^ 	=]*\)[ 	]*=*[ 	]*\(.*\)/#ifndef DEFAULT_\1%#define DEFAULT_\1 "\2"%#endif/' \
+	| tr '%' '\012' \
+	| sed -e 's%\$TEXMFCONFIG%/nonesuch/texmfconfig%g' \
+	      -e 's%\$TEXMFDIST%/nonesuch/texmfdist%g' \
+	      -e 's%\$TEXMFDOCDIR%/nonesuch/texmfdocdir%g' \
+	      -e 's%\$TEXMFLOCAL%/nonesuch/texmflocal%g' \
+	      -e 's%\$TEXMFMAIN%/nonesuch/texmfmain%g' \
+	      -e 's%\$TEXMFSYSCONFIG%/nonesuch/texmfsysconfig%g' \
+	      -e 's%\$TEXMFSYSVAR%/nonesuch/texmfsysvar%g' \
+	      -e 's%\$TEXMFVAR%/nonesuch/texmfvar%g' \
+	      -e 's%\$TEXMF%/nonesuch/texmf%g' \
+	      -e 's%\$VARTEXFONTS%/nonesuch/vartexfonts%g' \
+	| sed -e 's%;%:%g' \
+	>>paths.tmp
+cp paths.tmp paths.h
+rm -f paths.tmp
+date >stamp-paths
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tex-file.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tex-file.c -o tex-file.o
+echo timestamp > tex-file.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/absolute.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/absolute.c -o absolute.o
+echo timestamp > absolute.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/atou.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/atou.c -o atou.o
+echo timestamp > atou.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/cnf.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/cnf.c -o cnf.o
+echo timestamp > cnf.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/concat.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/concat.c -o concat.o
+echo timestamp > concat.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/concat3.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/concat3.c -o concat3.o
+echo timestamp > concat3.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/concatn.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/concatn.c -o concatn.o
+echo timestamp > concatn.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/db.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/db.c -o db.o
+echo timestamp > db.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/debug.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/debug.c -o debug.o
+echo timestamp > debug.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/dir.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/dir.c -o dir.o
+echo timestamp > dir.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/elt-dirs.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/elt-dirs.c -o elt-dirs.o
+echo timestamp > elt-dirs.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/expand.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/expand.c -o expand.o
+echo timestamp > expand.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/extend-fname.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/extend-fname.c -o extend-fname.o
+echo timestamp > extend-fname.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/file-p.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/file-p.c -o file-p.o
+echo timestamp > file-p.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/find-suffix.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/find-suffix.c -o find-suffix.o
+echo timestamp > find-suffix.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/fn.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/fn.c -o fn.o
+echo timestamp > fn.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/fontmap.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/fontmap.c -o fontmap.o
+echo timestamp > fontmap.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/getopt.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/getopt.c -o getopt.o
+echo timestamp > getopt.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/getopt1.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/getopt1.c -o getopt1.o
+echo timestamp > getopt1.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/hash.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/hash.c -o hash.o
+echo timestamp > hash.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/kdefault.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/kdefault.c -o kdefault.o
+echo timestamp > kdefault.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/line.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/line.c -o line.o
+echo timestamp > line.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/magstep.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/magstep.c -o magstep.o
+echo timestamp > magstep.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/make-suffix.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/make-suffix.c -o make-suffix.o
+echo timestamp > make-suffix.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/path-elt.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/path-elt.c -o path-elt.o
+echo timestamp > path-elt.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/pathsearch.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/pathsearch.c -o pathsearch.o
+echo timestamp > pathsearch.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/proginit.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/proginit.c -o proginit.o
+echo timestamp > proginit.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/progname.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/progname.c -o progname.o
+echo timestamp > progname.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/readable.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/readable.c -o readable.o
+echo timestamp > readable.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/rm-suffix.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/rm-suffix.c -o rm-suffix.o
+echo timestamp > rm-suffix.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/str-list.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/str-list.c -o str-list.o
+echo timestamp > str-list.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/str-llist.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/str-llist.c -o str-llist.o
+echo timestamp > str-llist.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tex-glyph.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tex-glyph.c -o tex-glyph.o
+echo timestamp > tex-glyph.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tex-hush.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tex-hush.c -o tex-hush.o
+echo timestamp > tex-hush.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tex-make.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tex-make.c -o tex-make.o
+echo timestamp > tex-make.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tilde.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/tilde.c -o tilde.o
+echo timestamp > tilde.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/truncate.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/truncate.c -o truncate.o
+echo timestamp > truncate.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/uppercasify.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/uppercasify.c -o uppercasify.o
+echo timestamp > uppercasify.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/variable.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/variable.c -o variable.o
+echo timestamp > variable.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/version.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/version.c -o version.o
+echo timestamp > version.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xbasename.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xbasename.c -o xbasename.o
+echo timestamp > xbasename.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xcalloc.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xcalloc.c -o xcalloc.o
+echo timestamp > xcalloc.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xdirname.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xdirname.c -o xdirname.o
+echo timestamp > xdirname.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xfopen.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xfopen.c -o xfopen.o
+echo timestamp > xfopen.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xfseek.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xfseek.c -o xfseek.o
+echo timestamp > xfseek.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xfseeko.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xfseeko.c -o xfseeko.o
+echo timestamp > xfseeko.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xftell.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xftell.c -o xftell.o
+echo timestamp > xftell.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xftello.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xftello.c -o xftello.o
+echo timestamp > xftello.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xgetcwd.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xgetcwd.c -o xgetcwd.o
+echo timestamp > xgetcwd.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xmalloc.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xmalloc.c -o xmalloc.o
+echo timestamp > xmalloc.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xopendir.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xopendir.c -o xopendir.o
+echo timestamp > xopendir.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xputenv.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xputenv.c -o xputenv.o
+echo timestamp > xputenv.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xrealloc.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xrealloc.c -o xrealloc.o
+echo timestamp > xrealloc.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xstat.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xstat.c -o xstat.o
+echo timestamp > xstat.lo
+/bin/sh ../libtool --mode=compile gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xstrdup.c
+gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/.. -g -O2 -DMAKE_KPSE_DLL -c ../../../texk/kpathsea/xstrdup.c -o xstrdup.o
+echo timestamp > xstrdup.lo
+/bin/sh ../libtool --mode=link gcc -o ../kpathsea/libkpathsea.la   -rpath /opt/luatex/metafont-2.718281/inst/lib/i686-pc-linux-gnu -version-info 5:0:1 tex-file.lo absolute.lo atou.lo cnf.lo concat.lo concat3.lo concatn.lo db.lo debug.lo dir.lo elt-dirs.lo expand.lo extend-fname.lo file-p.lo find-suffix.lo fn.lo fontmap.lo getopt.lo getopt1.lo hash.lo kdefault.lo line.lo magstep.lo make-suffix.lo path-elt.lo pathsearch.lo proginit.lo progname.lo readable.lo rm-suffix.lo str-list.lo str-llist.lo tex-glyph.lo tex-hush.lo tex-make.lo tilde.lo truncate.lo uppercasify.lo variable.lo version.lo xbasename.lo xcalloc.lo xdirname.lo xfopen.lo xfseek.lo xfseeko.lo xftell.lo xftello.lo xgetcwd.lo xmalloc.lo xopendir.lo xputenv.lo xrealloc.lo xstat.lo xstrdup.lo  
+mkdir ../kpathsea/.libs
+rm -fr ../kpathsea/.libs/libkpathsea.la ../kpathsea/.libs/libkpathsea.* ../kpathsea/.libs/libkpathsea.*
+ar cru ../kpathsea/.libs/libkpathsea.a  tex-file.o absolute.o atou.o cnf.o concat.o concat3.o concatn.o db.o debug.o dir.o elt-dirs.o expand.o extend-fname.o file-p.o find-suffix.o fn.o fontmap.o getopt.o getopt1.o hash.o kdefault.o line.o magstep.o make-suffix.o path-elt.o pathsearch.o proginit.o progname.o readable.o rm-suffix.o str-list.o str-llist.o tex-glyph.o tex-hush.o tex-make.o tilde.o truncate.o uppercasify.o variable.o version.o xbasename.o xcalloc.o xdirname.o xfopen.o xfseek.o xfseeko.o xftell.o xftello.o xgetcwd.o xmalloc.o xopendir.o xputenv.o xrealloc.o xstat.o xstrdup.o 
+ranlib ../kpathsea/.libs/libkpathsea.a
+creating ../kpathsea/libkpathsea.la
+(cd ../kpathsea/.libs && rm -f libkpathsea.la && ln -s ../libkpathsea.la libkpathsea.la)
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -c ../../../texk/kpathsea/kpsewhich.c -o kpsewhich.o
+/bin/sh ../libtool --mode=link gcc -o kpsewhich   kpsewhich.o  ../kpathsea/libkpathsea.la -lm  
+gcc -o kpsewhich kpsewhich.o  ../kpathsea/.libs/libkpathsea.a -lm
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -c ../../../texk/kpathsea/kpsestat.c -o kpsestat.o
+gcc -o kpsestat   kpsestat.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -c ../../../texk/kpathsea/access.c -o access.o
+gcc -o kpseaccess   access.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/kpathsea -I.. -I../../../texk/kpathsea/..   -g -O2  -c ../../../texk/kpathsea/readlink.c -o readlink.o
+gcc -o kpsereadlink   readlink.o
+cp /dev/null sedscript
+for f in ../kpathsea/paths.h; do \
+	  sed -n -e '/^#define/s/#define[ 	][ 	]*\([A-Z_a-z][A-Z_a-z]*\)[ 	][ 	]*\(.*\)/s%@\1@%\2%/p' \
+		$f \
+	  | sed -e 's/"//g' -e 's/[ 	]*\/\*[^*]*\*\///g' >>sedscript;\
+	done
+echo 's%@VERSION@%3.5.7%'		>>sedscript
+echo 's%@BINDIR@%/opt/luatex/metafont-2.718281/inst/bin/i686-pc-linux-gnu%'		>>sedscript
+echo 's%@INFODIR@%/opt/luatex/metafont-2.718281/inst/share/info%'		>>sedscript
+echo 's%@TEXINPUTDIR@%/opt/luatex/metafont-2.718281/inst/texmf/tex%'	>>sedscript
+echo 's%@MFINPUTDIR@%/opt/luatex/metafont-2.718281/inst/texmf/metafont%'	>>sedscript
+echo 's%@MPINPUTDIR@%/opt/luatex/metafont-2.718281/inst/texmf/metapost%'	>>sedscript
+echo 's%@FONTDIR@%/opt/luatex/metafont-2.718281/inst/texmf/fonts%'		>>sedscript
+echo 's%@FMTDIR@%/opt/luatex/metafont-2.718281/inst/texmf/web2c/tex%'		>>sedscript
+echo 's%@BASEDIR@%/opt/luatex/metafont-2.718281/inst/texmf/web2c/metafont%'		>>sedscript
+echo 's%@MEMDIR@%/opt/luatex/metafont-2.718281/inst/texmf/web2c/metapost%'		>>sedscript
+echo 's%@TEXPOOLDIR@%/opt/luatex/metafont-2.718281/inst/texmf/web2c%'	>>sedscript
+echo 's%@MFPOOLDIR@%/opt/luatex/metafont-2.718281/inst/texmf/web2c%'	>>sedscript
+echo 's%@MPPOOLDIR@%/opt/luatex/metafont-2.718281/inst/texmf/web2c%'	>>sedscript
+echo 's%@FONTMAPDIR@%/opt/luatex/metafont-2.718281/inst/texmf/dvips%'	>>sedscript
+echo 's%@LOCALMODES@%%'	>>sedscript
+sed -f sedscript ../../../texk/kpathsea/kpseaccess.man >kpseaccess.1
+sed -f sedscript ../../../texk/kpathsea/kpsestat.man >kpsestat.1
+sed -f sedscript ../../../texk/kpathsea/kpsewhich.man >kpsewhich.1
+sed -f sedscript ../../../texk/kpathsea/kpsereadlink.man >kpsereadlink.1
+sed -f sedscript ../../../texk/kpathsea/mktexlsr.man >mktexlsr.1
+sed -f sedscript ../../../texk/kpathsea/mktexmf.man >mktexmf.1
+sed -f sedscript ../../../texk/kpathsea/mktextfm.man >mktextfm.1
+sed -f sedscript ../../../texk/kpathsea/mktexpk.man >mktexpk.1
+make[2]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/kpathsea'
+for d in web2c ; do if test -f $d/Makefile; then \
+	  (cd $d && make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS='' prefix=/opt/luatex/metafont-2.718281/inst exec_prefix=/opt/luatex/metafont-2.718281/inst bindir=/opt/luatex/metafont-2.718281/inst/bin/i686-pc-linux-gnu scriptdir=/opt/luatex/metafont-2.718281/inst/bin/i686-pc-linux-gnu libdir=/opt/luatex/metafont-2.718281/inst/lib/i686-pc-linux-gnu datadir=/opt/luatex/metafont-2.718281/inst infodir=/opt/luatex/metafont-2.718281/inst/share/info includedir=/opt/luatex/metafont-2.718281/inst/include mandir=/opt/luatex/metafont-2.718281/inst/share/man manext=1 man1dir=/opt/luatex/metafont-2.718281/inst/share/man/man1 sysconfdir=/opt/luatex/metafont-2.718281/inst/etc localstatedir=/opt/luatex/metafont-2.718281/inst/var libexecdir=/opt/luatex/metafont-2.718281/inst/libexec texmf=/opt/luatex/metafont-2.718281/inst/texmf web2cdir=/opt/luatex/metafont-2.718281/inst/texmf/web2c vartexfonts=/var/tmp/texfonts texinputdir=/opt/luatex/metafont-2.718281/inst/texmf/tex mfinputdir=/opt/luatex/metafont-2.718281/inst/texmf/metafont mpinputdir=/opt/luatex/metafont-2.718281/inst/texmf/metapost fontdir=/opt/luatex/metafont-2.718281/inst/texmf/fonts fmtdir=/opt/luatex/metafont-2.718281/inst/texmf/web2c/tex basedir=/opt/luatex/metafont-2.718281/inst/texmf/web2c/metafont memdir=/opt/luatex/metafont-2.718281/inst/texmf/web2c/metapost texpooldir=/opt/luatex/metafont-2.718281/inst/texmf/web2c mfpooldir=/opt/luatex/metafont-2.718281/inst/texmf/web2c mppooldir=/opt/luatex/metafont-2.718281/inst/texmf/web2c dvips_plain_macrodir=/opt/luatex/metafont-2.718281/inst/texmf/tex/plain/dvips dvilj_latex2e_macrodir=/opt/luatex/metafont-2.718281/inst/texmf/tex/latex/dvilj dvipsdir=/opt/luatex/metafont-2.718281/inst/texmf/dvips psheaderdir=/opt/luatex/metafont-2.718281/inst/texmf/dvips default_texsizes='600'  all) || exit 1; else true; fi; done
+make[2]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+cd lib && make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS='' 
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/lib'
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/basechsuffix.c -o basechsuffix.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/chartostring.c -o chartostring.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/coredump.c -o coredump.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/eofeoln.c -o eofeoln.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/fprintreal.c -o fprintreal.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/inputint.c -o inputint.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/input2int.c -o input2int.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/main.c -o main.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/openclose.c -o openclose.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/printversion.c -o printversion.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/uexit.c -o uexit.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/usage.c -o usage.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/version.c -o version.o
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/lib -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/lib/..  -g -O2  -c ../../../../texk/web2c/lib/zround.c -o zround.o
+rm -f lib.a
+ar rc lib.a basechsuffix.o chartostring.o coredump.o eofeoln.o fprintreal.o inputint.o input2int.o main.o openclose.o printversion.o uexit.o usage.o version.o zround.o
+ranlib lib.a
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/lib'
+cd web2c && make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  fixwrites
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/web2c'
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/web2c -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/web2c/..  -g -O2  -c ../../../../texk/web2c/web2c/fixwrites.c
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/web2c -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/web2c/..  -g -O2  -c ../../../../texk/web2c/web2c/kps.c
+gcc -o fixwrites   fixwrites.o kps.o
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/web2c'
+cd web2c && make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  splitup
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/web2c'
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/web2c -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/web2c/..  -g -O2  -c ../../../../texk/web2c/web2c/splitup.c
+gcc -o splitup   splitup.o kps.o
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/web2c'
+cd web2c && make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  web2c
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/web2c'
+Expect one shift/reduce conflict.
+bison -y -d -v ../../../../texk/web2c/web2c/web2c.y
+../../../../texk/web2c/web2c/web2c.y:871.25-881.38: warning: unused value: $2
+conflicts: 1 shift/reduce
+test -f y.tab.c && mv -f y.tab.c y_tab.c
+test -f y.tab.h && mv -f y.tab.h y_tab.h
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/web2c -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/web2c/..  -g -O2  -c ../../../../texk/web2c/web2c/main.c
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/web2c -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/web2c/..  -g -O2  -c y_tab.c
+flex -l ../../../../texk/web2c/web2c/web2c.l
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/web2c -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/web2c/..  -g -O2  -c lex.yy.c
+gcc -o web2c   kps.o main.o y_tab.o lex.yy.o -lfl
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/web2c'
+cd web2c && make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  makecpool
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/web2c'
+gcc -DHAVE_CONFIG_H  -I. -I../../../../texk/web2c/web2c -I../.. -I../../../../texk/web2c/.. -I.. -I../../../../texk/web2c/web2c/..  -g -O2  -c ../../../../texk/web2c/web2c/makecpool.c
+gcc -o makecpool   makecpool.o
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/web2c'
+if [ -r ./tangle ] || [ -r ./tangle.exe ]; then \
+	  WEBINPUTS=.:../../../texk/web2c ./tangle tangle tangle; \
+	  mv tangle.p tangleboot.p; \
+	elif [ -r tangleboot.p ]; then \
+	  touch tangleboot.p; \
+	else \
+	  cp ../../../texk/web2c/tangleboot.p .; \
+	fi
+date >stamp-tangle
+make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  tangle
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . tangleboot
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c tangleboot.c -o tangleboot.o
+/bin/sh ../libtool --mode=link gcc -o tangleboot   tangleboot.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+mkdir .libs
+gcc -o tangleboot tangleboot.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangleboot tangle tangle
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*11*19*29*37*50*65*70*77*94*112*123*143*156*163*171*179*182*188*200
+Writing the output file.....500....
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . tangle
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c tangle.c -o tangle.o
+/bin/sh ../libtool --mode=link gcc -o tangle   tangle.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o tangle tangle.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  tangleboot.p
+make[4]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+make[4]: `tangleboot.p' is up to date.
+make[4]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+date >stamp-tangle
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . tangleboot
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c tangleboot.c -o tangleboot.o
+/bin/sh ../libtool --mode=link gcc -o tangleboot   tangleboot.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o tangleboot tangleboot.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangleboot tangle tangle
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*11*19*29*37*50*65*70*77*94*112*123*143*156*163*171*179*182*188*200
+Writing the output file.....500....
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . tangle
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c tangle.c -o tangle.o
+/bin/sh ../libtool --mode=link gcc -o tangle   tangle.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o tangle tangle.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  tangleboot.p
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+make[3]: `tangleboot.p' is up to date.
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+WEBINPUTS=.:../../../texk/web2c ./tangle bibtex bibtex
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*10*21*36*49*65*81*98*110*147*164*219*291*332*456*468*478
+Writing the output file.....500.....1000.....1500.....2000.....2500....
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . bibtex
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c bibtex.c -o bibtex.o
+/bin/sh ../libtool --mode=link gcc -o bibtex   bibtex.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o bibtex bibtex.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+if [ -r ./ctangle ] || [ -r ./ctangle.exe ]; then \
+	  CWEBINPUTS=../../../texk/web2c/cwebdir ./ctangle ctangle ctang-w2c; \
+	  mv ctangle.c ctangleboot.c; \
+	elif [ -r ctangleboot.c ]; then \
+	  touch ctangleboot.c; \
+	else \
+	  cp ../../../texk/web2c/ctangleboot.c .; \
+	fi
+date >stamp-ctangle
+make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  ctangle
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c ctangleboot.c -o ctangleboot.o
+if [ -r ./ctangle ] || [ -r ./ctangle.exe ]; then \
+	  CWEBINPUTS=../../../texk/web2c/cwebdir ./ctangle common comm-w2c cweb.c; \
+	  mv cweb.c cwebboot.c; \
+	elif [ -r cwebboot.c ]; then \
+	  touch cwebboot.c; \
+	else \
+	  cp ../../../texk/web2c/cwebboot.c .; \
+	fi
+date >stamp-ctangle
+make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  ctangle
+make[4]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c cwebboot.c -o cwebboot.o
+/bin/sh ../libtool --mode=link gcc -o ctangleboot   ctangleboot.o cwebboot.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o ctangleboot ctangleboot.o cwebboot.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+CWEBINPUTS=../../../texk/web2c/cwebdir ./ctangleboot ctangle ctang-w2c
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is CTANGLE, Version 3.64 (Web2C 7.5.7)
+*1*15*22*26*34*40*54*60*74*81*95
+Writing the output file (ctangle.c):.....500.....1000..
+Done.
+(No errors were found.)
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c ctangle.c -o ctangle.o
+CWEBINPUTS=../../../texk/web2c/cwebdir ./ctangleboot common comm-w2c cweb.c
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is CTANGLE, Version 3.64 (Web2C 7.5.7)
+*1*5*7*29*58*69*79*83*86
+Writing the output file (cweb.c):.....500....
+Done.
+(No errors were found.)
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c cweb.c -o cweb.o
+/bin/sh ../libtool --mode=link gcc -o ctangle   ctangle.o cweb.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o ctangle ctangle.o cweb.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  ctangleboot.c cwebboot.c
+make[5]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+make[5]: `ctangleboot.c' is up to date.
+make[5]: `cwebboot.c' is up to date.
+make[5]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+make[4]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c cwebboot.c -o cwebboot.o
+/bin/sh ../libtool --mode=link gcc -o ctangleboot   ctangleboot.o cwebboot.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o ctangleboot ctangleboot.o cwebboot.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+CWEBINPUTS=../../../texk/web2c/cwebdir ./ctangleboot ctangle ctang-w2c
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is CTANGLE, Version 3.64 (Web2C 7.5.7)
+*1*15*22*26*34*40*54*60*74*81*95
+Writing the output file (ctangle.c):.....500.....1000..
+Done.
+(No errors were found.)
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c ctangle.c -o ctangle.o
+CWEBINPUTS=../../../texk/web2c/cwebdir ./ctangleboot common comm-w2c cweb.c
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is CTANGLE, Version 3.64 (Web2C 7.5.7)
+*1*5*7*29*58*69*79*83*86
+Writing the output file (cweb.c):.....500....
+Done.
+(No errors were found.)
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c cweb.c -o cweb.o
+/bin/sh ../libtool --mode=link gcc -o ctangle   ctangle.o cweb.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o ctangle ctangle.o cweb.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  ctangleboot.c cwebboot.c
+make[4]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+make[4]: `ctangleboot.c' is up to date.
+make[4]: `cwebboot.c' is up to date.
+make[4]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c ctangleboot.c -o ctangleboot.o
+/bin/sh ../libtool --mode=link gcc -o ctangleboot   ctangleboot.o cwebboot.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o ctangleboot ctangleboot.o cwebboot.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+CWEBINPUTS=../../../texk/web2c/cwebdir ./ctangleboot ctangle ctang-w2c
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is CTANGLE, Version 3.64 (Web2C 7.5.7)
+*1*15*22*26*34*40*54*60*74*81*95
+Writing the output file (ctangle.c):.....500.....1000..
+Done.
+(No errors were found.)
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c ctangle.c -o ctangle.o
+CWEBINPUTS=../../../texk/web2c/cwebdir ./ctangleboot common comm-w2c cweb.c
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is CTANGLE, Version 3.64 (Web2C 7.5.7)
+*1*5*7*29*58*69*79*83*86
+Writing the output file (cweb.c):.....500....
+Done.
+(No errors were found.)
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c cweb.c -o cweb.o
+/bin/sh ../libtool --mode=link gcc -o ctangle   ctangle.o cweb.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o ctangle ctangle.o cweb.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+make -w CC='gcc' CFLAGS='-g -O2 ' LDFLAGS=''  ctangleboot.c cwebboot.c
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+make[3]: `ctangleboot.c' is up to date.
+make[3]: `cwebboot.c' is up to date.
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+CWEBINPUTS=../../../texk/web2c/ctiedir ./ctangle ctie.w ctie-k.ch
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is CTANGLE, Version 3.64 (Web2C 7.5.7)
+*1*10*12*21*30*40*44*72*74
+Writing the output file (ctie.c):.....500...
+Done.
+(No errors were found.)
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c ctie.c -o ctie.o
+/bin/sh ../libtool --mode=link gcc -o ctie   ctie.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o ctie ctie.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+CWEBINPUTS=../../../texk/web2c/cwebdir ./ctangle cweave cweav-w2c
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is CTANGLE, Version 3.64 (Web2C 7.5.7)
+*1*15*28*36*57*76*87*95*102*173*184*204*224*249
+Writing the output file (cweave.c):.....500.....1000.....1500.....2000.....2500.....3000...
+Done.
+(No errors were found.)
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c cweave.c -o cweave.o
+/bin/sh ../libtool --mode=link gcc -o cweave   cweave.o cweb.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o cweave cweave.o cweb.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangle dvicopy dvicopy
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*7*14*20*26*61*68*90*108*133*151*175*182*218*229*239*244*259*293*302
+Writing the output file.....500.....1000..
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . dvicopy
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c dvicopy.c -o dvicopy.o
+/bin/sh ../libtool --mode=link gcc -o dvicopy   dvicopy.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o dvicopy dvicopy.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangle dvitomp dvitomp
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*11*16*17*31*44*52*58*66*85*98*103*108*133
+Writing the output file.....500.
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . dvitomp
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c dvitomp.c -o dvitomp.o
+/bin/sh ../libtool --mode=link gcc -o dvitomp   dvitomp.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o dvitomp dvitomp.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangle dvitype dvitype
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*8*13*21*29*41*57*67*71*95*100*103*107*112*124
+Writing the output file.....500.
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . dvitype
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c dvitype.c -o dvitype.o
+/bin/sh ../libtool --mode=link gcc -o dvitype   dvitype.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o dvitype dvitype.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangle gftodvi gftodvi
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*10*19*27*34*36*45*52*70*86*102*116*124*134*139*153*204*219*222*232
+Writing the output file.....500...
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . gftodvi
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c gftodvi.c -o gftodvi.o
+/bin/sh ../libtool --mode=link gcc -o gftodvi   gftodvi.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o gftodvi gftodvi.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangle gftopk gftopk
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*9*14*21*37*49*52*63*88*96
+Writing the output file...
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . gftopk
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c gftopk.c -o gftopk.o
+/bin/sh ../libtool --mode=link gcc -o gftopk   gftopk.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o gftopk gftopk.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangle gftype gftype
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*8*13*20*25*35*44*61*66*73*79
+Writing the output file...
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . gftype
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c gftype.c -o gftype.o
+/bin/sh ../libtool --mode=link gcc -o gftype   gftype.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o gftype gftype.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangle mft mft
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*11*19*29*34*50*63*77*88*99*115*117*126
+Writing the output file.....500.....1000.
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . mft
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c mft.c -o mft.o
+/bin/sh ../libtool --mode=link gcc -o mft   mft.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o mft mft.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=../../../texk/web2c/omegaware ./tangle odvicopy odvicopy
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*7*14*20*26*61*68*91*109*134*152*176*183*219*230*240*245*260*294*303
+Writing the output file.....500.....1000...
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . odvicopy
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c odvicopy.c -o odvicopy.o
+/bin/sh ../libtool --mode=link gcc -o odvicopy   odvicopy.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o odvicopy odvicopy.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=../../../texk/web2c/omegaware ./tangle odvitype odvitype
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*8*13*21*29*41*58*68*72*96*101*104*108*113*125
+Writing the output file.....500.
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . odvitype
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c odvitype.c -o odvitype.o
+/bin/sh ../libtool --mode=link gcc -o odvitype   odvitype.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o odvitype odvitype.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=../../../texk/web2c/omegaware ./tangle otangle otangle
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*11*19*29*37*50*65*70*77*94*112*123*143*156*163*171*179*182*188*193
+Writing the output file.....500...
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . otangle
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c otangle.c -o otangle.o
+/bin/sh ../libtool --mode=link gcc -o otangle   otangle.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o otangle otangle.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+WEBINPUTS=.:../../../texk/web2c ./tangle patgen patgen
+warning: kpathsea: configuration file texmf.cnf not found in these directories: /opt/luatex/metafont-2.718281/Work/texk/web2c:/opt/luatex/metafont-2.718281/Work/texk:/opt/luatex/metafont-2.718281/Work:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texmf-local/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/share/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/web2c/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texk/texmf/web2c:/opt/luatex/metafont-2.718281/Work/texmf/web2c.
+This is TANGLE, Version 4.5 (Web2C 7.5.7)
+*1*12*26*33*43*51*64*74*90*94*98*102
+Writing the output file.....500
+Done.
+(No errors were found.)
+srcdir=../../../texk/web2c /bin/sh ../../../texk/web2c/web2c/convert . patgen
+gcc -DHAVE_CONFIG_H  -I. -I../../../texk/web2c -I.. -I../../../texk/web2c/..  -I../../libs/obsdcompat -I../../libs/obsdcompat/.. -I../../../texk/web2c/../../libs/obsdcompat -I../../../texk/web2c/../../libs/obsdcompat/..  -I../../../texk/web2c/../../libs/zlib -I../../../texk/web2c/../../libs/libpng -I../../../texk/web2c/../../libs/xpdf -Dextra_version_info=`date +-%Y%m%d%H` -g -O2  -c patgen.c -o patgen.o
+/bin/sh ../libtool --mode=link gcc -o patgen   patgen.o lib/lib.a ../kpathsea/libkpathsea.la -lm  
+gcc -o patgen patgen.o  lib/lib.a ../kpathsea/.libs/libkpathsea.a -lm
+cd pdftexdir && make pdftosrc.o
+make[3]: Entering directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/pdftexdir'
+make[3]: *** No rule to make target `../../../libs/xpdf/xpdf/Object.h', needed by `pdftosrc.o'.  Stop.
+make[3]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c/pdftexdir'
+make[2]: *** [pdftexdir/pdftosrc.o] Error 2
+make[2]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk/web2c'
+make[1]: *** [all] Error 1
+make[1]: Leaving directory `/opt/luatex/metafont-2.718281/Work/texk'
+make: *** [all] Error 1
+Command exited with non-zero status 2
+42.07user 4.58system 0:47.66elapsed 97%CPU (0avgtext+0avgdata 0maxresident)k
+0inputs+47280outputs (0major+1479925minor)pagefaults 0swaps
+find: /opt/luatex/metafont-2.718281/inst: No such file or directory
+./Build: Build failed, no binaries under /opt/luatex/metafont-2.718281/inst/bin.

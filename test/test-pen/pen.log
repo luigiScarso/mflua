@@ -1,0 +1,76 @@
+(pen.tex
+
+ConTeXt  ver: 2011.02.11 18:18 MKIV  fmt: 2011.2.12  int: english/english
+
+system          > cont-new.mkiv loaded
+(/opt/luatex/minimals-beta-exp/tex/texmf-context/tex/context/base/cont-new.mkiv
+system          > beware: some patches loaded from cont-new.mkiv
+)
+system          > pen.top loaded
+system          > options > begin of optionfile
+system          > options >
+system          > options > % runtime options files (command line driven)
+system          > options > \unprotect
+system          > options > % feedback and basic job control
+system          > options > \batchmode
+system          > options > % handy for special styles
+system          > options > \startluacode
+system          > options > document = document or { }
+system          > options > document.arguments={
+system          > options >  ["batchmode"]=true,
+system          > options > }
+system          > options > document.files={
+system          > options >  "pen",
+system          > options > }
+system          > options > \stopluacode
+system          > options > % process info
+system          > options > \setupsystem[inputfile=pen]
+system          > options > \setupsystem[\c!n=1,\c!m=1]
+system          > options > % modes
+system          > options > % options (not that important)
+system          > options > \startsetups *runtime:options
+system          > options > \stopsetups
+system          > options > % styles and modules
+system          > options > \startsetups *runtime:modules
+system          > options > \stopsetups
+system          > options > % done
+system          > options > \protect \endinput
+system          > options >
+system          > options > end of optionfile
+(pen.top
+)
+fonts           > latin modern fonts are not preloaded
+languages       > language en is active
+{/opt/luatex/minimals-beta-exp/tex/texmf-context/fonts/map/pdftex/context/mkiv-base.map}
+fonts           > preloading latin modern fonts (second stage)
+(/opt/luatex/minimals-beta-exp/tex/texmf-context/tex/context/base/type-siz.mkiv) (/opt/luatex/minimals-beta-exp/tex/texmf-context/tex/context/base/type-otf.mkiv){/opt/luatex/minimals-beta-exp/tex/texmf/fonts/map/dvips/lm/lm-math.map}{/opt/luatex/minimals-beta-exp/tex/texmf/fonts/map/dvips/lm/lm-rm.map}
+fonts           > fallback modern rm 12pt is loaded
+system          > begin file pen at line 1
+metapost        > initializing instance 'metafun' using format 'metafun'
+metapost        > loading 'metafun.mp' (experimental metapost version two)
+backend         > xmp > using file '/opt/luatex/minimals-beta-exp/tex/texmf-context/tex/context/base/lpdf-pdx.xml'
+pages           > flushing realpage 1, userpage 1, subpage 1
+pages           > flushing realpage 2, userpage 1
+system          > end file pen at line 12
+ )
+mkiv lua stats  > used config file          - selfautoparent:/texmf/web2c/texmfcnf.lua
+mkiv lua stats  > used cache path           - /opt/luatex/minimals-beta-exp/tex/texmf-cache/luatex-cache/context/5fe67e0bfe781ce0dde776fb1556f32e
+mkiv lua stats  > input load time           - 0.009 seconds
+mkiv lua stats  > stored bytecode data      - 266 modules, 57 tables, 323 chunks
+mkiv lua stats  > cleaned up reserved nodes - 33 nodes, 9 lists of 412
+mkiv lua stats  > node memory usage         - 18 glue_spec
+mkiv lua stats  > node list callback tasks  - 6 unique task lists, 4 instances (re)created, 2344 calls
+mkiv lua stats  > used backend              - pdf (backend for directly generating pdf output)
+mkiv lua stats  > loaded patterns           - en::2
+mkiv lua stats  > callbacks                 - direct: 2542, indirect: 2940, total: 5482
+mkiv lua stats  > randomizer                - resumed with value 0.30278425677809
+mkiv lua stats  > lxml preparation time     - 0.000 seconds, 0 nodes, 15 lpath calls, 0 cached calls
+mkiv lua stats  > result saved in file      - pen.pdf
+mkiv lua stats  > loaded fonts              - 40 files: stmary10.afm lmmono10-regular.otf lmmono12-regular.otf lmmono8-regular.otf lmmono9-regular.otf lmmonolt10-bold.otf lmroman10-bold.otf lmroman10-regular.otf lmroman12-bold.otf lmroman12-regular.otf lmroman7-bold.otf lmroman7-regular.otf lmroman9-bold.otf lmroman9-regular.otf lmsans10-regular.otf lmsans12-regular.otf lmsans8-regular.otf lmsans9-regular.otf eufb10.tfm eufb7.tfm eufm10.tfm eufm7.tfm msam10.tfm msam7.tfm msbm10.tfm msbm7.tfm lmex10.tfm lmmi10.tfm lmmi12.tfm lmmi7.tfm lmmi9.tfm lmmib10.tfm lmmib7.tfm lmsy10.tfm lmsy7.tfm lmsy9.tfm rm-lmr10.tfm rm-lmr12.tfm rm-lmr7.tfm rm-lmr9.tfm
+mkiv lua stats  > fonts load time           - 0.544 seconds 
+mkiv lua stats  > metapost processing time  - 0.002 seconds, loading: 0.068 seconds, execution: 0.002 seconds, n: 2
+mkiv lua stats  > luatex banner             - this is luatex, version beta-0.65.0-2010121316
+mkiv lua stats  > control sequences         - 29968 of 165536
+mkiv lua stats  > current memory usage      - 37 MB (ctx: 38 MB)
+mkiv lua stats  > runtime                   - 1.065 seconds, 1 processed pages, 2 shipped pages, 1.878 pages/second
+

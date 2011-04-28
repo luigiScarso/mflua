@@ -1,0 +1,33 @@
+
+font_size := 10pt#;
+mode_setup;
+u# := 0.6pt#;
+side_bearing# := u#;
+equal_spread# := 1.93pt#;
+line_thickness# := 0.65pt#;
+rule_thickness# := 0.58pt#;
+arrow_diag_len# := 9u#;
+arrow_spread# := 1.6equal_spread#;
+
+define_pixels(u);
+%%define_whole_pixels(equal_spread, arrow_horiz_len, arrow_vert_len, arrow_diag_len, arrow_spread, line_thickness, rule_thickness, side_bearing);
+define_whole_pixels(equal_spread, arrow_diag_len, arrow_spread, line_thickness, rule_thickness, side_bearing);
+
+current_char := -1;
+%%for alpha = 45, 135, 225, 315:
+  alpha = 45;
+  current_char := current_char + 1;
+
+  beginchar(current_char, arrow_diag_len# + 2side_bearing#, arrow_diag_len#, 0);
+    pair centre, head, foot;
+    centre := (w/2, (h-d)/2);
+    head := centre + (arrow_diag_len - line_thickness)/2 * dir alpha;
+    foot := centre - (arrow_diag_len - line_thickness)/2 * dir alpha;
+
+    %%pickup pencircle xscaled 1 yscaled 2 rotated 45; draw (200+0,200+100) .. (200+100,200+100) .. (200+100,200) ; 
+    pickup pencircle xscaled 20 yscaled 40 rotated 60; draw (0,100) .. (100,100) .. (100,0) ; showit;
+    
+  endchar;
+%%endfor;
+bye;
+

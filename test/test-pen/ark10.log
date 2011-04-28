@@ -1,0 +1,17 @@
+This is METAFONT, Version 2.718281 (Web2C 7.5.7) (base=mf 2011.1.16)  21 JAN 2011 05:35
+**\mode=otcff; input ark10.mf
+(ark10.mf
+small pencil [80]
+large pencil [87]
+return [67]
+eye
+{randomseed:=0.71}
+ [69]
+left thumbs down [68]
+right thumbs down [100]
+left thumbs up [85]
+right thumbs up [117]
+left hand pointing right [82]
+right hand pointing left [76] )
+Font metrics written on ark10.tfm.
+Output written on ark10.4000gf (10 characters, 60524 bytes).

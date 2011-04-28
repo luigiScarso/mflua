@@ -1,0 +1,16 @@
+mode_setup;
+capsule_def(penbook) makepen((0,-1)--(3,-1)--(6,1)--(1,2)--cycle);
+u#:=4/9pt#;
+define_pixels(u);
+
+%z0=(0,-100); z1=(200,-100);z2=(600,100);z3=(100,200);
+z0=(0u,0u); z1=(50u,0);
+%pickup pensquare xscaled 5 yscaled 10 rotated 45;
+pickup pensquare xscaled 5u yscaled 10u rotated 5;
+%pickup penbook xscaled 5u yscaled 10u rotated 45;
+draw z0 .. controls (12.5u,50u) and (37.5u,50u) .. z1 ;%-- z2 -- z3 -- cycle;
+%fill z5 .. z4 ..z1 ..z3 ..z6 ..cycle;
+%unfill 1/4[z2,z4] .. 3/4[z4,z2] .. cycle;
+%unfill 1/4[z6,z2] .. 3/4[z6,z2] .. cycle;
+shipit;
+bye.

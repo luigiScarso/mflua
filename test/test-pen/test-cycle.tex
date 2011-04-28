@@ -1,0 +1,507 @@
+\starttext
+\startMPpage
+
+
+
+
+pickup pencircle scaled 0.25;
+draw (0,0)..controls (12.5,50) and (37.5,50) ..(50,0);
+pickup pencircle scaled 1;
+drawdot(0,0);drawdot(12.5,50);drawdot(37.5,50);drawdot(50,0);
+
+drawoptions(withcolor red);
+pickup pencircle scaled 0.25;
+draw (0,0) % beginning in octant `NNE'
+   ..controls (4.04141,16.32063) and (9.38705,27.38705)
+  ..(15.19514,33.19514) ;% segment 0
+
+pickup pencircle scaled 1;
+drawdot(0,0);drawdot(4.04141,16.32063);drawdot(9.38705,27.38705);drawdot(9.38705,27.38705);
+
+
+pickup pencircle scaled 0.25;
+draw (15.19514,33.19514) 
+  ..controls (18.39838,36.39838) and (21.71259,38)
+  ..(25,38) ; %% segment 0
+pickup pencircle scaled 1;
+drawdot(15.19514,33.19514);drawdot(18.39838,36.39838);drawdot(21.71259,38);drawdot(25,38);
+
+
+pickup pencircle scaled 0.25;
+draw (25,38)
+  ..controls (28.28741,38) and (31.60162,36.39838)
+  ..(34.80486,33.19514) ;% segment 0
+pickup pencircle scaled 1;
+drawdot(25,38);drawdot(28.28741,38);drawdot(31.60162,36.39838);drawdot(34.80486,33.19514);
+
+pickup pencircle scaled 0.25;
+draw (34.80486,33.19514)
+  ..controls (40.61295,27.38705) and (45.95859,16.32063)
+  ..(50,0) ;%
+pickup pencircle scaled 1;
+drawdot(34.80486,33.19514);drawdot(40.61295,27.38705);drawdot(45.95859,16.32063);drawdot(50,0);
+
+drawoptions(withcolor blue);
+
+pickup pencircle scaled 0.25;
+draw (50,0) 
+%% % entering octant `ESE'
+%% % entering octant `ENE'
+%% % entering octant `NNE'
+%% % entering octant `NNW'
+    ..controls (45.95859,16.32063) and (40.61295,27.38705)
+  ..(34.80486,33.19514) % segment 1
+%% % entering octant `WNW'
+    ..controls (31.60162,36.39838) and (28.28741,38)
+  ..(25,38) % segment 1
+%% % entering octant `WSW'
+    ..controls (21.71259,38) and (18.39838,36.39838)
+  ..(15.19514,33.19514) % segment 1
+%% % entering octant `SSW'
+    ..controls (9.38705,27.38705) and (4.04141,16.32063)
+  ..(0,0); % segment 1
+
+
+drawoptions(withcolor green);
+draw    (0,0)
+%Octant NNE-2
+ .. controls (4.04141,16.32063) and (9.38705,27.38705) ..(15.19514,33.19514) % segment 0
+% entering octant `
+%Octant ENE-1
+ .. controls (18.39838,36.39838) and (21.71259,38) ..(25,38) % segment 0
+% entering octant `
+%Octant ESE-8
+ .. controls (28.28741,38) and (31.60162,36.39838) ..(34.80486,33.19514) % segment 0
+% entering octant `
+%Octant SSE-7
+ .. controls (40.61295,27.38705) and (45.95859,16.32063) ..(50,0); % segment 0
+
+
+
+
+
+%% % entering octant `ESE'
+%%    
+%%  
+%% % entering octant `SSE'
+%%    
+%%  ..(50,0) % segment 0
+
+
+
+
+
+%% This is METAFONT, Version 2.718281 (Web2C 7.5.7) (base=mf 2010.12.19)  19 DEC 2010 09:56
+%% **\tracingall; input test-pen
+%% (test-pen.mf
+%% mode_setup->warningcheck:=0;if.unknown.mode:mode=proof;fi.numeric.aspect_ratio;
+%% transform.currenttransform;scantokens.if.string.mode:("input "&mode)else:mode_n
+%% ame[mode]fi;if.unknown.mag:mag=1;fi.if.unknown.aspect_ratio:aspect_ratio=1;fi.d
+%% isplaying:=proofing;pixels_per_inch:=pixels_per_inch*mag;if.aspect_ratio=1:let.
+%% o_=\;let._o_=\else:def.o_=*aspect_ratio.enddef;def._o_=/aspect_ratio.enddef.fi;
+%% fix_units;scantokens.extra_setup;currenttransform:=if.unknown.currenttransform:
+%% identity.else:currenttransform.fi.yscaled.aspect_ratio;clearit;pickup.pencircle
+%% .scaled(0.4pt+blacker);warningcheck:=1;
+%% {warningcheck:=0}
+%% {if}
+%% {unknown(mode)}
+%% {true}
+%% {(mode)=(1)}
+%% ## mode=1
+%% {fi}
+%% {numeric}
+%% {transform}
+%% {scantokens}
+%% {if}
+%% {string(1)}
+%% {false}
+%% {fi}
+
+%% proof_->proofing:=2;fontmaking:=0;tracingtitles:=1;pixels_per_inch:=2601.72;bla
+%% cker:=0;fillin:=0;o_correction:=1;
+%% {proofing:=2}
+%% {fontmaking:=0}
+%% {tracingtitles:=1}
+%% {pixels_per_inch:=2601.72}
+%% {blacker:=0}
+%% {fillin:=0}
+%% {o_correction:=1}
+%% {if}
+%% {unknown(mag)}
+%% {true}
+%% {(mag)=(1)}
+%% ## mag=1
+%% {fi}
+%% {if}
+%% {unknown(aspect_ratio)}
+%% {true}
+%% {(aspect_ratio)=(1)}
+%% ## aspect_ratio=1
+%% {fi}
+%% {displaying:=2}
+%% {(2601.72)*(1)}
+%% {pixels_per_inch:=2601.72}
+%% {if}
+%% {(1)=(1)}
+%% {true}
+%% {let}
+%% {let}
+%% {else}
+
+%% fix_units->mm:=pixels_per_inch/25.4;cm:=pixels_per_inch/2.54;pt:=pixels_per_inc
+%% h/72.27;pc:=pixels_per_inch/6.0225;dd:=1238/1157pt;cc:=12dd;bp:=pixels_per_inch
+%% /72;in:=pixels_per_inch;hppp:=pt;vppp:=aspect_ratio*hppp;
+%% {(2601.72)/(25.4)}
+%% {mm:=102.42995}
+%% ## mm=102.42995
+%% {(2601.72)/(2.54)}
+%% {cm:=1024.30193}
+%% ## cm=1024.30193
+%% {(2601.72)/(72.27)}
+%% {pt:=36}
+%% ## pt=36
+%% {(2601.72)/(6.0225)}
+%% {pc:=431.99951}
+%% ## pc=431.99951
+%% {(1.07)*(36)}
+%% {dd:=38.52026}
+%% ## dd=38.52026
+%% {(12)*(38.52026)}
+%% {cc:=462.24316}
+%% ## cc=462.24316
+%% {(2601.72)/(72)}
+%% {bp:=36.135}
+%% ## bp=36.135
+%% {in:=2601.72}
+%% ## in=2601.72
+%% {hppp:=36}
+%% {(1)*(36)}
+%% {vppp:=36}
+%% {scantokens}
+%% {if}
+%% {unknown((xpart currenttransform,ypart currenttransform,xxpart currenttransform
+%% ,xypart currenttransform,yxpart currenttransform,yypart currenttransform))}
+%% {true}
+%% {else}
+%% {((0,0,1,0,0,1))yscaled(1)}
+%% {currenttransform:=(0,0,1,0,0,1)}
+%% ## yypart currenttransform=1
+%% ## yxpart currenttransform=0
+%% ## xypart currenttransform=0
+%% ## xxpart currenttransform=1
+%% ## ypart currenttransform=0
+%% ## xpart currenttransform=0
+
+%% clearit->currentpicture:=nullpicture
+%% {nullpicture}
+%% {currentpicture:=picture}
+
+%% pickup<secondary>->if.numeric(EXPR0):numeric_pickup_.else:pen_pickup_.fi(EXPR0)
+%% {pencircle}
+%% {(0.4)*(36)}
+%% {(14.39978)+(0)}
+%% {(future pen)scaled(14.39978)}
+%% (EXPR0)<-future pen
+%% {if}
+%% {numeric(future pen)}
+%% {false}
+
+%% pen_pickup_<primary>->currentpen:=(EXPR0)yscaled.aspect_ratio;pen_lft:=xpart.pe
+%% noffset.down.of.currentpen;pen_rt:=xpart.penoffset.up.of.currentpen;pen_top:=(y
+%% part.penoffset.left.of.currentpen)_o_;pen_bot:=(ypart.penoffset.right.of.curren
+%% tpen)_o_;path.currentpen_path;
+%% {fi}
+%% (EXPR0)<-future pen
+%% {(future pen)yscaled(1)}
+%% Pen polygon at line 1 (newly created):
+%% (2,-7)
+%%  .. (4,-6)
+%%  .. (6,-4)
+%%  .. (7,-2)
+%%  .. (7,2)
+%%  .. (6,4)
+%%  .. (4,6)
+%%  .. (2,7)
+%%  .. (-2,7)
+%%  .. (-4,6)
+%%  .. (-6,4)
+%%  .. (-7,2)
+%%  .. (-7,-2)
+%%  .. (-6,-4)
+%%  .. (-4,-6)
+%%  .. (-2,-7)
+%%  .. cycle
+
+%% {currentpen:=pen}
+%% {((0,-1))penoffset(pen)}
+%% {xpart((-7,2))}
+%% {pen_lft:=-7}
+%% {((0,1))penoffset(pen)}
+%% {xpart((7,-2))}
+%% {pen_rt:=7}
+%% {((-1,0))penoffset(pen)}
+%% {ypart((-2,7))}
+%% {\}
+%% {pen_top:=7}
+%% {((1,0))penoffset(pen)}
+%% {ypart((2,-7))}
+%% {\}
+%% {pen_bot:=-7}
+%% {path}
+%% {warningcheck:=1}
+
+%% z@#->begingroup(x(SUFFIX2),y(SUFFIX2))endgroup
+%% (SUFFIX0)<-
+%% (SUFFIX1)<-z
+%% (SUFFIX2)<-0
+%% {begingroup}
+%% {endgroup}
+%% {((x0,y0))=((0,0))}
+%% ## y0=0
+%% ## x0=0
+
+%% z@#->begingroup(x(SUFFIX2),y(SUFFIX2))endgroup
+%% (SUFFIX0)<-
+%% (SUFFIX1)<-z
+%% (SUFFIX2)<-1
+%% {begingroup}
+%% {endgroup}
+%% {((x1,y1))=((50,0))}
+%% ## y1=0
+%% ## x1=50
+
+%% pickup<secondary>->if.numeric(EXPR0):numeric_pickup_.else:pen_pickup_.fi(EXPR0)
+
+%% pensquare->(future pen)
+%% {(future pen)xscaled(5)}
+%% {(future pen)yscaled(10)}
+%% {(future pen)rotated(0)}
+%% (EXPR0)<-future pen
+%% {if}
+%% {numeric(future pen)}
+%% {false}
+
+%% pen_pickup_<primary>->currentpen:=(EXPR0)yscaled.aspect_ratio;pen_lft:=xpart.pe
+%% noffset.down.of.currentpen;pen_rt:=xpart.penoffset.up.of.currentpen;pen_top:=(y
+%% part.penoffset.left.of.currentpen)_o_;pen_bot:=(ypart.penoffset.right.of.curren
+%% tpen)_o_;path.currentpen_path;
+%% {fi}
+%% (EXPR0)<-future pen
+%% {(future pen)yscaled(1)}
+%% Pen polygon at line 4 (newly created):
+%% (2.5,-5)
+%%  .. (2.5,5)
+%%  .. (-2.5,5)
+%%  .. (-2.5,-5)
+%%  .. cycle
+
+%% {currentpen:=pen}
+%% {((0,-1))penoffset(pen)}
+%% {xpart((-2.5,5))}
+%% {pen_lft:=-2.5}
+%% {((0,1))penoffset(pen)}
+%% {xpart((2.5,-5))}
+%% {pen_rt:=2.5}
+%% {((-1,0))penoffset(pen)}
+%% {ypart((-2.5,5))}
+%% {\}
+%% {pen_top:=5}
+%% {((1,0))penoffset(pen)}
+%% {ypart((2.5,-5))}
+%% {\}
+%% {pen_bot:=-5}
+%% {path}
+
+%% draw<expr>->addto_currentpicture.doublepath(EXPR0)t_.withpen.currentpen
+
+%% z@#->begingroup(x(SUFFIX2),y(SUFFIX2))endgroup
+%% (SUFFIX0)<-
+%% (SUFFIX1)<-z
+%% (SUFFIX2)<-0
+%% {begingroup}
+%% {endgroup}
+
+%% z@#->begingroup(x(SUFFIX2),y(SUFFIX2))endgroup
+%% (SUFFIX0)<-
+%% (SUFFIX1)<-z
+%% (SUFFIX2)<-1
+%% {begingroup}
+%% {endgroup}
+%% Path at line 5, before choices:
+%% (0,0)..controls (12.5,50) and (37.5,50)
+%%  ..(50,0)
+
+%% Path at line 5, after choices:
+%% (0,0)..controls (12.5,50) and (37.5,50)
+%%  ..(50,0)
+
+%% (EXPR0)<-path
+
+%% addto_currentpicture->addto.currentpicture
+%% {addto}
+
+%% t_->transformed.currenttransform
+%% {(path)transformed((0,0,1,0,0,1))}
+%% Path at line 5, before subdivision into octants:
+%% draw (0,0)..controls (12.5,50) and (37.5,50)
+%%  ..(50,0)..controls (37.5,50) and (12.5,50)
+%%  ..cycle
+
+%% Cycle spec at line 5, after subdivision and double autorounding:
+%% (0,0) % beginning in octant `NNE'
+%%    ..controls (4.04141,16.32063) and (9.38705,27.38705)
+%%  ..(15.19514,33.19514) % segment 0
+%% % entering octant `ENE'
+%%    ..controls (18.39838,36.39838) and (21.71259,38)
+%%  ..(25,38) % segment 0
+%% % entering octant `ESE'
+%%    ..controls (28.28741,38) and (31.60162,36.39838)
+%%  ..(34.80486,33.19514) % segment 0
+%% % entering octant `SSE'
+%%    ..controls (40.61295,27.38705) and (45.95859,16.32063)
+%%  ..(50,0) % segment 0
+%% % entering octant `ESE'
+%% % entering octant `ENE'
+%% % entering octant `NNE'
+%% % entering octant `NNW'
+%%    ..controls (45.95859,16.32063) and (40.61295,27.38705)
+%%  ..(34.80486,33.19514) % segment 1
+%% % entering octant `WNW'
+%%    ..controls (31.60162,36.39838) and (28.28741,38)
+%%  ..(25,38) % segment 1
+%% % entering octant `WSW'
+%%    ..controls (21.71259,38) and (18.39838,36.39838)
+%%  ..(15.19514,33.19514) % segment 1
+%% % entering octant `SSW'
+%%    ..controls (9.38705,27.38705) and (4.04141,16.32063)
+%%  ..(0,0) % segment 1
+%% % entering octant `SSE'
+%% % entering octant `ESE'
+%% % entering octant `ENE'
+%%  & cycle
+
+%% Tracing edges at line 5: (weight 1)
+%% @ Octant NNE (1 offset), from (2.5,-5) to (17.69514,28.19514)
+%% @ transition line 2, from (2.5,-5) to (2.5,-5)
+%% @ transition line 1, from (17.69514,28.19514) to (17.69514,38.19514)
+%% (3,-5)(3,-1)(4,-1)(4,2)(5,2)(5,5)(6,5)(6,8)(7,8)(7,11)(8,11)(8,13)(9,13)
+%% (9,16)(10,16)(10,18)(11,18)(11,20)(12,20)(12,21)(13,21)(13,23)(14,23)
+%% (14,24)(15,24)(15,26)(16,26)(16,27)(17,27)(17,28)(18,28)
+%% @ retrograde line from (17.69514,38.19514) to (17.69514,28.19514)
+%% (18,38)
+%% @ Octant ENE (1 offset), from (17.69514,28.19514) to (22.5,33)
+%% @ retrograde line from (17.69514,28.19514) to (12.69514,28.19514)
+%% @ transition line 0, from (12.69514,28.19514) to (17.69514,28.19514)
+%% @ transition line 1, from (27.5,33) to (27.5,33)
+%% (18,28)(18,29)(19,29)(19,30)(20,30)(20,31)(22,31)(22,32)(24,32)
+%% @ retrograde line from (27.5,33) to (22.5,33)
+%% @ Octant ESE (0 offsets), from (22.5,33) to (32.30486,28.19514)
+%% @ transition line 1, from (32.30486,28.19514) to (32.30486,28.19514)
+%% (24,33)(26,33)(26,32)(28,32)(28,31)(30,31)(30,30)(31,30)(31,29)(32,29)
+%% @ Octant SSE (0 offsets), from (32.30486,28.19514) to (47.5,-5)
+%% @ transition line 0, from (32.30486,28.19514) to (32.30486,28.19514)
+%% (32,28)(33,28)(33,27)(34,27)(34,26)(35,26)(35,24)(36,24)(36,23)(37,23)
+%% (37,21)(38,21)(38,20)(39,20)(39,18)(40,18)(40,16)(41,16)(41,13)(42,13)
+%% (42,11)(43,11)(43,8)(44,8)(44,5)(45,5)(45,2)(46,2)(46,-1)(47,-1)
+%% @ Octant ESE (0 offsets), from (47.5,-5) to (47.5,-5)
+%% @ transition line 1, from (47.5,-5) to (47.5,-5)
+%% @ Octant ENE (1 offset), from (47.5,-5) to (52.5,-5)
+%% @ transition line 0, from (47.5,-5) to (52.5,-5)
+%% @ transition line 1, from (52.5,-5) to (52.5,-5)
+%% @ Octant NNE (1 offset), from (52.5,-5) to (52.5,5)
+%% @ transition line 2, from (52.5,-5) to (52.5,-5)
+%% @ transition line 1, from (52.5,-5) to (52.5,5)
+%% (47,-5)(53,-5)
+%% @ Octant NNW (0 offsets), from (52.5,5) to (37.30486,38.19514)
+%% @ transition line 0, from (52.5,5) to (52.5,5)
+%% (53,5)(52,5)(52,9)(51,9)(51,12)(50,12)(50,15)(49,15)(49,18)(48,18)(48,21)
+%% (47,21)(47,23)(46,23)(46,26)(45,26)(45,28)(44,28)(44,30)(43,30)(43,31)
+%% (42,31)(42,33)(41,33)(41,34)(40,34)(40,36)(39,36)(39,37)(38,37)
+%% @ Octant WNW (0 offsets), from (37.30486,38.19514) to (27.5,43)
+%% @ transition line 1, from (27.5,43) to (27.5,43)
+%% (38,38)(37,38)(37,39)(36,39)(36,40)(35,40)(35,41)(33,41)(33,42)(31,42)
+%% @ Octant WSW (1 offset), from (27.5,43) to (12.69514,38.19514)
+%% @ transition line 0, from (27.5,43) to (22.5,43)
+%% @ transition line 1, from (12.69514,38.19514) to (12.69514,38.19514)
+%% (31,43)(19,43)(19,42)(17,42)(17,41)(15,41)(15,40)(14,40)(14,39)(13,39)
+%% @ Octant SSW (1 offset), from (12.69514,38.19514) to (-2.5,-5)
+%% @ transition line 2, from (12.69514,38.19514) to (12.69514,38.19514)
+%% @ transition line 1, from (-2.5,5) to (-2.5,-5)
+%% (13,38)(12,38)(12,37)(11,37)(11,36)(10,36)(10,34)(9,34)(9,33)(8,33)
+%% (8,31)(7,31)(7,30)(6,30)(6,28)(5,28)(5,26)(4,26)(4,23)(3,23)(3,21)(2,21)
+%% (2,18)(1,18)(1,15)(0,15)(0,12)(-1,12)(-1,9)(-2,9)
+%% @ Octant SSE (0 offsets), from (-2.5,-5) to (-2.5,-5)
+%% @ transition line 0, from (-2.5,-5) to (-2.5,-5)
+%% @ Octant ESE (0 offsets), from (-2.5,-5) to (-2.5,-5)
+%% @ transition line 1, from (-2.5,-5) to (-2.5,-5)
+%% @ Octant ENE (1 offset), from (-2.5,-5) to (2.5,-5)
+%% @ transition line 0, from (-2.5,-5) to (2.5,-5)
+%% @ transition line 1, from (2.5,-5) to (2.5,-5)
+%% (-2,-5).
+
+
+%% shipit->shipout.currentpicture
+%% {shipout}
+%% [0]
+%% Edge structure at line 9 (just shipped out):
+%% row 42: | 19+ 31-
+%% row 41: | 17+ 33-
+%% row 40: | 15+ 35-
+%% row 39: | 14+ 36-
+%% row 38: | 13+ 37-
+%% row 37: | 12+ 18- 18+ 38-
+%% row 36: | 11+ 18- 18+ 39-
+%% row 35: | 10+ 18- 18+ 40-
+%% row 34: | 10+ 18- 18+ 40-
+%% row 33: | 9+ 18- 18+ 41-
+%% row 32: | 8+ 18- 18+ 24- 26+ 42-
+%% row 31: | 8+ 18- 18+ 22- 28+ 42-
+%% row 30: | 7+ 18- 18+ 20- 30+ 43-
+%% row 29: | 6+ 18- 18+ 19- 31+ 44-
+%% row 28: | 6+ 18- 18- 18+ 32+ 44-
+%% row 27: | 5+ 17- 33+ 45-
+%% row 26: | 5+ 16- 34+ 45-
+%% row 25: | 4+ 15- 35+ 46-
+%% row 24: | 4+ 15- 35+ 46-
+%% row 23: | 4+ 14- 36+ 46-
+%% row 22: | 3+ 13- 37+ 47-
+%% row 21: | 3+ 13- 37+ 47-
+%% row 20: | 2+ 12- 38+ 48-
+%% row 19: | 2+ 11- 39+ 48-
+%% row 18: | 2+ 11- 39+ 48-
+%% row 17: | 1+ 10- 40+ 49-
+%% row 16: | 1+ 10- 40+ 49-
+%% row 15: | 1+ 9- 41+ 49-
+%% row 14: | 0+ 9- 41+ 50-
+%% row 13: | 0+ 9- 41+ 50-
+%% row 12: | 0+ 8- 42+ 50-
+%% row 11: | -1+ 8- 42+ 51-
+%% row 10: | -1+ 7- 43+ 51-
+%% row 9: | -1+ 7- 43+ 51-
+%% row 8: | -2+ 7- 43+ 52-
+%% row 7: | -2+ 6- 44+ 52-
+%% row 6: | -2+ 6- 44+ 52-
+%% row 5: | -2+ 6- 44+ 52-
+%% row 4: | -2+ 5- 45+ 53-
+%% row 3: | -2+ 5- 45+ 53-
+%% row 2: | -2+ 5- 45+ 53-
+%% row 1: | -2+ 4- 46+ 53-
+%% row 0: | -2+ 4- 46+ 53-
+%% row -1: | -2+ 4- 46+ 53-
+%% row -2: | -2+ 3- 47+ 53-
+%% row -3: | -2+ 3- 47+ 53-
+%% row -4: | -2+ 3- 47+ 53-
+%% row -5: | -2+ 3- 47+ 53-
+
+%%  ) 
+%% Here is how much of METAFONT's memory you used:
+%%  12 strings out of 5275
+%%  97 string characters out of 70269
+%%  13090 words of memory out of 250000
+%%  1006 symbolic tokens out of 9500
+%%  4i,67n,8r,3p,103b stack positions out of 300i,300n,1000r,150p,3000b
+
+%% Output written on test-pen.2602gf (1 character, 272 bytes).
+
+\stopMPpage
+\stoptext

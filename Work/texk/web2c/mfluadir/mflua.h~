@@ -1,0 +1,14 @@
+#include "lua51/lua.h"
+#include "lua51/lualib.h"
+#include "lua51/lauxlib.h"
+#include <kpathsea/c-proto.h> 
+#include <web2c/config.h> 
+//#include <web2c/texmfmem.h>
+
+/*#include "mfd.h" */
+
+extern lua_State* Luas[];
+extern int mfluainitialize();
+extern int mfluaprintpath P3H(int,int,int);
+extern int mfluaprintedges P4H(int,int,int,int);
+extern int mfluaoffsetprep P2H(int,int);

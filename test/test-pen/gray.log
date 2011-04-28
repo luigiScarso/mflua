@@ -1,0 +1,9 @@
+This is METAFONT, Version 2.718281 (TeX Live 2010) (base=mf 2011.1.7)  7 JAN 2011 20:59
+**\mode:=dpdfezzz; mag:=1+0/(2*4000); nonstopmode; input gray
+(/opt/luatex/texlive/2010/texmf-dist/fonts/source/public/misc/gray.mf)
+! Emergency stop.
+<*> ... mag:=1+0/(2*4000); nonstopmode; input gray
+                                                  
+*** (job aborted, no legal end found)
+
+
