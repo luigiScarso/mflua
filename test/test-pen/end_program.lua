@@ -3416,9 +3416,9 @@ local function _clean_up_envelope(char)
 	 local coll_ind_pen = {}
 	 for i = 1,1+math.ldexp(1,mflua.bit) do coll_ind_pen[i] = i end
 	 --knots_set = {} 
-	 for k=1,#knots do -- should be this but it's too much slow. and broke s of ccr5  By the way, it must be set for sym.mf .
+	 --for k=1,#knots do -- should be this but it's too much slow. and broke s of ccr5  By the way, it must be set for sym.mf .
          -- a solution is to use #knots when #knots is small
-	 --for _,k in ipairs({1,math.floor(#knots/2),1+math.floor(#knots/2),#knots}) do
+	 for _,k in ipairs({1,math.floor(#knots/2),1+math.floor(#knots/2),#knots}) do
          -- for _,k in ipairs({1,math.floor(#knots/2)}) do
 	    local key =''
 	    knot = knots[k]

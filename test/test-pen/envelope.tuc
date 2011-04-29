@@ -1,22 +1,22 @@
 -- version: 1.14
 -- file: envelope
 -- format: cont-en
--- stamp: 2011.02.25 22:03
+-- stamp: 2011.04.24 15:15
 -- escape: [===[ ... ]===]
 
 job = job or { }
 job.variables = job.variables or { }
 job.variables.checksums = job.variables.checksums or { }
 job.variables.checksums={
- new="22AF645D1859CB5CA6DA0C484F1F37EA",
- old="149603E6C03516362A8DA23F624DB945",
+ ["new"]="22AF645D1859CB5CA6DA0C484F1F37EA",
+ ["old"]="149603E6C03516362A8DA23F624DB945",
 }
 job = job or { }
 job.variables = job.variables or { }
 job.variables.collected = job.variables.collected or { }
 job.variables.collected={
- randomseed=0.71939559267806,
- totalnofparbackgrounds=0,
+ ["randomseed"]=0.71939559267806,
+ ["totalnofparbackgrounds"]="0",
 }
 job = job or { }
 job.passes = job.passes or { }
@@ -32,40 +32,40 @@ structures = structures or { }
 structures.counters = structures.counters or { }
 structures.counters.collected = structures.counters.collected or { }
 structures.counters.collected={
- endnote={
+ ["endnote"]={
   { 0, 0, 0, 0 },
  },
- figure={
+ ["figure"]={
   { 0, 0 },
  },
- footnote={
+ ["footnote"]={
   { 0, 0, 0, 0 },
  },
- formula={
+ ["formula"]={
   { 0, 0 },
  },
- graphic={
+ ["graphic"]={
   { 0, 0 },
  },
- intermezzo={
+ ["intermezzo"]={
   { 0, 0 },
  },
  ["itemgroup:itemize"]={
   { 0, 0 },
  },
- linenote={
+ ["linenote"]={
   { 0, 0, 0, 0 },
  },
- realpage={
-  { 0, 2 },
+ ["realpage"]={
+  { 0, 52 },
  },
- subpage={
+ ["subpage"]={
   { 0, 1 },
  },
- table={
+ ["table"]={
   { 0, 0 },
  },
- userpage={
+ ["userpage"]={
   { 0, 0 },
  },
 }
@@ -79,16 +79,316 @@ structures.pages = structures.pages or { }
 structures.pages.collected = structures.pages.collected or { }
 structures.pages.collected={
  {
-  block="bodypart",
-  number=1,
-  numberdata=1,
-  prefixdata=2,
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
  },
  {
-  block="bodypart",
-  number=0,
-  numberdata=1,
-  prefixdata=2,
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
+ },
+ {
+  ["block"]="bodypart",
+  ["number"]=0,
+  ["numberdata"]=1,
+  ["prefixdata"]=2,
  },
 }
 structures = structures or { }
@@ -132,26 +432,26 @@ job.files.collected = job.files.collected or { }
 job.files.collected={
 }
 job.packed={
- index={
+ ["index"]={
   {
-   conversionset="pagenumber",
+   ["conversionset"]="pagenumber",
   },
   {
-   connector="–",
-   prefix="no",
-   set="part",
+   ["connector"]="–",
+   ["prefix"]="no",
+   ["set"]="part",
   },
  },
- keys={
-  directives=true,
-  metadata=true,
-  numberdata=true,
-  numbers=true,
-  pagedata=true,
-  prefixdata=true,
-  processors=true,
-  sectiondata=true,
-  specification=true,
+ ["keys"]={
+  ["directives"]=true,
+  ["metadata"]=true,
+  ["numberdata"]=true,
+  ["numbers"]=true,
+  ["pagedata"]=true,
+  ["prefixdata"]=true,
+  ["processors"]=true,
+  ["sectiondata"]=true,
+  ["specification"]=true,
  },
- version=1.01,
+ ["version"]=1.01,
 }
