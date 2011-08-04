@@ -1,0 +1,6 @@
+
+** (gnome-terminal:4065): WARNING **: Failed to connect to the session manager: None of the authentication protocols specified are supported
+
+Failed to get the session bus: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
+Falling back to non-factory mode.
+Failed to summon the GConf demon; exiting.  Contatto col server di configurazione non riuscito; tra le possibili cause la necessità di abilitare il supporto TCP/IP per ORBit o la presenza di un vecchio blocco NFS causato da un crash del sistema. Consultare http://www.gnome.org/projects/gconf/ per ulteriori informazioni (dettagli -  1: Recupero delle connessione alla sessione non riuscito: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.).

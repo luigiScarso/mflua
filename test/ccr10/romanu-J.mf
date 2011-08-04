@@ -1,0 +1,32 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanu.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman upper case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0101 through \0132 are generated.
+
+
+cmchar "The letter J";
+beginchar("J",9u#,cap_height#,0);
+italcorr cap_height#*slant-cap_serif_fit#
+ +.75cap_jut#-2.5u#+min(.5cap_stem#,u#);
+adjust_fit(0,cap_serif_fit#);
+pickup tiny.nib; pos1(cap_stem',0); pos2(cap_stem',0);
+top y1=h; rt x1r=hround(w-2u); x2=x1; y2=.21h;
+if serifs: pos3(vair,-90); pos4(cap_hair,-180);
+ pos5(flare+(cap_stem-stem),-180);
+ bot y3r=-o; x3=.5[x4,x2]; y5=1/6h; rt x5l=hround 2.75u; z5r=z4r;
+ filldraw stroke z1e--z2e&super_arc.e(2,3);  % stem and arc
+ dish_serif(1,2,a,1/3,1.3cap_jut,b,1/3,.75cap_jut);  % serif
+ pickup tiny.nib; bulb(3,4,5);  % bulb
+else: filldraw stroke z1e--z2e;  % stem
+ pickup fine.nib; pos3(cap_stem',0); z3=z2;
+ pos4(flare,angle(6.5u,-h)); pos5(1.1flare,-100);
+ bot y4r=-o; x4r=.5[x5r,x3r]; lft x5r=hround.75u; bot y5r=vround.06h-o;
+ filldraw stroke z3e{down}....term.e(4,5,left,1,4); fi % arc and terminal
+math_fit(0,.5ic#-.5u#); penlabels(1,2,3,4,5); endchar;
+

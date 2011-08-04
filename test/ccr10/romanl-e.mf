@@ -1,0 +1,46 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman lower case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0141 through \0172 are generated.
+
+
+cmchar "The letter e";
+beginchar("e",7.25u#+max(.75u#,.5curve#),x_height#,0);
+italcorr .5[bar_height#,x_height#]*slant+.5min(curve#-1.5u#,0);
+adjust_fit(if monospace: .25u#,.5u# else: 0,0 fi);
+numeric left_curve,right_curve;
+left_curve=right_curve+6stem_corr=curve if not serifs: -3stem_corr fi;
+if right_curve<tiny.breadth: right_curve:=tiny.breadth; fi
+if left_curve<tiny.breadth: left_curve:=tiny.breadth; fi
+pickup tiny.nib; pos1(right_curve,0);
+pos2(vair,90); pos3(left_curve,180);
+y1=good.y bar_height; top y2r=h+vround 1.5oo; y0l=bot y1;
+rt x1r=hround min(w-.5u,w-u+.5right_curve);
+lft x3r=hround max(.5u,1.25u-.5left_curve); x2=.5w+.25u;
+{{interim superness:=more_super;
+ filldraw stroke super_arc.e(1,2)}};  % right bowl
+y3=.5[y2,y4]; bot y4r=-oo; x4=x2+.25u;
+if serifs: pos4(vair',270); pos5(hair,360);
+ y5=max(good.y(.5bar_height-.9),y4l+vair); x5r=x1r;
+ (x,y4l)=whatever[z4r,z5]; x4l:=min(x,x4l+.5u);
+ filldraw stroke pulled_arc.e(2,3) & pulled_arc.e(3,4)
+  ...{x5-x4,5(y5-y4)}z5e; % left bowl, arc, and terminal
+else: pos4(vair,270);
+ filldraw stroke super_arc.e(2,3) & super_arc.e(3,4);  % left bowl and arc
+ pickup fine.nib; pos4'(vair,270); z4=z4';
+ pos5(.5[vair,flare],275); rt x5r=hround(w-.6u);
+ y5r=good.y(y5r+1/3bar_height-y5); y5l:=good.y y5l; x5l:=good.x x5l;
+ filldraw stroke term.e(4',5,right,1,4); fi  % terminal
+path testpath; testpath=super_arc.r(2,3) & super_arc.r(3,4);
+y1'r=y0r=y0l+.6[thin_join,vair]; y1'l=y0l; x1'l=x1'r=x1;
+forsuffixes $=l,r:
+ x0$=xpart(((0,y0$)--(x1,y0$)) intersectionpoint testpath); endfor
+fill stroke z0e--z1'e;  % crossbar
+penlabels(0,1,2,3,4,5); endchar;
+

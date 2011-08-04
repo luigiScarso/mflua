@@ -1,0 +1,118 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE roman.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% The Computer Modern Roman family of fonts (by D. E. Knuth, 1979--1985)
+
+if ligs>1: font_coding_scheme:="TeX text";
+ spanish_shriek=oct"074"; spanish_query=oct"076";
+else: font_coding_scheme:=if ligs=0: "TeX typewriter text"
+  else: "TeX text without f-ligatures" fi;
+ spanish_shriek=oct"016"; spanish_query=oct"017"; fi
+
+mode_setup; font_setup;
+
+input romanu;  % upper case (majuscules) pass 2011-06-20 02:55 am pass 2011-07-15 04:03 am 6 bit
+%input romanu-A;  % upper case A %OK
+%input romanu-B;  % upper case B %OK
+%input romanu-C;  % upper case C %OK
+%input romanu-D;  % upper case D %OK
+%input romanu-J;  % upper case J %OK with filter remove
+%input romanu-E-P;  % upper case E => T
+%input romanu-M;    % upper case M %OK 
+%input romanu-N;    % upper case M %OK 
+%input romanu-Q;  % upper case Q %OK 
+%input romanu-R-Z; 
+%input romanu-R;  % uppercase R OK
+%input romanu-W;  % uppercase W wrong fixed (bug in design of letter ?)
+
+input romanl;  % lower case (minuscules)
+%input romanl-a;  % lower case (minuscules) OK 
+%input romanl-b;  % lower case (minuscules) OK 
+%input romanl-c;  % lower case (minuscules) OK 
+%input romanl-d;  % lower case (minuscules) OK with filters 
+%input romanl-e;  % lower case (minuscules) OK 
+%input romanl-f-l;  % lower case (minuscules)
+%input romanl-h;  % lower case (minuscules) OK with filter remove
+%input romanl-i;  % lower case (minuscules) OK
+%input romanl-g;  % lower case (minuscules) OK 
+%input romanl-k;  % lower case (minuscules) OK 
+%input romanl-m;  % lower case (minuscules) OK 
+%input romanl-n;  % lower case (minuscules) OK with filter remove
+%input romanl-p;  % lower case (minuscules) OK with filter remove
+%input romanl-s;  % lower case (minuscules) OK 
+%input romanl-t;  % lower case (minuscules) OK 
+%input romanl-y;  % lower case (minuscules) OK 
+%input romanl-w;  % lower case (minuscules) wrong  fixed (bug in design of letter ?)
+%input romanl-u;  %  lower case (minuscules) OK with filter
+
+input greeku;  % upper case Greek letters 
+%input greeku-Ξ.mf ;
+%input greeku-Υ.mf;
+%% bug with Ψ at the right  arm --- we need more pens 
+
+input romand;  % numerals OK
+%input romand-2;  % numerals OK
+%input romand-6;  % numerals OK with filter
+%input romand-4;  % numerals OK 
+%input romand-5;  % OK with HUGE filter
+%input romand-7;  % numerals OK  with HUGE filter and some errors
+
+input romanp;  % ampersand, question marks, currency sign OK
+%input romanp-DollSign;
+%input romspl;  % lowercase specials (dotless \i, ligature \ae, etc.)
+%input romspl-ß;  % OK lowercase specials (dotless \i, ligature \ae, etc.)
+%input romspl-æ;  %% OK with filters
+%input romspl-œ.mf; %% OK with filters
+
+input romspu;  %  uppercase specials (\AE, \OE, \O) OK
+%input romspu-AE;  % \AE  OK
+
+input punct;  % punctuation symbols common to roman and italic text
+%input punct-perc;  % percent sign  OK with filter
+
+input accent;  % OK accents common to roman and italic text
+if ligs>1: input romlig; fi  % letter ligatures
+if ligs>0: input comlig; fi  % ligatures common with italic text
+if ligs<=1: input romsub; fi  % substitutes for ligatures
+
+ligtable "!": "`" =: spanish_shriek;
+ligtable "?": "`" =: spanish_query;
+font_slant slant; font_x_height x_height#;
+if monospace: font_normal_space 9u#; % no stretching or shrinking
+ font_quad 18u#;
+ font_extra_space 9u#;
+else: font_normal_space 6u#+2letter_fit#;
+ font_normal_stretch 3u#; font_normal_shrink 2u#;
+ font_quad 18u#+4letter_fit#;
+ font_extra_space 2u#;
+ k#:=-.5u#; kk#:=-1.5u#; kkk#:=-2u#; % three degrees of kerning
+ ligtable "k": if serifs: "v": "a" kern -u#, fi\\"w": "e" kern k#,
+  "a" kern k#, "o" kern k#, "c" kern k#;
+ ligtable "P": "A" kern kk#,
+  "y": "o" kern k#, "e" kern k#, "a" kern k#, "." kern kk#, "," kern kk#;
+ ligtable "F": "V": "W": if serifs: "o" kern kk#, "e" kern kk#, "u" kern kk#,
+    "r" kern kk#, "a" kern kk#, "A" kern kkk#,
+   else: "o" kern k#, "e" kern k#, "u" kern k#,
+    "r" kern k#, "a" kern k#, "A" kern kk#, fi
+  "K": "X": "O" kern k#, "C" kern k#, "G" kern k#, "Q" kern k#;
+ ligtable "T": "y" kern if serifs: k# else: kk# fi,
+  "Y": "e" kern kk#, "o" kern kk#,
+   "r" kern kk#, "a" kern kk#, "A" kern kk#, "u" kern kk#;
+ ligtable "O": "D": "X" kern k#, "W" kern k#, "A" kern k#,
+   "V" kern k#, "Y" kern k#;
+ if serifs: ligtable "h": "m": "n":
+   "t" kern k#, "u" kern k#, "b" kern k#, "y" kern k#, "v" kern k#, "w" kern k#;
+  ligtable "c": "h" kern k#, "k" kern k#; fi
+ ligtable "o": "b": "p": "e" kern -k#, "o" kern -k#, "x" kern k#,
+   "d" kern -k#, "c" kern -k#, "q" kern -k#,
+  "a": if serifs: "v" kern k#, "j" kern u#, else: "r" kern k#, fi
+  "t": "y" kern k#,
+  "u": "w" kern k#;
+ ligtable "A": if serifs: "R": fi\\ "t" kern k#,
+  "C" kern k#, "O" kern k#, "G" kern k#, "U" kern k#, "Q" kern k#,
+  "L": "T" kern kk#, "Y" kern kk#, "V" kern kkk#, "W" kern kkk#;
+ ligtable "g": "j" kern -k#; % logjam
+ ligtable "I": "I" kern -k#; fi % Richard III
+ % there are ligature/kern programs for |"f"| in the {\tt romlig} file
+ % and for |"-"|, |"`"|, and |"'"| in the {\tt comlig} file
+bye.

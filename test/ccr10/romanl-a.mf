@@ -1,0 +1,57 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman lower case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0141 through \0172 are generated.
+
+cmchar "The letter a";
+beginchar("a",9u#,x_height#,0);
+bh#:=min(bar_height#,1.14x_height#-bar_height#); define_pixels(bh);
+italcorr 1/3[bh#,x_height#]*slant+.5stem#-serif_fit#-2u#;
+adjust_fit(0,serif_fit# if serifs: if hair#+.5stem#>1.5u#:-.25u# fi\\fi);
+pickup fine.nib; top y3r=h+vround 1.5oo;
+if serifs: pos1(flare,180); pos2(hair,180);
+ pos3(vair,90);  lft x1r=hround max(u,2.1u-.5flare); x3=.5w-.5u;
+ y1=min(bh+.5flare+2vair+2,.9[bh,h]-.5flare);
+ bulb(3,2,1);  % bulb
+else: pos1(5/7[vair,flare],95); x1l=good.x 1.5u; x1r:=good.x x1r;
+ pos3(1/8[vair,thin_join],90);
+ x3=.5w-.2u; top y1r=vround .82[bh,top y3r];
+ filldraw stroke term.e(3,1,left,.9,4); fi  % terminal
+pos4(stem,0); rt x4r=hround(w-2.5u+.5stem); y4=1/3[bh,h];
+pos5(stem,0); x5=x4; y5=max(.55bh,2vair);
+filldraw stroke super_arc.e(3,4)&z4e..z5e;  % arc and stem
+pos6(.3[thin_join,vair],90); x6=x4; bot y6=bh;
+pos7(hround(curve-2stem_corr),180);
+lft x7r=hround max(.5u,1.5u-.5curve); y7=1/3[top y8l,top y6r];
+pos8(vair,270); x8l=.5w-.75u; bot y8r=-oo;
+pos9(thin_join,360); z9l=z5l;
+(x,y8r)=whatever[z8l,z9l]; x8r:=max(x,x8-u);
+{{interim superness:=more_super;
+ filldraw stroke z9e{down}...z8e{left}...{up}z7e&super_arc.e(7,6)}}; % bowl
+if serifs: numeric shaved_stem; shaved_stem=hround(stem-3stem_corr);
+ if hair#+.5stem#>1.5u#: pickup tiny.nib;
+  pos5'(shaved_stem,0); rt x5'r=fine.rt x5r; y5'=y5;
+  pos10(shaved_stem,0); x10=x5'; y10=.2[.5tiny,bh];
+  pos11(shaved_stem,0); rt x11r=hround(w-.25u); bot y11=0;
+  pos12(shaved_stem,0); x11=x12; top y12=slab+eps;
+  filldraw z5'l---z10l...z11l{right}--z11r
+   --z12r{left}...z10r+.75(z12-z11)---z5'r--cycle;  % foot
+ else: pickup crisp.nib; pos5'(shaved_stem,0); rt x5'r=fine.rt x5r; y5'=y5;
+  pos10(shaved_stem,0); x10=x5'; y10=1/3bh;
+  pos11(.2[vair,stem],90); x11r=.5[x10r,x12r]; bot y11l=-vround .5oo;
+  pos12(hair,180); rt x12l=hround(w-.1u); y12=max(y10,y11+vair);
+  pos13(hair,180); x13=x12; top y13=max(vround .6bh,top y12);
+  (x',y11l)=whatever[z11r,z12r]; x11l:=max(x',x10);
+  filldraw stroke z5'e---z10e...z11e{right}...z12e---z13e; fi  % hook
+else: numeric shaved_stem; shaved_stem=hround(stem-stem_corr);
+ pickup tiny.nib; pos5'(shaved_stem,0); rt x5'r=fine.rt x5r; y5'=y5;
+ pos10(shaved_stem,0); x10=x5'; bot y10=0;
+ filldraw stroke z5'e--z10e; fi  % base of stem
+penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13); endchar;
+

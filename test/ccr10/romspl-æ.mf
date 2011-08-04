@@ -1,0 +1,63 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romspl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains special letters and letter combinations,
+% compatible with the alphabet `{\tt romanl}'.
+
+% Codes \0020--\0021 and \0031--\0034 are generated.
+
+
+cmchar "The ligature ae";
+beginchar(oct"032",13u#,x_height#,0);
+italcorr .5[bar_height#,x_height#]*slant+.5min(curve#-1.5u#,0);
+adjust_fit(0,0);
+numeric left_curve,right_curve;
+if monospace: right_curve=left_curve=fudged.stem;
+else: left_curve=max(tiny.breadth,hround(curve-2stem_corr));
+ right_curve=max(tiny.breadth,hround(curve-if serifs:6 else:8 fi\\stem_corr));fi
+pickup tiny.nib; pos11(right_curve,0);
+pos12(vair,90); pos13(mfudged.stem,180);
+y11=good.y bar_height; top y12r=h+vround 1.5oo; y10l=bot y11;
+rt x11r=hround min(w-.5u,w-u+.5right_curve);
+lft x13r=hround (.5w-.5mfudged.stem); x12=.55[x13,x11];
+{{interim superness:=more_super;
+ filldraw stroke super_arc.e(11,12)}};  % right bowl of e
+y13=.5[y12,y14]; bot y14r=-oo; x14=x12+.25u;
+if serifs: pos14(vair',270); pos15(mfudged.hair,360);
+ y15=max(good.y(.5bar_height-.9),y14l+vair); x15r=x11r;
+ (x,y14l)=whatever[z14r,z15]; x14l:=min(x,x14l+.5u);
+ filldraw stroke pulled_arc.e(12,13)
+  & pulled_super_arc.e(13,14)(.8superpull)
+  ...{x15-x14,5(y15-y14)}z15e; % left bowl, arc, and terminal of e
+else: pos14(vair,270);
+ filldraw stroke super_arc.e(12,13)
+  & super_arc.e(13,14);  % left bowl and arc of e
+ pickup fine.nib; pos14'(vair,270); z14=z14';
+ pos15(.5[vair,flare],275); rt x15r=hround(w-.6u);
+ y15r=good.y(y15r+1/3bar_height-y15); y15l:=good.y y15l; x15l:=good.x x15l;
+ filldraw stroke term.e(14',15,right,1,4); fi  % right terminal
+y11'r=y10r=y10l+.6[thin_join,vair]; y11'l=y10l; x11'l=x11'r=x11; x10l=x10r=x13;
+fill stroke z10e--z11'e;  % crossbar
+pickup fine.nib; top y3r=h+vround 1.5oo;
+if serifs: pos1(flare,180); pos2(mfudged.hair,180);
+ pos3(vair,90);  lft x1r=hround max(u,2.1u-.5flare); x3=4u;
+ y1=min(bar_height+.5flare+2vair+2,.9[bar_height,h]-.5flare);
+ bulb(3,2,1);  % bulb
+else: pos1(5/7[vair,flare],95); x1l=good.x 1.5u; x1r:=good.x x1r;
+ pos3(1/8[vair,thin_join],90);
+ x3=4.3u; top y1r=vround .82[bar_height,top y3r];
+ filldraw stroke term.e(3,1,left,.9,4); fi  % left terminal
+pos4(mfudged.stem,0); x4=x13; y4=1/3[bar_height,h];
+pos5(mfudged.stem,0); x5=x4; y5=min(y4,y13);
+filldraw stroke super_arc.e(3,4)&z4e--z5e;  % arc and stem
+pos6(.6[thin_join,vair],90); x6=x4; bot y6=y10l;
+pos7(left_curve,180);
+lft x7r=hround max(.5u,1.5u-.5left_curve); y7=1/3[top y8l,top y6r];
+pos8(vair,270); x8l=3.75u; bot y8r=-oo;
+pos9(.5[vair,fudged.stem],360); x9=x5; y9=.55bar_height;
+(x',y8r)=whatever[z8l,z9l]; x8r:=max(x',x8-u);
+{{interim superness:=more_super;
+ filldraw stroke z9e{down}...z8e{left}...{up}z7e&super_arc.e(7,6)}}; % bowl
+if y9<y5: filldraw stroke z5e{down}..{down}z9e; fi  % link (usually hidden)
+penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15); endchar;
+

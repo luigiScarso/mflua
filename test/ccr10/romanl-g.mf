@@ -1,0 +1,52 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman lower case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0141 through \0172 are generated.
+
+
+
+iff not variant_g: cmchar "The letter g";
+beginchar("g",9u#,x_height#,desc_depth#);
+italcorr x_height#*slant+.25u#;
+adjust_fit(0,0);
+numeric light_vair,light_curve,loop_top,loop_side;
+light_vair=Vround(.5[thin_join,vair]+vair_corr);
+light_curve=max(fine.breadth,hround(curve-3stem_corr));
+loop_top=if serifs: Vround .77[vair,fudged.stem] else: vair fi;
+loop_side=hround .64[vair,fudged.stem];
+pickup fine.nib; pos1(light_vair,90);
+pos2(light_curve,180); pos3(light_vair,270);
+pos4(light_curve,360); pos11(loop_top,90);
+y11r=good.y(y11r+.15bar_height-y11); x1=x3=.5[x2,x4]; y2=y4=.5[y1,y3];
+lft x2r=hround(1.75u-.5light_curve); rt x4r=hround(w-2.75u+.5light_curve);
+top y1r=h+oo; y3r=good.y(y3r+.27[top y11r,bot y1l]-y3);
+filldraw stroke pulled_arc.e(1,2) & pulled_arc.e(2,3);  % left half of bowl
+filldraw stroke pulled_arc.e(3,4) & pulled_arc.e(4,1);  % right half of bowl
+x0=superness[x1r,x4r]; y0=superness[y4r,y1r];  % NE point on the super bowl
+x8'=superness[x3r,x2r]; y8'=superness[y2r,y3r];  % SW point on the super bowl
+x8''=superness[x3,x2]; y8''=superness[y2,y3];
+pos0(thin_join,angle(z0-z8')+90);
+pos8(thin_join,angle(z0-z8')-90); z8=.618[z8',z8''];
+if serifs: pos5(vair,90);
+ pos6(hair,0); pos7(.5[hair,flare],0); x5=.75[x0,x6]; top y5r=h+o;
+ rt x6r=hround(w-.25u); y6+(.5[hair,flare])/2=.95[bar_height,h]+oo;
+ filldraw stroke z0e..{right}z5e; bulb(5,6,7);  % ear
+else: pos5(vair',100); top y5r=h+oo;
+ rt x5l=hround(w-.25u); y5l:=good.y y5l;
+ filldraw z0l{z5-z0}..z5l--z5r{left}..{curl 1}z0r--cycle; fi  % ear
+pos10(loop_top,90); x10=x8+.75u; y10=y11;
+pos12(loop_side,0); pos13(light_vair,-90);
+pos14(loop_side,-180); pos10'(.5[thin_join,vair],-270);
+rt x12r=hround max(w-1.25u+.5loop_side,w-.5u); y12=y14=.5[y11,y13];
+x11=x13=max(.5w,x10+eps); bot y13r=-d-oo-1; x14=w-x12; z10'l=z10l;
+filldraw stroke z8e{z8-z0}..z10e---z11e;  % link
+filldraw stroke {{interim superness:=hein_super; super_arc.e(11,12)}}
+ & super_arc.e(12,13) & super_arc.e(13,14) & super_arc.e(14,10');  % loop
+penlabels(0,1,2,3,4,5,6,7,8,10,11,12,13,14); labels(8',8''); endchar;
+

@@ -1,0 +1,49 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romspl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains special letters and letter combinations,
+% compatible with the alphabet `{\tt romanl}'.
+
+% Codes \0020--\0021 and \0031--\0034 are generated.
+
+
+cmchar "The ligature oe";
+beginchar(oct"033",14u#,x_height#,0);
+italcorr .5[bar_height#,x_height#]*slant+.5min(curve#-1.5u#,0);
+adjust_fit(0,0);
+numeric left_curve,right_curve;
+if monospace: right_curve=left_curve=fudged.stem;
+else: left_curve=max(fine.breadth,hround(curve-2stem_corr));
+ right_curve=max(tiny.breadth,hround(curve-if serifs:6 else:8 fi\\stem_corr));fi
+pickup tiny.nib; pos11(right_curve,0);
+pos12(vair,90); pos13(mfudged.stem,180);
+y11=good.y bar_height; top y12r=h+vround 1.5oo; y10l=bot y11;
+rt x11r=hround min(w-.5u,w-u+.5right_curve);
+lft x13r=hround (.5(w+u)-.5mfudged.stem); x12=.55[x13,x11];
+{{interim superness:=more_super;
+ filldraw stroke super_arc.e(11,12)}};  % right bowl of e
+y13=.5[y12,y14]; bot y14r=-oo; x14=x12+.25u;
+if serifs: pos14(vair',270); pos15(mfudged.hair,360);
+ y15=max(good.y(.5bar_height-.9),y14l+vair); x15r=x11r;
+ (x,y14l)=whatever[z14r,z15]; x14l:=min(x,x14l+.5u);
+ filldraw stroke pulled_arc.e(12,13)
+  & pulled_super_arc.e(13,14)(.8superpull)
+  ...{x15-x14,5(y15-y14)}z15e; % left bowl, arc, and terminal of e
+else: pos14(vair,270);
+ filldraw stroke super_arc.e(12,13)
+  & super_arc.e(13,14);  % left bowl and arc of e
+ pickup fine.nib; pos14'(vair,270); z14=z14';
+ pos15(.5[vair,flare],275); rt x15r=hround(w-.6u);
+ y15r=good.y(y15r+1/3bar_height-y15); y15l:=good.y y15l; x15l:=good.x x15l;
+ filldraw stroke term.e(14',15,right,1,4); fi  % terminal
+y11'r=y10r=y10l+.6[thin_join,vair]; y11'l=y10l; x11'l=x11'r=x11; x10l=x10r=x13;
+fill stroke z10e--z11'e;  % crossbar
+pickup fine.nib; pos1(vair,90); pos3(vair,-90);
+pos2(left_curve,180); pos4(mfudged.stem,0);
+lft x2r=hround max(.5u,1.25u-.5curve);
+z4=z13; x1=x3=.5[x2,x4]; top y1r=h+vround 1.5oo; bot y3r=-oo;
+y2=y4; y2l:=y4l:=.52h;
+filldraw stroke pulled_arc.e(1,2) & pulled_arc.e(2,3); % left half of left bowl
+filldraw stroke pulled_arc.e(3,4) & pulled_arc.e(4,1); % right half of left bowl
+penlabels(1,2,3,4,10,11,12,13,14,15); endchar;
+

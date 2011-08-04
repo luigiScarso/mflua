@@ -1,0 +1,40 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romspl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains special letters and letter combinations,
+% compatible with the alphabet `{\tt romanl}'.
+
+% Codes \0020--\0021 and \0031--\0034 are generated.
+
+
+cmchar "German letter es-zet (sharp s)";
+beginchar(oct"031",4.5u#+max(4.5u#,.5stem#+flare#+curve#),asc_height#,0);
+italcorr asc_height#*slant-u#;
+adjust_fit(serif_fit#,0);
+pickup tiny.nib; pos1(stem',0); pos2(stem',0);
+lft x1l=lft x2l=hround(2.5u-.5stem'); bot y1=0; y2=y4=.5[x_height,y3];
+penpos3(vair-fine,90); fine.top y3r=h+oo;
+filldraw stroke z1e--z2e;  % stem
+numeric stem_edge,curve'; stem_edge=rt x1r; curve'=hround .5[stem',curve];
+pickup fine.nib; pos4(curve',0); pos5(vair,-90);
+pos2'(stem',180); z2'=z2; x3=.5[x2,x4]; rt x4r=hround(w-u);
+top y5l=x_height; lft x5=min(lft x4l,hround(stem_edge+u));
+filldraw stroke pulled_super_arc.e(2',3)(.5superpull)
+ & pulled_super_arc.e(3,4)(.5superpull)
+ & pulled_super_arc.e(4,5)(.5superpull);  % upper bowl
+pos5'(vair,90); z5'=z5; pos6(curve',0); pos7(vair,-90);
+rt x6r=hround(w-.5u)+3eps; y6=.4x_height; bot y7r=-oo;
+if serifs: pos8(hair,-180) else: pos8(vair,-110) fi;
+lft x8r=min(hround(stem_edge+.5u+1),lft x8r+x6r-2eps-x8l);
+x7=max(x8l+eps,.4[lft x8r,x6]);
+filldraw stroke pulled_super_arc.e(5',6)(.5superpull)
+ & pulled_super_arc.e(6,7)(.5superpull);  % lower bowl
+if serifs: pos9(5/7[vair,flare],-180);
+ y9-(x9-lft x9r)=vround .07x_height; bulb(7,8,9);  % bulb
+ penpos0(stem'-tiny,0); x0=x1; tiny.top y0=x_height;
+ serif(0,1,a,0,-jut);  % bar
+ dish_serif(1,2,b,1/3,jut,c,0,epsilon);  % serif
+else: bot y8r=vround .01h; x8l:=good.x x8l; y8l:=good.y(y8l+.5);
+ filldraw stroke term.e(7,8,left,1,4); fi  % terminal
+penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+

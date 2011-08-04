@@ -1,0 +1,37 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romand.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman digits:
+% This file contains the ten digits in so-called roman style.
+% Character codes \0060 through \0071 are generated.
+
+% All digits have the same height, width, depth, and italic correction.
+
+
+cmchar "The numeral 2";
+beginchar("2",9u#,fig_height#,0);
+italcorr fig_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric arm_thickness, hair_vair; hair_vair=.25[vair,hair];
+arm_thickness=Vround(if hefty:slab+2stem_corr else:.4[stem,cap_stem] fi);
+pickup crisp.nib; pos7(arm_thickness,-90); pos8(hair,0);
+bot y7r=0; lft x7=hround .9u; rt x8r=hround(w-.9u); y8=good.y(y7l+beak/2)+eps;
+arm(7,8,a,.3beak_darkness,beak_jut);  % arm and beak
+pickup fine.nib; pos2(slab,90); pos3(.4[curve,cap_curve],0);
+top y2r=h+o; x2=.5(w-.5u); rt x3r=hround(w-.9u); y3+.5vair=.75h;
+if serifs: numeric bulb_diam; bulb_diam=hround(flare+2/3(cap_stem-stem));
+ pos0(bulb_diam,180); pos1(cap_hair,180);
+ lft x1r=hround .9u; y1-.5bulb_diam=2/3h;
+ (x,y2l)=whatever[z1l,z2r]; x2l:=x; bulb(2,1,0);  % bulb and arc
+else: x2l:=x2l-.25u; pos1(flare,angle(-9u,h));
+ lft x1r=hround .75u; bot y1l=vround .7h; y1r:=good.y y1r+eps; x1l:=good.x x1l;
+ filldraw stroke term.e(2,1,left,.9,4); fi  % terminal and arc
+pos4(.25[hair_vair,cap_stem],0);
+pos5(hair_vair,0); pos6(hair_vair,0);
+y5=arm_thickness; y4=.3[y5,y3]; top y6=min(y5,slab,top y7l);
+lft x6l=crisp.lft x7; z4l=whatever[z6l,(x3l,bot .58h)]; z5l=whatever[z6l,z4l];
+erase fill z4l--z6l--lft z6l--(lft x6l,y4l)--cycle;  % erase excess at left
+filldraw stroke z2e{right}..tension atleast .9 and atleast 1
+ ..z3e{down}..{z5e-z4e}z4e--z5e--z6e;  % stroke
+penlabels(0,1,2,3,4,5,6,7,8); endchar;
+
