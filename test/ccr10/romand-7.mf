@@ -1,0 +1,39 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romand.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman digits:
+% This file contains the ten digits in so-called roman style.
+% Character codes \0060 through \0071 are generated.
+
+% All digits have the same height, width, depth, and italic correction.
+
+
+cmchar "The numeral 7";
+beginchar("7",9u#,fig_height#,0);
+italcorr fig_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric arm_thickness, bot_width, top_shift, top_hair;
+if hefty: arm_thickness=Vround(slab+2stem_corr); top_shift=0;
+ bot_width=hround .51[curve,cap_curve]; top_hair=.4[thin_join,bot_width];
+else: arm_thickness=Vround .4[stem,cap_stem]; top_shift=.5u;
+ bot_width=flare; top_hair=cap_hair; fi
+if top_hair<tiny.breadth: top_hair:=tiny.breadth; fi
+pickup crisp.nib; pos2(arm_thickness,90); pos1(hair,180);
+top y2r=h; rt x2=hround(w-.75u+top_shift);
+lft x1r=hround(.75u+.5top_shift); y1=good.y(y2l-beak/2)-eps;
+arm(2,1,a,.3beak_darkness,-beak_jut);  % arm and beak
+pos3(hair,180); y3=good.y(y2r+beak/6)+eps; z3r=whatever[z1r,z.a0];
+penpos2'(eps,-90); z2'=z2r;
+arm(2',3,b,beak_darkness,x3r-x.a0);  % upward extension of beak
+pickup tiny.nib; pos4(top_hair,0); pos6(bot_width,0);
+bot y4=max(h-arm_thickness,h-slab,bot y2l); rt x4r=crisp.rt x2;
+lft x6l=hround(3.5u+top_shift-.5bot_width);
+if serifs: y6-.5bot_width=-o; filldraw z6l{down}..{up}z6r--cycle;  % bulb
+else: bot y6=-oo; fi
+if hefty: erase fill rt z4r--z4r...{down}z6r
+  --(rt x4r,y6)--cycle;  % erase excess at top
+ filldraw stroke z4e...{down}z6e;  % stroke
+else: pos5(top_hair,0); y5=2/3h; z5=whatever[z4,(.75u,y6)];
+ erase fill rt z4r--z4r--z5r--(rt x4r,y5)--cycle;  % erase excess at top
+ filldraw stroke z4e---z5e...{down}z6e; fi  % stroke
+penlabels(1,2,3,4,5,6); endchar;

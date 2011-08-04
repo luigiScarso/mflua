@@ -1,0 +1,50 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman lower case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0141 through \0172 are generated.
+
+
+cmchar "The letter t";
+beginchar("t",6u#+max(u#,.5stem#),
+ min(asc_height#,if hefty:9/7 else:10/7 fi\\ x_height#),0);
+italcorr x_height#*slant if serifs: -.9u# else: -.4u# fi;
+adjust_fit(0,if serifs: 0 else: -.5u# fi);
+numeric shaved_stem; shaved_stem=hround(stem if hefty:-\\2stem_corr fi);
+pickup fine.nib; pos2(shaved_stem,180);pos3(shaved_stem,180);
+lft x2r=lft x3r=hround(2.5u-.5shaved_stem);
+y2=y8; y3=max(.5bar_height,2vair);
+pickup crisp.nib; pos8(bar,90);
+rt x8=hround(w-1.3u); top y8r=x_height; lft x7=hround 1/3u; y7l=y8l;
+if hefty: pos7(bar,90);
+ filldraw stroke z7e--z8e;  % crossbar
+ pickup tiny.nib; pos1(hround(shaved_stem-stem_corr),0);
+ rt x1r=fine.rt x2l; top y1=h;
+ penpos2'(x1r-x1l,0); x2'=x1; y2'=y2;
+ filldraw stroke z1e--z2'e;  % upper terminal
+else: pos7(vair,90); pos1(hair,0);
+ rt x1r=fine.rt x2l; top y1=h;
+ filldraw z1l{down}...{left}z7r--z7l--z8l
+  --z8r--(x1r,y8r)--z1r--cycle; fi  % upper terminal and crossbar
+pickup fine.nib; interim superness:=more_super;
+pos4(vair',-90); bot y4r=-oo; rt x5r=hround(w-u);
+if serifs: pos5(hair,0); y5=y3; x4l=.5[x3l,x5l];
+ (x,y4r)=whatever[z4l,z5l]; x4r:=max(x,.5[x3r,x4]);
+ filldraw stroke z2e..super_arc.e(3,4)...{up}z5e;  % stem and hook
+ pickup crisp.nib; pos6(hair,0); pos5'(hair,0);
+ x6=x5=x5'; top y6=max(vround .75bar_height,top y5); y5=y5';
+ filldraw stroke z5'e--z6e;  % terminal
+else: pos5(vair,-75); top y5l=vround .2[top y4l,bar_height];
+ x5l:=good.x x5l; x4l=1/3[x3l,x5l]; x4r:=1/3[x3r,x5r]; y3l:=y3l+.2vair;
+ filldraw stroke z2e..super_arc.e(3,4);  % stem and hook
+ path p; p=stroke z4e{right}..tension .9 and atleast 1..z5e;  % terminal
+ if (xpart(z5l-precontrol 1 of p)<0) or (xpart(z5r-postcontrol 2 of p)<0):
+  filldraw stroke z4e{right}...{up}z5e;
+ else: filldraw p; fi fi;
+penlabels(1,2,3,4,5,6,7,8); endchar;
+

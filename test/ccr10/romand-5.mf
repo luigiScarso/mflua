@@ -1,0 +1,49 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romand.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman digits:
+% This file contains the ten digits in so-called roman style.
+% Character codes \0060 through \0071 are generated.
+
+% All digits have the same height, width, depth, and italic correction.
+
+
+cmchar "The numeral 5";
+beginchar("5",9u#,fig_height#,0);
+italcorr fig_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric bot_thickness,light_hair;
+bot_thickness=max(fine.breadth,vround(slab-vair_corr));
+light_hair=hround(cap_hair if hefty: -\\2stem_corr fi);
+pickup tiny.nib; pos5(vair,180); pos6(vair,90);
+bot y5=vround(.53h-vair); top y6r=max(vround .61803h+o,top y6r+y5+eps-y6l);
+pos3(light_hair,0); pos4(light_hair,0);
+lft x3l=max(1.35u,2.1u-.5light_hair); x3=x4=x5; y4=y5;
+top y3=h if not hefty: +\\o fi;
+filldraw stroke z3e--z4e;  % thin stem
+penpos7(cap_stem-fine,0); penpos8(bot_thickness-fine,-90);
+fine.rt x7r=hround(w-.9u); x8=.5[u,x7]; x6=.5[x5,x7];
+erase fill z5--bot z5--(x6,bot y5)--z6{left}
+ ..tension .9 and 1..{x5-x6,3(y5-y6)}cycle; % erase excess in middle
+filldraw stroke z6e{left}..tension .9 and 1..{x5-x6,3(y5-y6)}z5e;  % link
+pickup fine.nib; pos6'(vair,90); z6'=z6;
+y7=.5[y6,y8]; bot y8r=-o;
+filldraw stroke pulled_arc.e(6',7) & pulled_arc.e(7,8);  % bowl
+if serifs: pos9(hair,-180); y9=.5y5; lft x9r=hround .9u;
+ pos10(flare+1/3(cap_stem-stem),-180); bulb(8,9,10);  % bulb
+else: pos9(3/7[bot_thickness,flare],angle(-7u,-h));
+ lft x9r=hround(tiny.lft x3l-.75u); bot y9r=vround .15h-o;
+ x9l:=good.x x9l; y9l:=good.y y9l;
+ filldraw stroke term.e(8,9,left,1,4); fi  % terminal
+if hefty: pickup crisp.nib; pos1(slab,90); pos2(hair,0);
+ top y1r=h; x1=x4; rt x2r=hround(w-1.5u); y2=y1l-eps;
+ arm(1,2,a,0,0);  % arm
+else: numeric flag_breadth; flag_breadth=7/8[vair,cap_curve];
+ pos1(flag_breadth,90); pos2(flag_breadth,60);
+ pos0(vair,90); top y1r=tiny.top y3; top y2r=vround .95h+o; y0r=y1r;
+ lft x1=tiny.lft x3l; x2r=.5[x1,x0]; rt x0=hround(w-1.6u);
+ erase fill top z1r--z1r...{right}z2r
+  --(x2r,top y1r)--cycle; % erase excess at top
+ filldraw stroke z1e...{right}z2e...z0e; fi  % flag
+penlabels(0,1,2,3,4,5,6,7,8,9,10); endchar;
+

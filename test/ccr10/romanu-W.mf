@@ -1,0 +1,61 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanu.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman upper case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0101 through \0132 are generated.
+
+
+
+cmchar "The letter W";
+beginchar("W",18u#,cap_height#,0);
+italcorr cap_height#*slant+.25u#;
+adjust_fit(cap_serif_fit#,cap_serif_fit#);
+numeric stem[],outer_jut,upper_notch,alpha,mid_corr;
+outer_jut=.7cap_jut; x1l=w-x8r=l+letter_fit+outer_jut+.25u;
+stem1=fudged.cap_stem-stem_corr;
+stem4=min(fudged.hair if hefty:-2stem_corr fi,stem1);
+stem2=stem4 if hefty:-2stem_corr fi;
+stem3=stem1 if hefty:-2stem_corr fi;
+x2-x1=x4-x3=x6-x5=x8-x7; x2l+apex_corr=x3l; x6l+apex_corr=x7l;
+y1=y8=h; y2=y3=y6=y7=-apex_o; y4=y5=if monospace: vround .6 fi\\ h;
+mid_corr=if monospace or hefty:-apex_corr else: 1/3jut fi;
+alpha=diag_ratio(4,stem2-stem3+stem4,y1-y2,x8r-x1l+mid_corr-2apex_corr);
+penpos1(alpha*stem1,0); penpos2(alpha*stem1,0);
+penpos3(alpha*stem2,0); penpos4(alpha*stem2,0);
+penpos5(alpha*stem3,0); penpos6(alpha*stem3,0);
+penpos7(alpha*stem4,0); penpos8(alpha*stem4,0);
+x4l-x1l=floor(x4l-x1l+.5(x5r+mid_corr-x4r)); % |x5r+mid_corr| $\approx$ |x4r|
+z23=whatever[z1r,z2r]=whatever[z3l,z4l];
+z45=whatever[z3r,z4r]=whatever[z5l,z6l];
+z67=whatever[z5r,z6r]=whatever[z7l,z8l]; upper_notch=y4-cap_notch_cut;
+fill diag_end(1l,2l,1,1,3r,4r){z4-z3}
+ ...if y45<upper_notch:(x45,upper_notch)+.5left{up}
+   --(x45,upper_notch)+.5right{down} else: z45&z45 fi
+ ...{z6-z5}diag_end(5l,6l,1,1,7r,8r)--diag_end(7r,8r,1,1,8l,7l){z7-z8}
+ ...if y67>cap_notch_cut:(x67,cap_notch_cut)+.5right{down}
+   --(x67,cap_notch_cut)+.5left{up} else: z67&z67 fi
+ ...{z5-z6}special_diag_end(6,5,4,3){z3-z4}
+ ...if y23>cap_notch_cut:(x23,cap_notch_cut)+.5right{down}
+   --(x23,cap_notch_cut)+.5left{up} else: z23&z23 fi
+ ...{z1-z2}diag_end(2r,1r,1,1,1l,2l)--cycle;  % diagonals
+if serifs: numeric inner_jut[]; pickup tiny.nib;
+ prime_points_inside(1,2); prime_points_inside(5,6); prime_points_inside(8,7);
+ if monospace: inner_jut1=inner_jut4=1.5cap_jut;
+ elseif hefty: inner_jut1=inner_jut4=cap_jut;
+ else: fill diag_end(6r,5r,1,1,5l,6l)--.9[z5l,z6l]
+   ..{z5-z6}.1[z5r,z6r]--cycle;  % middle stem
+  inner_jut2=.7inner_jut1; inner_jut4=1.1inner_jut3;
+  if rt x1'r+cap_jut+.5u+1<=lft x5'l-.7cap_jut: inner_jut1=cap_jut;
+  else: rt x1'r+inner_jut1+.5u+1=lft x5'l-inner_jut2; fi
+  if rt x5'r+cap_jut+.5u+1<=lft x8'l-1.1cap_jut: inner_jut3=cap_jut;
+  else: rt x5'r+inner_jut3+.5u+1=lft x8'l-inner_jut4; fi
+  dish_serif(5',6,e,1/3,inner_jut2,f,1/2,inner_jut3); fi  % middle serif
+ dish_serif(1',2,a,1/3,outer_jut,b,1/2,inner_jut1);  % left serif
+ dish_serif(8',7,c,.6,inner_jut4,d,1/2,outer_jut)(dark); fi  % right serif
+math_fit(.75u#-cap_height#*slant,ic#-2.5u#);
+penlabels(0,1,2,3,4,5,6,7,8,23,45,67); endchar;

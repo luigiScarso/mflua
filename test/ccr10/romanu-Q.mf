@@ -1,0 +1,42 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanu.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman upper case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0101 through \0132 are generated.
+
+
+cmchar "The letter Q";
+beginchar("Q",14u#-width_adj#,cap_height#,comma_depth#);
+italcorr .7cap_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric light_curve; light_curve=cap_curve-hround stem_corr;
+penpos1(vair',90); penpos3(vair',-90);
+penpos2(light_curve,180); penpos4(light_curve,0);
+if monospace: x2r=hround 1.5u;
+ interim superness:=sqrt superness;  % make |"Q"| like |"O"|
+else: x2r=hround u; fi
+x4r=w-x2r; x1=x3=.5w; y1r=h+o; y2=y4=.5h-vair_corr; y3r=-o;
+penstroke pulled_super_arc.e(1,2)(.5superpull)
+ & pulled_super_arc.e(2,3)(.5superpull)
+ & pulled_super_arc.e(3,4)(.5superpull)
+ & pulled_super_arc.e(4,1)(.5superpull) & cycle;  % bowl
+pickup tiny.nib;
+if hefty: penpos5(1.2(.5[cap_bar,light_curve]),0); penpos6(1.2light_curve,0);
+ x5=.5w; x6r=hround(w-1.5u);
+ y5=vround .28h; y6=-d;
+ fill diag_end(6r,5r,.25,1,5l,6l)--diag_end(5l,6l,.5,1,6r,5r)--cycle;  % tail
+else: pos3'(vair,270); pos5(vair,180); pos6(vair,90);
+ pos7(cap_curve,85); penpos8(eps,180);
+ z3'=z3; x6=x3; top y6r=vround(.2h+.5vair);
+ lft x5r=hround(.5w-1.25u-.5vair); y5=.5[y3,y6];
+ bot y7l=-d; x7l=2/3[x6,x8]; y8=0; rt x8=hround(x4r+.1u);
+ filldraw stroke z3'e{left}...z5e{up}...z6e{right}
+  ..z7e{right}...z8e{up}; fi % tail
+math_fit(-.3cap_height#*slant-.5u#,ic#);
+penlabels(1,2,3,4,5,6,7,8); endchar;
+

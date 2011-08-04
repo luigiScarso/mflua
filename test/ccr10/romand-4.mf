@@ -1,0 +1,40 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romand.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman digits:
+% This file contains the ten digits in so-called roman style.
+% Character codes \0060 through \0071 are generated.
+
+% All digits have the same height, width, depth, and italic correction.
+
+cmchar "The numeral 4";
+beginchar("4",9u#,fig_height#,0);
+italcorr fig_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric light_stem, light_stem', diag_stem, alpha, cut; cut=.75notch_cut;
+light_stem=hround .4[fudged.stem,fudged.cap_stem];
+light_stem'=hround max(tiny.breadth,light_stem-2stem_corr);
+diag_stem=max(tiny.breadth,.4[vair,fudged.hair]);
+pickup crisp.nib; pos5(cap_bar,90); pos6(cap_bar,90);
+lft x5=hround .5u; rt x6=hround(w-.5u);
+top y5r=vround(if serifs: 5/18[slab,h-light_stem]+1
+ else:.35(h-light_stem) fi+.5cap_bar);
+z4l=top lft z5r; y2=y2'=y5=y6; x1r=x2r=hround(w-3u+.5light_stem);
+penpos1(light_stem',0); penpos2(light_stem',0); y1=y3=h+apex_o+apex_oo;
+x3r+apex_corr=x1r; alpha=diag_ratio(1,diag_stem,y3-y4l,x3r-x4l);
+penpos3(alpha*diag_stem,0); penpos4(alpha*diag_stem,0);
+x0=x1l; z0=whatever[z3r,z4r];
+x5'=x5; z5''=z5'+penoffset z4-z3 of currentpen=whatever[z4l,z3l];
+fill diag_end(2r,1r,1,.5,3l,4l)---z5''...lft z5'
+ ---lft z5l -- (x4r,y5l) -- z4r
+ if y0<h-cut:{z3r-z4r}...{up}(x1l-1,h-cut)
+  --(x1l,h-cut) else: -- z0 fi
+ --z2l--z2r--cycle;  % diagonal and upper stem
+filldraw stroke z5e--z6e;  % bar
+pickup tiny.nib; pos7(light_stem,0); rt x7r=x1r; bot y7=0;
+pos2'(light_stem,0); x2'=x7;
+filldraw stroke z2'e--z7e;  % lower stem
+if serifs: dish_serif(7,2',a,1/3,1.75u,
+  b,1/3,min(1.75u,w-.5u-rt x7r)); fi  % serif
+penlabels(0,1,2,3,4,5,6,7); endchar;
+

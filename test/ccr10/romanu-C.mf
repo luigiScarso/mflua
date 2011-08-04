@@ -1,0 +1,45 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanu.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman upper case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0101 through \0132 are generated.
+
+
+cmchar "The letter C";
+if serifs: beginchar("C",13u#,cap_height#,0);
+ italcorr cap_height#*slant-.5u#;
+ adjust_fit(0,0);
+ pickup fine.nib; pos1(cap_hair,0); pos2(cap_band,90);
+ pos3(cap_curve,180); pos4(cap_band,270); pos5(hair,360);
+ rt x1r=rt x5r=hround(w-u); lft x3r=hround u; x2=x4=.55[x3,x1];
+ top y2r=h+o; bot y4r=-o; y3=.5[y2,y4];
+ bot y1=min(vround max(.6h,x_height-.5vair),bot y2l-eps);
+ y5=max(good.y .95(h-y1),y4l+eps);
+ (x2l',y2l)=whatever[z2r,z1l]; x2l:=min(x2l',x2l+.5u);
+ (x4l',y4l)=whatever[z4r,z5l]; x4l:=min(x4l',x4l+.5u);
+ filldraw stroke z1e{x2-x1,10(y2-y1)}
+  ...pulled_arc.e(2,3) & pulled_arc.e(3,4)...{up}z5e; % arc
+ pos6(.3[fine.breadth,cap_hair],0); x6r=x1r; top y6=h+o;
+ x1r-x1'=2cap_curve-fine; y1'=y1;
+ path upper_arc; upper_arc=z1{x2-x1,10(y2-y1)}..z2{left};
+ numeric t; t=xpart(upper_arc intersectiontimes (z6l--z1'));
+ filldraw z1r--z6r--z6l--subpath(t,0) of upper_arc--cycle; % barb
+else: beginchar("C",11.5u#,cap_height#,0);
+ italcorr cap_height#*slant-.5u#;
+ adjust_fit(0,0);
+ pickup fine.nib; pos1(1.2flare,80); pos2(slab,90);
+ pos3(cap_curve,180); pos4(slab,270); pos5(flare,275);
+ rt x1r=hround(w-1.1u); x2=x4=.5w+1.25u;
+ lft x3r=hround max(u,2u-.5cap_curve); rt x5r=hround(w-.9u);
+ top y1r=vround .95h+oo; top y2r=h+oo; y3=.5h;
+ bot y4r=-oo; bot y5r=vround .08h-oo; y5l:=good.y y5l; x5l:=good.x x5l;
+ filldraw stroke rterm.e(2,1,right,.9,4) & super_arc.e(2,3)
+  & super_arc.e(3,4) & term.e(4,5,right,.8,4); fi % arc and terminals
+math_fit(-.3cap_height#*slant-.5u#,.5ic#);
+penlabels(1,1',2,3,4,5,6); endchar;
+

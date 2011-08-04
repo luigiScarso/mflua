@@ -1,0 +1,42 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE punct.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains punctuation marks common to roman and italic styles.
+
+% Codes \0041, \0043, \0045, \0047--\0054,\ %
+%% \0056, \0057, \0072, \0073, \0075, \0100,\par
+% \0133, \0135, and \0140 are generated, as well as code |spanish_shriek|
+% (for a Spanish exclamation point) if that code value is known.
+
+cmchar "Per cent sign";
+beginchar("%",9u#+max(6u#,2fudge*(hair#+stem#)),
+  body_height#,body_height#-asc_height#);
+italcorr if hefty: .4asc_height#*slant-.5u# else: h#*slant-u# fi;
+adjust_fit(0,0); pickup fine.nib;
+numeric left_curve,right_curve;
+left_curve=hround 5/6[fudged.hair,fudged.stem];
+right_curve=max(fine.breadth,hround(fudged.hair if hefty:-2stem_corr fi));
+pos1(vair,90); pos2(left_curve,180); pos3(vair,270); pos4(right_curve,360);
+top y1r=h; lft x2r=hround u; rt x4r=hround(.5w-1.5u);
+bot y3r=floor(if monospace: .7 else: .5 fi\\ asc_height);
+x1=x3=.5[x2,x4]; y2=y4=.5[y1,y3];
+filldraw stroke pulled_super_arc.e(1,2)(superpull)
+ & pulled_super_arc.e(2,3)(superpull);  % left half of upper bowl
+filldraw stroke super_arc.e(3,4) & super_arc.e(4,1); % right half of upper bowl
+pos5(vair,90); pos6(left_curve,180); pos7(vair,270); pos8(right_curve,360);
+bot y7r=-d; rt x8r=hround(w-u); lft x6r=hround(.5w+1.5u);
+top y5r=vround(if monospace: .3 else: .5 fi\\ asc_height);
+x5=x7=.5[x6,x8]; y6=y8=.5[y5,y7];
+filldraw stroke pulled_super_arc.e(5,6)(superpull)
+ & pulled_super_arc.e(6,7)(superpull);  % left half of lower bowl
+filldraw stroke super_arc.e(7,8) & super_arc.e(8,5); % right half of lower bowl
+pickup rule.nib; top y9=h; bot y10=-d;
+if hefty: x9=good.x(x5-eps); x10=good.x(x1+eps);
+ draw z9--z10;  % diagonal
+else: rt x9=hround(w-2.5u); lft x10=hround 2.5u; draw z9--z10;  % diagonal
+ pickup fine.nib; pos9(rule_thickness,angle(z9-z10)+90);
+ pos11(vair,angle(z1r-z4r)-90); pos12(vair,angle(z9-z10)+90);
+ path p; p=super_arc.r(1,4); z11r=point 2/3 of p; z12r=z9r;
+ filldraw stroke z11e{direction 2/3 of p}...{z9-z10}z12e; fi  % link
+penlabels(1,2,3,4,5,6,7,8,9,10,11,12); endchar;
+
