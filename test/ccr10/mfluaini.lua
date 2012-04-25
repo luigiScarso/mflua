@@ -12,11 +12,28 @@ function:	left_x
 function:	left_y
 function:	right_x
 function:	right_y
-function:	LUAGLOBALGET_cur_edges -- get cur_edges
-function:	LUAGLOBALGET_memtop -- get memtop
-function:	LUAGLOBALGET_cur_pen -- get cur_pen
-function:	LUAGLOBALGET_octant -- get octant
-
+function:	LUAGLOBALGET_boundary_char
+function:	LUAGLOBALGET_char_code
+function:	LUAGLOBALGET_char_dp
+function:	LUAGLOBALGET_char_dx
+function:	LUAGLOBALGET_char_dy
+function:	LUAGLOBALGET_char_ext
+function:	LUAGLOBALGET_char_ht
+function:	LUAGLOBALGET_char_ic
+function:	LUAGLOBALGET_char_wd
+function:	LUAGLOBALGET_cur_edges
+function:	LUAGLOBALGET_cur_exp
+function:	LUAGLOBALGET_cur_pen
+function:	LUAGLOBALGET_designsize
+function:	LUAGLOBALGET_fillin
+function:	LUAGLOBALGET_granularity
+function:	LUAGLOBALGET_hppp
+function:	LUAGLOBALGET_mem_top
+function:	LUAGLOBALGET_octant
+function:	LUAGLOBALGET_turning_check
+function:	LUAGLOBALGET_vppp
+function:	LUAGLOBALGET_x_offset
+function:	LUAGLOBALGET_y_offset
 ]==]
 
 
@@ -502,7 +519,24 @@ mflua.threshold_remove_redundant_curves = 3 --_remove_redundant_curves
 
 mflua.threshold_merge_segments =  5e-5 -- _merge_segments
 
+mflua.threshold_join_curves =  0.049 -- _build_cycles try and error
 
+
+mflua.simplify_routine = 'simplify.mf'
+mflua.simplify_tempdir = 'simplify'
+
+mflua.threshold_simplify_len = 6
+mflua.threshold_simplify_big_small_ratio = 5
+mflua.threshold_simplify_max_len = 31
+mflua.threshold_simplify_n = 10
+mflua.threshold_simplify_sample = 64
+
+
+
+
+
+mflua.mflua_exe = './mf'
+mflua.turningnumber_file='mflua_tn'
 -- to permit multiple instances of mflua
 if io.open('LOCK1')==nil then 
    mflua.print_specification.filename  = "envelope.tex"
@@ -520,6 +554,12 @@ mflua.do_add_to.bezier_octant_I ={}
 mflua.do_add_to.bezier_octant_contour ={} 
 
 mflua.chartable  ={}
+mflua.max_curves =1e4
+-- mflua.svg = dofile('mflua_svg_backend.lua')
+
+function mflua.lock(params) return io.open('LOCK1','w') end
+function mflua.unlock(params) return os.remove('LOCK1') end
+
 
 function mflua.dot(P1,P2)  return P1[1]*P2[1]+P1[2]*P2[2] end
 function mflua.angle(p,q) 
@@ -547,6 +587,11 @@ function mflua.modul_vec(a,b) local dot = mflua.dot local P ={b[1]-a[1],b[2]-a[2
 function mflua.approx_curve_lenght(p,c1,c2,q) return  mflua.modul_vec(p,c1) + mflua.modul_vec(c1,c2) + mflua.modul_vec(c2,q) + mflua.modul_vec(p,q) end
 
 
+--
+-- Initialize the svg backend
+--
+mflua.svg = dofile('mflua_svg_backend.lua')
+mflua.svg.enabled = (mflua.svg.enabled and (mflua.svg.enabled==true or mflua.svg.enabled=='true')) or false
 
 
 --[==[

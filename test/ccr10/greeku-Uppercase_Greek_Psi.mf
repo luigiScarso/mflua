@@ -1,0 +1,33 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE greeku.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Greek caps, analogous to the uppercase Roman letters.
+
+% Character codes \0000 through \0012 are generated,
+% using plain \TeX's standard text font layout conventions.
+
+
+cmchar "Uppercase Greek Psi";
+beginchar(oct"011",14u#,cap_height#,0);
+italcorr .8cap_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric shaved_stem;
+shaved_stem=cap_stem-hround 2stem_corr;
+pickup tiny.nib; pos1(shaved_stem,0); pos2(shaved_stem,0);
+lft x1l=lft x2l=hround(.5w-.5shaved_stem); top y1=h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+pos3(shaved_stem,-180); pos4(shaved_stem,-180);
+pos5(vair,-90); x5=x1; bot y5r=vround(.15h if serifs:+slab fi);
+pos6(shaved_stem,0); pos7(shaved_stem,0);
+lft x3r=hround u; x7=w-x3; lft x4r=hround(3u-.5shaved_stem); x6=w-x4;
+pos3'(vair,90); pos7'(vair,90); z3'r=z3r; z7'r=z7r;
+y3=y7; y4=y6=.6h; y3=good.y(y3+.84h if serifs:-slab fi-y3');
+interim superness:=more_super;
+filldraw z3'l{right}...z4r{down} & super_arc.r(4,5)
+ & super_arc.r(5,6) & z6r{up}...z7'l{right}
+ --z7r---z7l...z6l{down} & super_arc.l(6,5)
+ & super_arc.l(5,4) & z4l{up}...z3l---z3r--cycle;  % stroke
+if serifs: dish_serif(1,2,a,1/3,1.25cap_jut,b,1/3,1.25cap_jut);  % upper serif
+ dish_serif(2,1,c,1/3,1.25cap_jut,d,1/3,1.25cap_jut); fi  % lower serif
+math_fit(-.8cap_height#*slant-.5u#,.4cap_height#*slant-1.25u#);
+penlabels(1,2,3,4,5,6,7); endchar;

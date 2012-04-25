@@ -1,0 +1,30 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman lower case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0141 through \0172 are generated.
+
+
+cmchar "The letter f";
+beginchar("f",5.5u#,asc_height#,0);
+italcorr asc_height#*slant+if serifs:flare#-.25u# else: 1.25u# fi;
+adjust_fit(stem_shift#,if monospace: .5u# else:-stem_shift# fi);
+pickup tiny.nib; pos1(stem',0); lft x1l=hround(2.5u-.5stem');
+pickup fine.nib; numeric bulb_diam;
+if serifs: bulb_diam=hround .8[stem,flare];
+ pos2(bulb_diam,0); y2+.5bulb_diam=.9[x_height,h+oo];
+ if monospace: rt x2r=hround(w-.5u)+1 else: lft x2l=hround(w-.75u+.5) fi;
+else: pos2(5/7[vair,flare],90); top y2r=h;
+ rt x2=hround(if monospace:w-.5u else:w+.75u fi); fi
+f_stroke(1,2,a,b,c,jut,if not monospace:1.25fi\\ jut); % stem, terminal, serif
+pickup crisp.nib; top y3r=top y4r=x_height; lft x3=hround .5u-1;
+pos3(bar,90); pos4(bar,90);
+rt x4=hround(w-if monospace:.75u+1 else:1/3u fi);
+filldraw stroke z3e--z4e;  % bar
+penlabels(1,2,3,4); endchar;
+

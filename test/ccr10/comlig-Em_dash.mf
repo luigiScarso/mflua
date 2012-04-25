@@ -1,0 +1,17 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE comlig.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file defines characters common to roman and italic text fonts
+% that appear only when |ligs>0|.
+
+% Character codes \0042, \0055, \0134, \0173, and \0174 are generated.
+
+
+cmchar "Em dash";
+beginchar(oct"174",18u#,x_height#,0);
+italcorr .61803x_height#*slant+.5u#;
+adjust_fit(letter_fit#,letter_fit#);
+pickup crisp.nib; pos1(vair,90); pos2(vair,90);
+top y1r=top y2r=vround(.61803h+.5vair); lft x1=-eps; rt x2=w+eps;
+filldraw stroke z1e--z2e;  % bar
+penlabels(1,2); endchar;

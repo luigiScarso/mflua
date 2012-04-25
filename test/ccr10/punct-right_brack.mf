@@ -1,0 +1,28 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE punct.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains punctuation marks common to roman and italic styles.
+
+% Codes \0041, \0043, \0045, \0047--\0054,\ %
+%% \0056, \0057, \0072, \0073, \0075, \0100,\par
+% \0133, \0135, and \0140 are generated, as well as code |spanish_shriek|
+% (for a Spanish exclamation point) if that code value is known.
+
+cmchar "Right bracket";
+numeric wd#; wd#=max(5u#,4.5u#+.5if hefty:stem# else:rule_thickness# fi);
+beginchar("]",wd#,body_height#,paren_depth#);
+italcorr body_height#*slant-2u#+.5if hefty:stem# else:rule_thickness# fi;
+adjust_fit(0,0);
+numeric top_thickness,side_thickness;
+if hefty: top_thickness=vair;
+ side_thickness=max(crisp.breadth,stem-2stem_corr);
+else: top_thickness=side_thickness=rule_thickness; fi;
+pickup crisp.nib; pos1(side_thickness,0); pos2(side_thickness,0);
+top y1=h; bot y2=-d; rt x1r=rt x2r=hround(w-2.5u+.5side_thickness)+1+eps;
+filldraw stroke z1e--z2e;  % stem
+pos3(top_thickness,90); pos4(top_thickness,90);
+pos5(top_thickness,90); pos6(top_thickness,90);
+x3=x5=x1r; lft x4=lft x6=floor .4u-eps; y3r=y4r=y1; y5l=y6l=y2;
+filldraw stroke z3e--z4e;  % upper bar
+filldraw stroke z5e--z6e;  % lower bar
+penlabels(1,2,3,4,5,6); endchar;

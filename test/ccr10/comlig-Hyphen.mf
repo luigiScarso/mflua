@@ -1,0 +1,20 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE comlig.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file defines characters common to roman and italic text fonts
+% that appear only when |ligs>0|.
+
+% Character codes \0042, \0055, \0134, \0173, and \0174 are generated.
+
+
+cmchar "Hyphen";
+beginchar("-",6u#,x_height#,0);
+italcorr .5x_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric thickness; thickness=if hefty:bar else:.75[hair,stem] fi;
+pickup crisp.nib; pos1(thickness,90); pos2(thickness,90);
+top y1r=top y2r=vround(.5h+.5thickness); rt x2=hround(w-u)+eps;
+if monospace: x2=w-x1 else: lft x1=hround .2u-eps fi;
+filldraw stroke z1e--z2e;  % bar
+penlabels(1,2); endchar;
+

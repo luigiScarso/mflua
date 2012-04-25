@@ -1,0 +1,17 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE punct.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains punctuation marks common to roman and italic styles.
+
+% Codes \0041, \0043, \0045, \0047--\0054,\ %
+%% \0056, \0057, \0072, \0073, \0075, \0100,\par
+% \0133, \0135, and \0140 are generated, as well as code |spanish_shriek|
+% (for a Spanish exclamation point) if that code value is known.
+cmchar "Reverse apostrophe";
+beginchar("`",5u#,asc_height#,0);
+italcorr asc_height#*slant+.5dot_size#-2u#;
+adjust_fit(0,0);
+x1-.5dot_size=hround(.5w-.5dot_size); y1+.5dot_size=h-comma_depth;
+if monospace: ammoc(1,a,dot_size,.28u,vround 1.5comma_depth);  % large ammoc
+else: ammoc(1,a,dot_size,.25u,comma_depth); fi  % normal ammoc
+penlabels(1); endchar;

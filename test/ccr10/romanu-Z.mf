@@ -1,0 +1,39 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanu.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman upper case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0101 through \0132 are generated.
+
+
+
+cmchar "The letter Z";
+beginchar("Z",11u#,cap_height#,0);
+italcorr cap_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric arm_thickness[],z_stem;
+if hefty: arm_thickness1=Vround(slab-vair_corr); arm_thickness2=slab;
+ z_stem=.8[vair,cap_stem];
+else: arm_thickness1=slab; arm_thickness2=vround(slab+vair_corr);
+ z_stem=.9[vair,cap_stem]; fi
+pickup tiny.nib; x3l=x4l=w-x1r=w-x2r; lft x3l=hround u;
+top y1=h; y2=min(y1,h-2/3arm_thickness1);
+bot y4=0; y3=max(y4,2/3arm_thickness2);
+numeric alpha; alpha=diag_ratio(1,z_stem-tiny,y2-y3,x2r-x3l);
+penpos1(alpha*(z_stem-tiny),0); penpos2(alpha*(z_stem-tiny),0);
+penpos3(alpha*(z_stem-tiny),0); penpos4(alpha*(z_stem-tiny),0);
+pair delta; delta=penoffset z3-z2 of currentpen;
+fill top lft z1l--z2l+delta---z3l+delta..lft z3l---lft z4l..bot z4l
+ ---bot rt z4r--z3r-delta---z2r-delta..rt z2r---rt z1r..top z1r
+ ---cycle;  % diagonal
+pickup crisp.nib; pos5(arm_thickness1,90); pos6(hair,180);
+top y5r=h; x5=x1; lft x6r=hround 1.25u; y6=good.y(y5l-beak)-eps;
+arm(5,6,a,beak_darkness**.8,-.4beak_jut);  % upper arm and beak
+pos7(arm_thickness2,-90); pos8(hair,0);
+bot y7r=0; x7=x4; rt x8r=hround(w-.9u); y8=good.y(y7l+1.2beak)+eps;
+arm(7,8,b,beak_darkness**.9,.6beak_jut);  % lower arm and beak
+math_fit(0,.5ic#); penlabels(1,2,3,4,5,6,7,8); endchar;

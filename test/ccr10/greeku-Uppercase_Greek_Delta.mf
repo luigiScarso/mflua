@@ -1,0 +1,27 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE greeku.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Greek caps, analogous to the uppercase Roman letters.
+
+% Character codes \0000 through \0012 are generated,
+% using plain \TeX's standard text font layout conventions.
+
+
+cmchar "Uppercase Greek Delta";
+beginchar(oct"001",15u#,cap_height#,0);
+adjust_fit(0,0);
+numeric left_stem,alpha;
+left_stem=cap_hair if hefty: -3stem_corr fi;
+x1l=w-x4r=.75u; y1=y4=0;
+x2-x1=x4-x3; x3r=x2r+apex_corr; y2=y3=h+apex_o+apex_oo;
+alpha=diag_ratio(2,left_stem,y2-y1,x4r-x1l-apex_corr);
+penpos1(alpha*left_stem,0); penpos2(alpha*left_stem,0);
+penpos3(alpha*cap_stem,0); penpos4(alpha*cap_stem,0);
+fill diag_end(2l,1l,1,1,4r,3r)--diag_end(4r,3r,1,1,2l,1l)--cycle;  % triangle
+z0=whatever[z1r,z2r]=whatever[z3l,z4l];
+y5=y6=cap_vstem; z5=whatever[z1r,z2r]; z6=whatever[z3l,z4l];
+if y0<h-cap_notch_cut: y0:=h-cap_notch_cut;
+ unfill z0+.5right{down}...{z4-z3}z6--z5{z2-z1}
+  ...{up}z0+.5left--cycle; % counter
+else: unfill z0--z5--z6--cycle; fi  % counter
+penlabels(0,1,2,3,4,5,6); endchar;

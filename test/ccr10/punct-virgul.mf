@@ -1,0 +1,18 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE punct.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains punctuation marks common to roman and italic styles.
+
+% Codes \0041, \0043, \0045, \0047--\0054,\ %
+%% \0056, \0057, \0072, \0073, \0075, \0100,\par
+% \0133, \0135, and \0140 are generated, as well as code |spanish_shriek|
+% (for a Spanish exclamation point) if that code value is known.
+
+cmchar "Virgule (slash)";
+beginchar("/",9u#,body_height#,paren_depth#);
+italcorr body_height#*slant-.5u#;
+adjust_fit(0,0); pickup rule.nib;
+rt x1=hround(w-u)+eps; top y1=h+eps;
+lft x2=hround u-eps; bot y2=-d-eps;
+draw z1--z2;  % diagonal
+penlabels(1,2); endchar;

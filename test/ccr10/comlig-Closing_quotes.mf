@@ -1,0 +1,19 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE comlig.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file defines characters common to roman and italic text fonts
+% that appear only when |ligs>0|.
+
+% Character codes \0042, \0055, \0134, \0173, and \0174 are generated.
+
+
+cmchar "Closing quotes";
+beginchar(oct"042",7u#+max(2u#,dot_size#),asc_height#,0);
+italcorr asc_height#*slant+dot_size#-4.1u#;
+adjust_fit(0,0);
+x1-.5dot_size=hround .6u; y2+.5dot_size=h;
+x2-x1=hround(1.5u+max(2u,dot_size)); y2=y1;
+comma(1,a,dot_size,.25u,comma_depth); % left dot and tail
+comma(2,b,dot_size,.25u,comma_depth); % right dot and tail
+penlabels(1,2); endchar;
+

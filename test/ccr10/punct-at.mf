@@ -1,0 +1,39 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE punct.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains punctuation marks common to roman and italic styles.
+
+% Codes \0041, \0043, \0045, \0047--\0054,\ %
+%% \0056, \0057, \0072, \0073, \0075, \0100,\par
+% \0133, \0135, and \0140 are generated, as well as code |spanish_shriek|
+% (for a Spanish exclamation point) if that code value is known.
+
+cmchar "At sign";
+beginchar("@",14u#,asc_height#,0);
+italcorr .7asc_height#*slant-.5u#;
+adjust_fit(0,if hefty or monospace:-2u# else: 0 fi);
+pickup fine.nib; pos0(fudged.hair,0); pos1(vair,90);
+pos2(fudged.stem,180); pos3(vair,270);
+pos4(fudged.stem,-180); pos5(fudged.stem,-180);
+pos6(vair,-90); pos7(fudged.hair,0);
+pos8(vair,90); pos9(fudged.hair,180);
+pos10(vair,270); pos11(.5[vair,flare],360);
+x1=x3=.5[x0,x2]; y0=y2=.5[y1,y3];
+x8=x10=.5w; y7=y9=.5[y8,y10];
+lft x9r=hround u; x7=w-x9; top y8r=h+oo; bot y10r=-oo;
+top y1r=vround(.8[y10,y8]+.5vair); bot y3r=vround(.2[y10,y8]-.5vair);
+x6l=1/3[x5l,x7l]; y6=y3; y11=good.y(.1[y10,y8]-.5);
+x0=x4=x5; y4=.8[y3,y1]; y5=2/3[y7,y6];
+if hefty or monospace: lft x2r=hround(5u-.5fudged.stem);
+ rt x0r=hround(w-3u); x11r=x0r;
+else: lft x2r=hround 3.4u; x0=w-x2; x11r=x7r; fi
+filldraw stroke super_arc.e(1,2) & super_arc.e(2,3);  % left inner bowl
+filldraw stroke super_arc.e(3,0) & super_arc.e(0,1);  % right inner bowl
+filldraw stroke super_arc.e(8,9) & super_arc.e(9,10)
+ & term.e(10,11,right,1,4);  % left outer bowl and terminal
+if hefty or monospace: {{interim superness:=hein_super;
+  filldraw stroke super_arc.e(0,8)}};  % link
+else: (x,y6r)=whatever[z6l,z7l]; x6r:=x;
+ filldraw stroke z4e---z5e...z6e{right}...{up}z7e
+  & super_arc.e(7,8); fi % stem and link
+penlabels(0,1,2,3,4,5,6,7,8,9,10,11); endchar;

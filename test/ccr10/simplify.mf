@@ -1,0 +1,92 @@
+batchmode;
+pair C[];
+path polygonal;
+path approx;
+path vert;
+path temp[];
+numeric M,N[];
+numeric phi,alpha,beta;
+pair k, d[], r[],target[];
+numeric s,smin;
+
+M:= abs(p1-q1);
+polygonal:=(p1--q1);
+for i=2 step 1 until L:
+  polygonal := polygonal & (p[i]--q[i]) ;
+  M:= M+abs(p[i]-q[i]);
+endfor   ;
+M:= floor(M+1);
+%%show M;
+
+C[1] := c1; %% p[2]
+C[2] := c2 ; %%p[L];
+
+temp[1] := p1 -- C[1];
+d3:=direction 1 of temp[1];
+alpha:= angle(d3);
+temp[2] := q[L] --C[2];
+d4:=direction 1 of temp[2];
+beta:= angle(d4);
+
+smin=+infinity;
+for n=0  step Step until Nmax:
+ N1 := n;
+ for m=0 step Step until Mmax:
+    N2 := m;
+    approx := p[1] .. controls (xpart(C1)+N1*cosd(alpha),ypart(C1)+N1*sind(alpha)) and (xpart(C2)+N2*cosd(beta),ypart(C2)+N2*sind(beta)) .. q[L];
+    %% drawoptions(withcolor (1,0,1)  withpen pencircle scaled 0.1pt);
+    %% draw approx ; 
+    s:=-infinity;
+    for t=0 upto Limit:
+       k:= point t/Limit of approx;
+       d1:= direction t/Limit of approx;
+       d2:= d1 rotated 90;
+       phi := angle(d2);
+       vert:= k--(xpart(k)+M*cosd(phi),ypart(k)+M*sind(phi));
+       %%drawoptions(withcolor (1,0,0)  withpen pencircle scaled 0.1pt);
+       %% drawdot k;
+       r[3] := vert intersectiontimes polygonal;
+       if r[3] <> (-1,-1):
+        r[0]:= vert intersectionpoint polygonal;
+        if s<(xpart(k)-xpart(r[0]))++(ypart(k)-ypart(r[0])) : 
+          s:=(xpart(k)-xpart(r[0]))++(ypart(k)-ypart(r[0])) ; 
+          r[2]:= r[0] ;
+          r[1]:= k;
+        fi
+       else: 
+	 d2:= d1 rotated -90;
+	 phi := angle(d2);
+	 vert:= k--(xpart(k)+M*cosd(phi),ypart(k)+M*sind(phi));
+	 r[3] := vert intersectiontimes polygonal;
+	 if r[3] <> (-1,-1):
+	   r[0]:= vert intersectionpoint polygonal;
+	   if s<(xpart(k)-xpart(r[0]))++(ypart(k)-ypart(r[0])) : 
+	     s:=(xpart(k)-xpart(r[0]))++(ypart(k)-ypart(r[0])) ; 
+	     r[2]:= r[0] ;
+	     r[1]:= k;
+	   fi
+	 else: 
+	   %%errmessage("intersection not found");
+	 fi
+       fi
+     endfor; %% t=0
+    %%draw r[1] -- r[2];
+    if s < smin: 
+     smin:= s;
+     temp[3] :=  approx;
+     target[1] := p1;
+     target[2] := (xpart(C1)+N1*cosd(alpha),ypart(C1)+N1*sind(alpha)) ;
+     target[3] := (xpart(C2)+N2*cosd(beta),ypart(C2)+N2*sind(beta)) ;
+     target[4] := q[L];
+    fi
+ endfor; %% m
+endfor %% n
+
+
+show target[1]; %% p
+show target[2]; %% c1
+show target[3]; %% c2
+show target[4]; %% q
+show "END"; %%
+
+bye.

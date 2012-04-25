@@ -1,0 +1,103 @@
+path p[];
+%i=18
+p2:=(286.372,159.465) .. controls (287.499,158.481) and (288.58695647998,157.46404067999) .. (289.63496855997,156.41603143998);
+draw p2;
+%i=19
+p3:=(289.63496855997,156.41603143998) .. controls (303.55,142.501) and (310.537,123.093) .. (310.537,103.206);
+draw p3;
+%i=18+19 
+p1:=(286.372,159.465) .. controls (287.499,158.481)  and (310.537,123.093) .. (310.537,103.206);
+draw p1;
+
+p4 := p2 & p3;
+p5 := subpath(0,4) of p4;
+message "point 0 of p4";
+show point 0 of p4;
+message " ";
+
+
+message "point 1 of p4";
+show point 1 of p4;
+message " ";
+
+
+message "point 3 of p4";
+show point 3 of p4;
+message " ";
+
+message "lengths";
+show length p2, length p3, length p4;
+message " ";
+
+
+message "point 0 of p2";
+show point 0 of p2;
+message " ";
+
+
+message "point 1 of p3";
+show point 1 of p3;
+message " ";
+
+
+def merge =
+ pair k[],a[],b[],c[],d[];
+ numeric area[],B,b,h,H,temp;
+ L:=16; 
+ area[0]:=0;
+ k0:= point 0 of p1;
+ a0:= point 0 of p4;
+ for t=1 upto L:
+  k1:= point t/L of p1;
+  d1:= direction t/L of p1;
+  d2:= d1 rotated 90;
+  p100:= (k1-0.125k1)--k1{d2}--1.125k1;
+  a[t]:= p100 intersectionpoint p4;
+  fill k0--k1--a[t]--a[0]--cycle;
+  draw k0--k1--a[t]--a[0]--cycle;
+  b:= xpart(k1-k0)++ypart(k1-k0); 
+  B:= xpart(a1-a0)++ypart(a1-a0); 
+  h:= xpart(a1-k1)++ypart(a1-k1); 
+  H:= xpart(a0-k0)++ypart(a0-k0); 
+  if H<h : temp:=H; H:=h; h:=temp; fi;  
+  area[t]:= (B/1000+b/1000)*H/2;
+  area[0]:=area[0]+area[t];
+  %show b,B,h,H,area[t],area[0];
+  draw k1 -- a[t];
+  drawdot k1 ;
+  drawdot a[t] ;
+  k0:=k1; 
+  a0:=a[t];
+ endfor;
+message "area";show area[0];
+enddef;
+
+merge;
+
+%i=18+19 
+
+p1:=(286.372,159.465) .. controls 1.0025(287.499,158.481)  and 1.0025(310.537,123.093) .. (310.537,103.206);
+draw p1;merge
+
+p1:=(286.372,159.465) .. controls 1.005(287.499,158.481)  and 1.005(310.537,123.093) .. (310.537,103.206);
+draw p1;merge;
+
+
+
+p1:=(286.372,159.465) .. controls 1.0075(287.499,158.481)  and 1.0075(310.537,123.093) .. (310.537,103.206);
+draw p1;merge;
+
+p1:=(286.372,159.465) .. controls 1.008(287.499,158.481)  and 1.008(310.537,123.093) .. (310.537,103.206);
+draw p1;merge;
+
+
+p1:=(286.372,159.465) .. controls 1.009(287.499,158.481)  and 1.009(310.537,123.093) .. (310.537,103.206);
+drawoptions(withcolor (0,0.5,1)  withpen pencircle scaled 0.1pt);
+draw p1;merge;
+
+
+p1:=(286.372,159.465) .. controls 1.01(287.499,158.481)  and 1.01(310.537,123.093) .. (310.537,103.206);
+
+draw p1;merge;
+
+bye.

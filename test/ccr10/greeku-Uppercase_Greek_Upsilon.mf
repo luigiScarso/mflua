@@ -1,0 +1,28 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE greeku.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Greek caps, analogous to the uppercase Roman letters.
+
+% Character codes \0000 through \0012 are generated,
+% using plain \TeX's standard text font layout conventions.
+
+cmchar "Uppercase Greek Upsilon";
+beginchar(oct"007",14u#,cap_height#,0);
+italcorr .8cap_height#*slant-.5u#;
+adjust_fit(0,0);
+pickup tiny.nib; pos1(cap_stem,0); pos2(cap_stem,0);
+lft x1l=lft x2l=hround(.5w-.5cap_stem); y1=.5h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+penpos3(.6cap_stem,0); penpos4(.75cap_curve,90); penpos5(cap_hair,180);
+z3l=lft z1l; x5r=hround u; y5=bot .8h; x4=.61803[x3l,x5l]; y4r=h+o;
+penpos5'(cap_hair,180); x5'=x5; y5'=h;
+fill z3r{up}...z4r{left}...{down}diag_end(5'r,5r,1,1,5l,5'l){up}
+ ...{right}z4l...{down}z3l--cycle;  % left arc
+penpos6(.6cap_stem,0); penpos7(.75cap_curve,-90); penpos8(cap_hair,-180);
+z6r=rt z1r; x8=w-x5; y8=y5; x7=w-x4; y7=y4;
+penpos8'(cap_hair,-180); x8'=x8; y8'=h;
+fill z6r{up}...z7r{right}...{down}diag_end(8'r,8r,1,1,8l,8'l){up}
+ ...{left}z7l...{down}z6l--cycle;  % right arc
+if serifs: dish_serif(2,1,a,1/3,1.25cap_jut,b,1/3,1.25cap_jut); fi  % serif
+math_fit(-.8cap_height#*slant-.5u#,ic#-2.5u#);
+penlabels(1,2,3,4,5,6,7,8); endchar;

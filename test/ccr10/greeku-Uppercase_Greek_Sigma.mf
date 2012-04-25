@@ -1,0 +1,30 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE greeku.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Greek caps, analogous to the uppercase Roman letters.
+
+% Character codes \0000 through \0012 are generated,
+% using plain \TeX's standard text font layout conventions.
+
+cmchar "Uppercase Greek Sigma";
+beginchar(oct"006",13u#,cap_height#,0);
+italcorr cap_height#*slant-beak_jut#-.5u#;
+adjust_fit(0,0);
+numeric bot_arm_thickness;
+bot_arm_thickness=Vround .25[slab,cap_vstem];
+pickup tiny.nib; lft x1l=hround u; x1l=x2l=x4l;
+top y1=h; bot y2=h-slab-eps; bot y4=0; x3l-x1l=4/11(w-2u); y3=.5h;
+numeric alpha[]; alpha1=((x3l-x1l)++(y2-y3))/(y2-y3);
+penpos1(alpha1*(cap_stem-tiny),0); penpos2(alpha1*(cap_stem-tiny),0);
+penpos3(alpha1*(cap_stem-tiny),0);
+alpha2=diag_ratio(1,cap_hair-tiny,y3-y4,x3r-x4l);
+penpos4(alpha2*(cap_hair-tiny),0);
+z0=whatever[z2l,z3l]=z4l+whatever*(z3r-z4r);
+filldraw z1l--z2l--z0--z4l--z4r--z3r--z2r--z1r--cycle;  % diagonals
+pickup crisp.nib; pos5(slab,90); pos6(hair,0);
+top y5r=h; x5=x1; rt x6r=hround(w-u); y6=good.y(y5l-beak)-eps;
+arm(5,6,a,beak_darkness,beak_jut);  % upper arm and beak
+pos7(bot_arm_thickness,-90); pos8(hair,0);
+bot y7r=0; z7l=whatever[z4,z3]; x7r:=x4; x8=x6; y8=good.y(y7l+beak)+eps;
+arm(7,8,b,beak_darkness,beak_jut);  % lower arm and beak
+math_fit(0,.5ic#); penlabels(0,1,2,3,4,5,6,7,8); endchar;

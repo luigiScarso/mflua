@@ -1,0 +1,30 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE greeku.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Greek caps, analogous to the uppercase Roman letters.
+
+% Character codes \0000 through \0012 are generated,
+% using plain \TeX's standard text font layout conventions.
+
+
+cmchar "Uppercase Greek Pi";
+beginchar(oct"005",13u#+width_adj#,cap_height#,0);
+italcorr cap_height#*slant-cap_serif_fit#+cap_jut#-2.5u#+min(.5cap_stem#,u#);
+adjust_fit(cap_serif_fit#,cap_serif_fit#); pickup tiny.nib;
+h:=vround(h-stem_corr);
+pos1(cap_stem,0); pos2(cap_stem,0); pos3(cap_stem,0); pos4(cap_stem,0);
+lft x1l=lft x2l=hround max(2u,3u-.5cap_stem); x3=x4=w-x1;
+top y1=top y3=h; bot y2=bot y4=0;
+filldraw stroke z1e--z2e; % left stem
+filldraw stroke z3e--z4e; % right stem
+penpos5(cap_bar,90); penpos6(cap_bar,90);
+x5=x1; x6=x3; y5r=y6r=h;
+fill stroke z5e--z6e;  % bar
+if serifs: numeric inner_jut;
+ if rt x1r+cap_jut+.5u+1<=lft x3l-cap_jut: inner_jut=cap_jut;
+ else: rt x1r+inner_jut+.5u+1=lft x3l-inner_jut; fi
+ nodish_serif(1,2,a,1/3,cap_jut,b,1/3,eps);  % upper left serif
+ dish_serif(2,1,c,1/3,cap_jut,d,1/3,inner_jut); % lower left serif
+ nodish_serif(3,4,e,1/3,eps,f,1/3,cap_jut);  % upper right serif
+ dish_serif(4,3,g,1/3,inner_jut,h,1/3,cap_jut); fi  % lower right serif
+math_fit(0,.5ic#); penlabels(1,2,3,4,5,6); endchar;

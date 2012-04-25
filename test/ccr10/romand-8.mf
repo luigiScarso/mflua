@@ -1,0 +1,56 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romand.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman digits:
+% This file contains the ten digits in so-called roman style.
+% Character codes \0060 through \0071 are generated.
+
+% All digits have the same height, width, depth, and italic correction.
+
+
+cmchar "The numeral 8";
+beginchar("8",9u#,fig_height#,0);
+italcorr fig_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric top_thickness,mid_thickness,bot_thickness,upper_side,lower_side,theta;
+top_thickness=max(fine.breadth,vround(slab-2vair_corr));
+bot_thickness=max(fine.breadth,vround(slab-vair_corr));
+x0=.5w; y0=.54h;
+if hefty: mid_thickness=vround 2/3vair; upper_side=hround(stem-3stem_corr);
+ lower_side=hround min(.5[curve,cap_curve]-stem_corr,upper_side+.25u);
+ penpos1(top_thickness,90); penpos2(upper_side,180);
+ penpos3(mid_thickness,270); penpos8(upper_side,360);
+ penpos4(mid_thickness,90); penpos7(lower_side,180);
+ penpos6(bot_thickness,270); penpos5(lower_side,360);
+ penpos0(vair,90); z3l=z0r; z4l=z0l;
+ x1=x6=.5w; x2r=w-x8r=hround u; x7r=w-x5r=hround .75u;
+ top y1r=h+o; bot y6r=-o; y2=y8=.5[y1l,y3l]; y7=y5=.5[y4l,y6l];
+ filldraw stroke pulled_arc.e(1,2)
+  & pulled_arc.e(2,3);  % left half of upper bowl
+ filldraw stroke pulled_arc.e(4,5)
+  & pulled_arc.e(5,6);  % right half of lower bowl
+ filldraw stroke pulled_arc.e(6,7)
+  & pulled_arc.e(7,4);  % left half of lower bowl
+ filldraw stroke pulled_arc.e(3,8)
+  & pulled_arc.e(8,1);  % right half of upper bowl
+else: pickup fine.nib; theta=90-angle(18u,h); slope:=-h/18u;
+ upper_side=max(fine.breadth,hround(.5[hair,stem]-stem_corr));
+ lower_side=hround(.5[hair,stem]+stem_corr);
+ if lower_side>1.2upper_side: upper_side:=lower_side; fi
+ pos1(top_thickness,-90); pos6(bot_thickness,-90);
+ x1=x6=.5w; top y1l=h+o; bot y6r=-o; pos0(cap_stem,theta);
+ lft x2l=w-rt x8l=hround 1.25u; lft x7r=w-rt x5r=hround .75u;
+ x2r-x2l=upper_side-fine; x5r-x5l=lower_side-fine;
+ ellipse_set(1l,2l,3l,0l); ellipse_set(1r,2r,3r,0r);
+ ellipse_set(6l,5l,4l,0l); ellipse_set(6r,5r,4r,0r);
+ numeric tau; tau=max(.8,.20710678/(superness-.5));
+ filldraw stroke z1e{left}..tension atleast tau..z2e{down}
+  ..z3e---z4e..z5e{down}..tension atleast tau..z6e{left};  % S stroke
+ pos7(lower_side,180); pos8(upper_side,180);
+ y7=.5[y5l,y5r]; y8=.5[y2l,y2r]; pos9(vair,90); z9=z0;
+ filldraw stroke z1e{right}..tension atleast tau..z8e{down}
+  ..tension atleast tau and atleast 1..{-18u,-.618h}z9e; % upper right stroke
+ filldraw stroke z6e{left}..tension atleast tau..z7e{up}
+  ..tension atleast tau and atleast 1..{18u,.5h}z9e; fi % lower left stroke
+penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+

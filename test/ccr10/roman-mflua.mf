@@ -1,0 +1,186 @@
+% The Computer Modern Roman family of fonts (by D. E. Knuth, 1979--1985)
+% MFLua version (no changes in parameters, only in loading test files)
+if ligs>1: font_coding_scheme:="TeX text";
+ spanish_shriek=oct"074"; spanish_query=oct"076";
+else: font_codi
+  ng_scheme:=if ligs=0: "TeX typewriter text"
+  else: "TeX text without f-ligatures" fi;
+ spanish_shriek=oct"016"; spanish_query=oct"017"; fi
+
+mode_setup; font_setup;
+
+input romanu;  % upper case (majuscules) pass 2011-06-20 02:55 am pass 2011-07-15 04:03 am 6 bit OK SVG
+%%
+%input romanu-A;  % upper case A %OK SVG OK <=
+%input romanu-B;  % upper case B %OK SVG OK <=
+%input romanu-C;  % upper case C %OK SVG OK <=
+%input romanu-D;  % upper case D %OK SVG OK <=
+%input romanu-J;  % upper case J %OK with filter remove OK SVG OK
+%input romanu-E-P;  % upper case E => T SVG OK  <=
+%input romanu-M;    % upper case M %OK  SVG OK 
+%input romanu-N;    % upper case M %OK   SVG OK
+%input romanu-Q;  % upper case Q %OK  <=
+%input romanu-V;  % uppercase V OK SVG OK
+%input romanu-R;  % uppercase R OK
+%input romanu-W;  % uppercase W wrong fixed (bug in design of letter ?)
+%input romanu-Z;  % uppercase Z SVG OK
+%input romanu-R-Z; %% SVG OK <=
+
+input romanl;  % lower case (minuscules) SVG OK
+%%
+%input romanl-a;  % lower case (minuscules) OK SVG OK
+%input romanl-b;  % lower case (minuscules) OK  SVG OK
+%input romanl-c;  % lower case (minuscules) OK SVG OK
+%input romanl-d;  % lower case (minuscules) OK with filters 
+%input romanl-e;  % lower case (minuscules) OK 
+%input romanl-f-l;  % lower case (minuscules)
+%input romanl-h;  % lower case (minuscules) OK with filter remove
+%input romanl-f;  % lower case (minuscules)
+%input romanl-i;  % lower case (minuscules) OK
+input romanl-j;  % lower case (minuscules) OK
+%input romanl-g;  % lower case (minuscules) OK 
+%input romanl-k;  % lower case (minuscules) OK 
+%input romanl-m;  % lower case (minuscules) OK 
+%input romanl-n;  % lower case (minuscules) OK with filter remove
+%input romanl-p;  % lower case (minuscules) OK with filter remove
+%input romanl-r;  % lower case (minuscules) OK with filter remove
+%input romanl-s;  % lower case (minuscules) OK 
+%input romanl-t;  % lower case (minuscules) OK 
+%input romanl-y;  % lower case (minuscules) OK 
+%input romanl-v;  % lower case (minuscules) OK 
+%input romanl-w;  % lower case (minuscules) wrong  fixed (bug in design of letter ?)
+%input romanl-u;  %  lower case (minuscules) OK with filter
+
+input greeku;  % upper case Greek letters % SVG OK
+%%
+%% bug with Ψ at the right  arm --- we need more pens 
+%% input greeku-Uppercase_Greek_Delta.mf; % SVG OK
+%% input  greeku-Uppercase_Greek_Gamma.mf ; % SVG OK
+%%input  greeku-Uppercase_Greek_Lambda.mf; % SVG OK
+%input  greeku-Uppercase_Greek_Omega.mf; % SVG OK
+% input  greeku-Uppercase_Greek_Phi.mf;% SVG OK
+% input  greeku-Uppercase_Greek_Pi.mf;  % SVG OK
+%input  greeku-Uppercase_Greek_Psi.mf; % SVG OK
+%input  greeku-Uppercase_Greek_Sigma.mf;% SVG OK
+%input  greeku-Uppercase_Greek_Theta.mf;% SVG OK
+%%input  greeku-Uppercase_Greek_Upsilon.mf;% SVG OK
+%input  greeku-Uppercase_Greek_Xi.mf;% SVG OK
+
+
+
+
+input romand;  % numerals OK SVG OK
+%%
+%input romand-2;  % numerals OK
+%input romand-6;  % numerals OK with filter
+%input romand-4;  % numerals OK 
+%input romand-5;  % OK with HUGE filter
+%input romand-7;  % numerals OK  with HUGE filter and some errors
+%input romand-8;  % numerals OK 
+%input romand-9;  % numerals OK 
+
+
+input romanp;  % ampersand, question marks, currency sign OK SVG OK
+%%
+%input romanp-DollSign;
+%input romspl;  % lowercase specials (dotless \i, ligature \ae, etc.) SVG OK
+%input romspl-ß;  % OK lowercase specials (dotless \i, ligature \ae, etc.)
+%input romspl-æ;  %% OK with filters
+%input romspl-œ.mf; %% OK with filters
+
+input romspu;  %  uppercase specials (\AE, \OE, \O) OK SVG OK
+%%
+%input romspu-AE;  % \AE  OK
+
+input punct;  % punctuation symbols common to roman and italic text
+%%
+%% input punct-apostrophe.mf;  %% SVG OK
+%% input punct-asterix.mf; %% SVG OK
+%% input punct-at.mf; %% SVG OK
+%%input punct-colon.mf; %% SVG OK
+%%input punct-comma.mf; %% SVG OK
+%input punct-equal.mf; %%  SVG OK
+%%input punct-exm-point.mf; %%   SVG OK
+%%input punct-hashmark.mf; %%   SVG OK
+% input punct-left_brack.mf; %% SVG OK
+% input punct-left_paren.mf; %% SVG OK
+%%input punct-perc.mf; %%SVG OK
+%%input punct-period.mf; %%SVG OK
+%%input punct-plus.mf; %%SVG OK
+%%input punct-rev_apos.mf; %%SVG OK
+% input punct-right_brack.mf; %%SVG OK
+% input punct-right_paren.mf; %%SVG OK
+% input punct-semicolon.mf; %%SVG OK
+%%input punct-spanish-excl-mark.mf; %%SVG OK
+% input punct-virgul.mf; %%SVG OK
+
+
+input accent;  % OK accents common to roman and italic text SVG OK
+
+if ligs>1: input romlig; fi  % letter ligatures % SVG OK
+%%if ligs>1: 
+%%input romlig-ff;  % SVG OK
+%input romlig-fi;  % SVG OK
+%input romlig-fl; % SVG OK
+%input romlig-ffi; % SVG OK
+%input romlig-ffl;% SVG OK
+%%fi
+
+if ligs>0: input comlig; fi  % ligatures common with italic text
+% if ligs>0: 
+% ligtable "`": "`"=:oct"134";
+% ligtable "'": "'"=:oct"042", "?" kern 2u#, "!" kern 2u#;
+% ligtable "-": "-"=:oct"173";
+% ligtable oct"173": "-"=:oct"174";
+% input comlig-Closing_quotes; %
+% input comlig-Em_dash; % % SVG OK
+% input comlig-En_dash; % % SVG OK
+% input comlig-Hyphen; % % SVG OK
+% input comlig-Opening_quotes; %  % SVG OK
+% fi;
+if ligs<=1: input romsub; fi  % substitutes for ligatures
+
+
+
+
+ligtable "!": "`" =: spanish_shriek;
+ligtable "?": "`" =: spanish_query;
+font_slant slant; font_x_height x_height#;
+if monospace: font_normal_space 9u#; % no stretching or shrinking
+ font_quad 18u#;
+ font_extra_space 9u#;
+else: font_normal_space 6u#+2letter_fit#;
+ font_normal_stretch 3u#; font_normal_shrink 2u#;
+ font_quad 18u#+4letter_fit#;
+ font_extra_space 2u#;
+ k#:=-.5u#; kk#:=-1.5u#; kkk#:=-2u#; % three degrees of kerning
+ ligtable "k": if serifs: "v": "a" kern -u#, fi\\"w": "e" kern k#,
+  "a" kern k#, "o" kern k#, "c" kern k#;
+ ligtable "P": "A" kern kk#,
+  "y": "o" kern k#, "e" kern k#, "a" kern k#, "." kern kk#, "," kern kk#;
+ ligtable "F": "V": "W": if serifs: "o" kern kk#, "e" kern kk#, "u" kern kk#,
+    "r" kern kk#, "a" kern kk#, "A" kern kkk#,
+   else: "o" kern k#, "e" kern k#, "u" kern k#,
+    "r" kern k#, "a" kern k#, "A" kern kk#, fi
+  "K": "X": "O" kern k#, "C" kern k#, "G" kern k#, "Q" kern k#;
+ ligtable "T": "y" kern if serifs: k# else: kk# fi,
+  "Y": "e" kern kk#, "o" kern kk#,
+   "r" kern kk#, "a" kern kk#, "A" kern kk#, "u" kern kk#;
+ ligtable "O": "D": "X" kern k#, "W" kern k#, "A" kern k#,
+   "V" kern k#, "Y" kern k#;
+ if serifs: ligtable "h": "m": "n":
+   "t" kern k#, "u" kern k#, "b" kern k#, "y" kern k#, "v" kern k#, "w" kern k#;
+  ligtable "c": "h" kern k#, "k" kern k#; fi
+ ligtable "o": "b": "p": "e" kern -k#, "o" kern -k#, "x" kern k#,
+   "d" kern -k#, "c" kern -k#, "q" kern -k#,
+  "a": if serifs: "v" kern k#, "j" kern u#, else: "r" kern k#, fi
+  "t": "y" kern k#,
+  "u": "w" kern k#;
+ ligtable "A": if serifs: "R": fi\\ "t" kern k#,
+  "C" kern k#, "O" kern k#, "G" kern k#, "U" kern k#, "Q" kern k#,
+  "L": "T" kern kk#, "Y" kern kk#, "V" kern kkk#, "W" kern kkk#;
+ ligtable "g": "j" kern -k#; % logjam
+ ligtable "I": "I" kern -k#; fi % Richard III
+ % there are ligature/kern programs for |"f"| in the {\tt romlig} file
+ % and for |"-"|, |"`"|, and |"'"| in the {\tt comlig} file
+bye.

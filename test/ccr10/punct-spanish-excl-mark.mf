@@ -1,0 +1,25 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE punct.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains punctuation marks common to roman and italic styles.
+
+% Codes \0041, \0043, \0045, \0047--\0054,\ %
+%% \0056, \0057, \0072, \0073, \0075, \0100,\par
+% \0133, \0135, and \0140 are generated, as well as code |spanish_shriek|
+% (for a Spanish exclamation point) if that code value is known.
+
+iff known spanish_shriek: cmchar "Spanish open exclamation point";
+beginchar(spanish_shriek,5u#+width_adj#,asc_height#-desc_depth#,desc_depth#);
+italcorr h#*slant-2u#-.5width_adj#+.5dot_size#;
+adjust_fit(0,0);
+pickup tiny.nib; pos3(dot_size,0); pos4(dot_size,90);
+lft x3l=hround(.5w-.5dot_size); top y4r=h; z3=z4; dot(3,4);  % dot
+numeric top_width;
+top_width=if hefty:max(hround .8dot_size,fine.breadth) else: hair fi;
+pickup fine.nib; pos1(dot_size,0); pos2(top_width,0);
+x1=x2=x3; top y2=.25[bot y4l,h-x_height]-1;
+if square_dots: bot y1=-d;
+ filldraw stroke z1e--z2e;  % stem
+else: bot z0=(x1,-d-o); y1-.5dot_size=-d-o;
+ filldraw z1l...z0...z1r---z2r--z2l---cycle; fi  % stem and bulb
+penlabels(0,1,2,3,4); endchar;

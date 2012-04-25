@@ -1,0 +1,40 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romlig.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file describes five roman ligatures that begin with `f'
+% and puts them in code positions \0013--\0017.
+
+numeric itc#; % modified italic correction on `f' and `ff'
+itc#=if serifs: max(0,flare#-.25u#) else: 1.25u# fi;
+
+ligtable "f": "i"=:oct"014", "f"=:oct"013", "l"=:oct"015",
+ "'" kern itc#, "?" kern itc#, "!" kern itc#, ")" kern itc#, "]" kern itc#;
+ligtable oct"013": "i"=:oct"016", "l"=:oct"017",
+ "'" kern itc#, "?" kern itc#, "!" kern itc#, ")" kern itc#, "]" kern itc#;
+
+cmchar "The ligature ff";
+beginchar(oct"013",10.5u#+2letter_fit#,asc_height#,0);
+italcorr asc_height#*slant+if serifs:flare#-.25u# else: 1.25u# fi;
+adjust_fit(0,0);
+pickup tiny.nib; pos1(stem',0); lft x1l=hround(2.5u-.5stem');
+pos11(stem',0); rt x11r=hround(w-3u+.5stem');
+pickup fine.nib; numeric bulb_diam, inner_jut;
+if serifs: bulb_diam=hround .8[stem,flare];
+ pos2(bulb_diam,0); pos12(bulb_diam,0);
+ rt x2r=hround(rt x11r-stem_corr); lft x12l=hround(w-.75u+.5);
+ y2+.5bulb_diam=.85[x_height,h+oo]; y12+.5bulb_diam=.9[x_height,h+oo];
+ if rt x1r+jut+.5u+2<=lft x11l-jut: inner_jut=jut;
+ else: rt x1r+inner_jut+.5u+2=lft x11l-inner_jut; fi
+else: pos2(5/7[vair,flare],90); top y2r=h; rt x2=hround 6.25u;
+ pos12(5/7[vair,flare],90); y12=y2; rt x12=hround(w+.75u); fi
+f_stroke(1,2,a,b,c,jut,inner_jut); % left stem, arc, terminal, serif
+f_stroke(11,12,d,e,f,inner_jut,1.25jut); % right stem, arc, terminal, serif
+pickup crisp.nib; top y3r=top y4r=x_height; lft x3=hround .5u-1;
+pos3(bar,90); pos4(bar,90);
+rt x4=hround(w-1/3u);
+if hefty: pos3'(bar,90); x3'-x1=x4-x11; y3'=y3;
+ pos4'(bar,90); x4'=x11; y4'=y4;
+ filldraw stroke z3e--z3'e; filldraw stroke z4'e--z4e;  % bars
+else: filldraw stroke z3e--z4e; fi  % bar
+penlabels(1,2,3,4,11,12); endchar;
+

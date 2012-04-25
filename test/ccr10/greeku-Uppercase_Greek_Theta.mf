@@ -1,0 +1,33 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE greeku.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Greek caps, analogous to the uppercase Roman letters.
+
+% Character codes \0000 through \0012 are generated,
+% using plain \TeX's standard text font layout conventions.
+
+cmchar "Uppercase Greek Theta";
+beginchar(oct"002",14u#,cap_height#,0);
+italcorr .7cap_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric light_curve; light_curve=hround(cap_curve-2stem_corr);
+penpos1(vair,90); penpos3(vround(vair+.5vair_corr),-90);
+penpos2(light_curve,180); penpos4(light_curve,0);
+if monospace: x2r=hround 1.5u;
+ interim superness:=sqrt superness;  % make |"O"|, not |"0"|
+else: x2r=hround u; fi
+x4r=w-x2r; x1=x3=.5w; y1r=h+o; y2=y4=.5h-vair_corr; y3r=-o;
+penstroke pulled_super_arc.e(1,2)(.5superpull)
+ & pulled_super_arc.e(2,3)(.5superpull)
+ & pulled_super_arc.e(3,4)(.5superpull)
+ & pulled_super_arc.e(4,1)(.5superpull) & cycle;  % bowl
+pickup crisp.nib; pos5(cap_vstem,90); pos6(cap_vstem,90);
+lft x5=w-rt x6=hround(x2l+u)+1; y5=y6=.5[y1l,y3l];
+filldraw stroke z5e--z6e;  % bar
+if serifs: pos7(hair,0); pos8(hair,0); pos9(hair,0); pos10(hair,0);
+ x7l=x8l=x5; x9r=x10r=x6;
+ y7-y5r=y9-y6r=y5l-y8=y6l-y10=vround .05h;
+ filldraw stroke z7e--z8e;  % left serif
+ filldraw stroke z9e--z10e; fi  % right serif
+math_fit(-.3cap_height#*slant-.5u#,ic#-.5u#);
+penlabels(1,2,3,4,5,6,7,8,9,10); endchar;

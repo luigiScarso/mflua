@@ -1,0 +1,42 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romand.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman digits:
+% This file contains the ten digits in so-called roman style.
+% Character codes \0060 through \0071 are generated.
+
+% All digits have the same height, width, depth, and italic correction.
+
+
+cmchar "The numeral 9";
+beginchar("9",9u#,fig_height#,0);
+italcorr fig_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric top_thickness,bot_thickness,side_thickness,pull;
+top_thickness=max(fine.breadth,vround(slab-2vair_corr));
+bot_thickness=max(fine.breadth,vround(slab-vair_corr));
+side_thickness=max(fine.breadth,hround 1/3[curve,cap_curve]);
+pull=min(.25,1.5superpull);
+pickup fine.nib; pos2(bot_thickness,-90);
+pos3(side_thickness,0); pos4(top_thickness,90);
+pos5(side_thickness,180); pos6(vair,270);
+w-rt x3r=lft x5r=hround max(.75u,1.5u-.5side_thickness);
+x4-.1u=x6+.1u=x2+.75u=.5w;
+bot y2r=-o; y3=.5[y2,y4]; top y4r=h+o;
+y5=.5[y4,y6]; bot y6=vround 3/8h-o;
+path p; {{interim superness:=more_super; p=pulled_super_arc.l(3,4)(pull)}};
+numeric t; t=xpart(p intersectiontimes((x3r,y5)--(x4,y5)));
+pos7(thin_join,360); z7l=point t of p;
+(x,y6r)=whatever[z7l,z6l]; x6r:=max(x,.5[x5r,x6]);
+filldraw stroke pulled_super_arc.e(2,3)(pull)
+ & {{interim superness:=more_super; pulled_super_arc.e(3,4)(pull)}}
+ & {{less_tense; pulled_super_arc.e(4,5)(pull) & pulled_super_arc.e(5,6)(pull)}}
+ & z6e{right}...{direction t of p}z7e;  % arc and bowl
+if serifs: pos1(hair,-180); pos0(flare,-180);
+ lft x0r=min(lft x2-eps,hround 1.2u);
+ y0=vround max(.1h+.5flare,.15h-.5flare)-o;
+ {{less_tense; bulb(2,1,0)}};  % arc and bulb
+else: pos1(.1[bot_thickness,flare],-120);
+ bot y1r=vround .07h-o; lft x1r=hround 1.3u;
+ filldraw stroke term.e(2,1,left,.9,4); fi  % terminal
+penlabels(0,1,2,3,4,5,6,7); endchar;
