@@ -1,3 +1,8 @@
+2011-04-26 Luigi Scarso  <luigi.scarso@gmail.com>
+MFLua is able to procude ConcreteOT.svg from ccr10.mf without change the source.
+ConcreteOT.otf can be produced from ConcrteOT.svg with latest fontforge, but it needs work (curves are not simplified, for example).
+
+
 2011-08-04  Luigi Scarso  <luigi.scarso@gmail.com>
 A new folder with ccr10 has started;
 the folder ccr5 stays for historical reason, but the development is halted.
