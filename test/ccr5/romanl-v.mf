@@ -1,0 +1,40 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE romanl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Roman lower case:
+% These letters were originally coded by D. E. Knuth in November, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% Sans serif designs by Richard Southall were added in April, 1982.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0141 through \0172 are generated.
+
+
+
+cmchar "The letter v";
+beginchar("v",if serifs: 9.5u# else:9u# fi,x_height#,0);
+italcorr x_height#*slant+.25u#;
+adjust_fit(serif_fit# if monospace:+\\.5u#,.5u#+ else:,fi\\ serif_fit#);
+numeric left_stem,right_stem,outer_jut,alpha;
+left_stem=fudged.stem-stem_corr;
+right_stem=min(fudged.hair if hefty:-2stem_corr fi,left_stem);
+outer_jut=.75jut; x1l=w-x4r=l+letter_fit+outer_jut+.25u; y1=y4=h;
+x2-x1=x4-x3; x2l+apex_corr=x3l; y2=y3=-apex_oo;
+alpha=diag_ratio(2,right_stem,y1-y2,x4r-x1l-apex_corr);
+penpos1(alpha*left_stem,0); penpos2(alpha*left_stem,0);
+penpos3(alpha*right_stem,0); penpos4(alpha*right_stem,0);
+z0=whatever[z1r,z2r]=whatever[z3l,z4l];
+if y0>notch_cut: y0:=notch_cut;
+  fill z0+.5right{up}...{z4-z3}diag_end(3l,4l,1,1,4r,3r)
+    --diag_end(4r,3r,1,1,2l,1l)--diag_end(2l,1l,1,1,1r,2r){z2-z1}
+    ...{down}z0+.5left--cycle; % left and right diagonals
+else: fill z0--diag_end(0,4l,1,1,4r,3r)--diag_end(4r,3r,1,1,2l,1l)
+    --diag_end(2l,1l,1,1,1r,0)--cycle; fi % left and right diagonals
+if serifs: numeric inner_jut; pickup tiny.nib;
+ prime_points_inside(1,2); prime_points_inside(4,3);
+ if rt x1'r+jut+.5u+1<=lft x4'l-jut: inner_jut=jut;
+ else: rt x1'r+inner_jut+.5u+1=lft x4'l-inner_jut; fi
+ dish_serif(1',2,a,1/3,outer_jut,b,1/2,inner_jut);  % left serif
+ dish_serif(4',3,c,.6,inner_jut,d,1/2,outer_jut)(dark); fi  % right serif
+penlabels(0,1,2,3,4); endchar;
+

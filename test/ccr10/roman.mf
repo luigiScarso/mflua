@@ -11,6 +11,7 @@ else: font_coding_scheme:=if ligs=0: "TeX typewriter text"
 
 mode_setup; font_setup;
 
+<<<<<<< HEAD
 input romanu;  % upper case (majuscules)
 input romanl;  % lower case (minuscules)
 input greeku;  % upper case Greek letters
@@ -20,6 +21,68 @@ input romspl;  % lowercase specials (dotless \i, ligature \ae, etc.)
 input romspu;  % uppercase specials (\AE, \OE, \O)
 input punct;  % punctuation symbols common to roman and italic text
 input accent;  % accents common to roman and italic text
+=======
+input romanu;  % upper case (majuscules) pass 2011-06-20 02:55 am pass 2011-07-15 04:03 am 6 bit
+%input romanu-A;  % upper case A %OK
+%input romanu-B;  % upper case B %OK
+%input romanu-C;  % upper case C %OK
+%input romanu-D;  % upper case D %OK
+%input romanu-J;  % upper case J %OK with filter remove
+%input romanu-E-P;  % upper case E => T
+%input romanu-M;    % upper case M %OK 
+%input romanu-N;    % upper case M %OK 
+%input romanu-Q;  % upper case Q %OK 
+%input romanu-R-Z; 
+%input romanu-R;  % uppercase R OK
+%input romanu-W;  % uppercase W wrong fixed (bug in design of letter ?)
+
+input romanl;  % lower case (minuscules)
+%input romanl-a;  % lower case (minuscules) OK 
+%input romanl-b;  % lower case (minuscules) OK 
+%input romanl-c;  % lower case (minuscules) OK 
+%input romanl-d;  % lower case (minuscules) OK with filters 
+%input romanl-e;  % lower case (minuscules) OK 
+%input romanl-f-l;  % lower case (minuscules)
+%input romanl-h;  % lower case (minuscules) OK with filter remove
+%input romanl-i;  % lower case (minuscules) OK
+%input romanl-g;  % lower case (minuscules) OK 
+%input romanl-k;  % lower case (minuscules) OK 
+%input romanl-m;  % lower case (minuscules) OK 
+%input romanl-n;  % lower case (minuscules) OK with filter remove
+%input romanl-p;  % lower case (minuscules) OK with filter remove
+%input romanl-s;  % lower case (minuscules) OK 
+%input romanl-t;  % lower case (minuscules) OK 
+%input romanl-y;  % lower case (minuscules) OK 
+%input romanl-w;  % lower case (minuscules) wrong  fixed (bug in design of letter ?)
+%input romanl-u;  %  lower case (minuscules) OK with filter
+
+input greeku;  % upper case Greek letters 
+%input greeku-Ξ.mf ;
+%input greeku-Υ.mf;
+%% bug with Ψ at the right  arm --- we need more pens 
+
+input romand;  % numerals OK
+%input romand-2;  % numerals OK
+%input romand-6;  % numerals OK with filter
+%input romand-4;  % numerals OK 
+%input romand-5;  % OK with HUGE filter
+%input romand-7;  % numerals OK  with HUGE filter and some errors
+
+input romanp;  % ampersand, question marks, currency sign OK
+%input romanp-DollSign;
+%input romspl;  % lowercase specials (dotless \i, ligature \ae, etc.)
+%input romspl-ß;  % OK lowercase specials (dotless \i, ligature \ae, etc.)
+%input romspl-æ;  %% OK with filters
+%input romspl-œ.mf; %% OK with filters
+
+input romspu;  %  uppercase specials (\AE, \OE, \O) OK
+%input romspu-AE;  % \AE  OK
+
+input punct;  % punctuation symbols common to roman and italic text
+%input punct-perc;  % percent sign  OK with filter
+
+input accent;  % OK accents common to roman and italic text
+>>>>>>> origin/master
 if ligs>1: input romlig; fi  % letter ligatures
 if ligs>0: input comlig; fi  % ligatures common with italic text
 if ligs<=1: input romsub; fi  % substitutes for ligatures

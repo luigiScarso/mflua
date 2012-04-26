@@ -464,6 +464,7 @@ static int priv_mfweb_LUAGLOBALGET_char_ic(lua_State *L)
   return 1;
 }
 
+<<<<<<< HEAD
 static int priv_mfweb_LUAGLOBALGET_char_dx(lua_State *L)
 {
   integer char_dx=24;
@@ -551,6 +552,17 @@ static int priv_mfweb_LUAGLOBALGET_boundary_char(lua_State *L)
   lua_pushnumber(L,p);
   return 1;
 }
+=======
+
+
+
+
+
+
+
+
+
+>>>>>>> origin/master
 
 
 
@@ -730,6 +742,7 @@ int mfluainitialize()
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_ht);lua_setglobal(L, "LUAGLOBALGET_char_ht");
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_dp);lua_setglobal(L, "LUAGLOBALGET_char_dp");
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_ic);lua_setglobal(L, "LUAGLOBALGET_char_ic");
+<<<<<<< HEAD
   /* */
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_dx);lua_setglobal(L,"LUAGLOBALGET_char_dx");
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_dy);lua_setglobal(L,"LUAGLOBALGET_char_dy");
@@ -743,6 +756,8 @@ int mfluainitialize()
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_turning_check);lua_setglobal(L,"LUAGLOBALGET_turning_check");
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_boundary_char);lua_setglobal(L,"LUAGLOBALGET_boundary_char");
 
+=======
+>>>>>>> origin/master
   //lua_pushcfunction(L, priv_mfweb_SKELETON);lua_setglobal(L, "SKELETON");
   // 
   /* execute Lua external "mfluaini.lua" */
