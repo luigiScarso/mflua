@@ -2,7 +2,7 @@ MFLua is a new implementation of MetaFont which is 100% compatible with MetaFont
 It's still a proof-of-concept. For copyrights see README.orig .
 
 You need ConTeXt MKIV (see wiki.contextgarden.net)
-and a recent Linux 32 bit; there is already a mf executable available into the Work dirctory, 
+and a recent Linux 32 bit; there is already a mf executable available into the Work directory, 
 so that it is not necessary to compile the code.
 The program is not even an alpha release, so definitively don't use it in a production environment.
 
