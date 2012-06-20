@@ -1,0 +1,11 @@
+mode_setup;
+capsule_def(penbook) makepen((0,-1)--(3,-1)--(6,1)--(1,2)--cycle);
+u#:=7/72.27pt#;
+define_pixels(u);
+z0=(0,0); z1=(50,0);
+pickup pencircle xscaled 10u yscaled 5u rotated 45;
+path p; 
+p :=  (4,4){right} .. {right}(10,20) -- (30,20){right} .. {right}(40,0)  ; 
+draw p scaled u;
+shipit;
+bye.
