@@ -111,3 +111,5 @@
 @define procedure mfluaprintretrogradeline();
 @define procedure mfluaprinttransitionlinefrom();
 @define procedure mfluaprinttransitionlineto();
+@define procedure mfluaPREmakeellipse();
+@define procedure mfluaPOSTmakeellipse();
