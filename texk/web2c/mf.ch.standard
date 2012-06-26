@@ -1801,10 +1801,8 @@ major_axis:=halfp(a_minus_b+a_plus_b); minor_axis:=halfp(abs(a_plus_b-a_minus_b)
 if major_axis=minor_axis then theta:=0 {circle}
 else theta:=half(n_arg(txx-tyy,tyx+txy)+n_arg(txx+tyy,tyx-txy));
 free_node(q,knot_node_size);
-mfluaPRE_make_ellipse(major_axis,minor_axis,theta,tx,ty,0);
 q:=make_ellipse(major_axis,minor_axis,theta);
 if (tx<>0)or(ty<>0) then @<Shift the coordinates of path |q|@>;
-mfluaPOST_make_ellipse(major_axis,minor_axis,theta,tx,ty,q);
 end
 @z
 
