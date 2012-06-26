@@ -50,3 +50,7 @@ extern int mfluaprintretrogradeline P4H(int,int,int,int);
 
 extern int mfluaprinttransitionlinefrom P2H(int,int);
 extern int mfluaprinttransitionlineto P2H(int,int);
+
+extern int mfluaPREmakeellipse P6H(int,int,int,int,int,int);
+extern int mfluaPOSTmakeellipse P6H(int,int,int,int,int,int);
+

@@ -464,7 +464,6 @@ static int priv_mfweb_LUAGLOBALGET_char_ic(lua_State *L)
   return 1;
 }
 
-<<<<<<< HEAD
 static int priv_mfweb_LUAGLOBALGET_char_dx(lua_State *L)
 {
   integer char_dx=24;
@@ -552,17 +551,6 @@ static int priv_mfweb_LUAGLOBALGET_boundary_char(lua_State *L)
   lua_pushnumber(L,p);
   return 1;
 }
-=======
-
-
-
-
-
-
-
-
-
->>>>>>> origin/master
 
 
 
@@ -742,7 +730,6 @@ int mfluainitialize()
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_ht);lua_setglobal(L, "LUAGLOBALGET_char_ht");
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_dp);lua_setglobal(L, "LUAGLOBALGET_char_dp");
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_ic);lua_setglobal(L, "LUAGLOBALGET_char_ic");
-<<<<<<< HEAD
   /* */
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_dx);lua_setglobal(L,"LUAGLOBALGET_char_dx");
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_char_dy);lua_setglobal(L,"LUAGLOBALGET_char_dy");
@@ -756,8 +743,6 @@ int mfluainitialize()
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_turning_check);lua_setglobal(L,"LUAGLOBALGET_turning_check");
   lua_pushcfunction(L, priv_mfweb_LUAGLOBALGET_boundary_char);lua_setglobal(L,"LUAGLOBALGET_boundary_char");
 
-=======
->>>>>>> origin/master
   //lua_pushcfunction(L, priv_mfweb_SKELETON);lua_setglobal(L, "SKELETON");
   // 
   /* execute Lua external "mfluaini.lua" */
@@ -1475,8 +1460,8 @@ int mfluaprintretrogradeline P4C (integer,x0, integer,y0, integer, cur_x, intege
 	lua_getglobal(L, "print_retrograde_line");  /* function to be called */
 	lua_pushnumber(L, x0);   /* push 1st argument */
 	lua_pushnumber(L, y0);   /* push 2nd argument */
-	lua_pushnumber(L, cur_x);   /* push 3nd argument */
-	lua_pushnumber(L, cur_y);   /* push 4nd argument */
+	lua_pushnumber(L, cur_x);   /* push 3th argument */
+	lua_pushnumber(L, cur_y);   /* push 4th argument */
 	/* do the call (4 arguments, 1 result) */
 	res = lua_pcall(L, 4, 1, 0) ;
 	if (res==0) {
@@ -1501,6 +1486,94 @@ int mfluaprintretrogradeline P4C (integer,x0, integer,y0, integer, cur_x, intege
   return 0;
 
 }
+
+
+int mfluaPREmakeellipse P6C (integer,major_axis, integer,minor_axis, integer,theta , integer,tx, integer,ty,integer,q)
+{
+  lua_State *L = Luas[0];
+  const char* file = "make_ellipse.lua";
+  int res = luaL_loadfile(L, file);
+  if ( res==0 ){
+      res = lua_pcall(L, 0, 0, 0);
+      if (res==0){
+	lua_getglobal(L, "PRE_make_ellipse");  /* function to be called */
+	lua_pushnumber(L, major_axis);   /* push 1st argument */
+	lua_pushnumber(L, minor_axis);   /* push 2nd argument */
+	lua_pushnumber(L, theta);   /* push 3th argument */
+	lua_pushnumber(L, tx);   /* push 4th argument */
+	lua_pushnumber(L, ty);   /* push 5th argument */
+	lua_pushnumber(L, q);   /* push 6th argument */
+	/* do the call (6 arguments, 1 result) */
+	res = lua_pcall(L, 6, 1, 0) ;
+	if (res==0) {
+	  /* retrieve result */
+	  int z = 0;
+	  if (!lua_isnumber(L, -1)){
+	    fprintf(stderr,"\n! Error:function `PRE_make_ellipse\n",lua_tostring(L, -1));
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }else {
+	    z = lua_tonumber(L, -1);
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }
+	}
+      }
+  }
+  //
+  //stackdump_g(L);
+  //
+  priv_lua_reporterrors(L, res);
+  return 0;
+
+}
+
+
+int mfluaPOSTmakeellipse P6C (integer,major_axis, integer,minor_axis, integer,theta , integer,tx, integer,ty,integer,q)
+{
+  lua_State *L = Luas[0];
+  const char* file = "make_ellipse.lua";
+  int res = luaL_loadfile(L, file);
+  if ( res==0 ){
+      res = lua_pcall(L, 0, 0, 0);
+      if (res==0){
+	lua_getglobal(L, "POST_make_ellipse");  /* function to be called */
+	lua_pushnumber(L, major_axis);   /* push 1st argument */
+	lua_pushnumber(L, minor_axis);   /* push 2nd argument */
+	lua_pushnumber(L, theta);   /* push 3th argument */
+	lua_pushnumber(L, tx);   /* push 4th argument */
+	lua_pushnumber(L, ty);   /* push 5th argument */
+	lua_pushnumber(L, q);   /* push 6th argument */
+	/* do the call (6 arguments, 1 result) */
+	res = lua_pcall(L, 6, 1, 0) ;
+	if (res==0) {
+	  /* retrieve result */
+	  int z = 0;
+	  if (!lua_isnumber(L, -1)){
+	    fprintf(stderr,"\n! Error:function `PRE_make_ellipse\n",lua_tostring(L, -1));
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }else {
+	    z = lua_tonumber(L, -1);
+	    lua_pop(L, 1);  /* pop returned value */
+	    return z;
+	  }
+	}
+      }
+  }
+  //
+  //stackdump_g(L);
+  //
+  priv_lua_reporterrors(L, res);
+  return 0;
+
+}
+
+
+
+
+
+
 
 
 int mfluaprinttransitionlinefrom P2C(integer,x,integer,y)
