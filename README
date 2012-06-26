@@ -6,4 +6,8 @@ and a recent Linux 32 bit; there is already a mf executable available into the W
 so that it is not necessary to compile the code.
 The program is not even an alpha release, so definitively don't use it in a production environment.
 
+You can rebuild the mf program with 
+$>cd Work/texk/web2c
+$> make mf
+
 
