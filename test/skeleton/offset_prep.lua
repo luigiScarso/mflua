@@ -1,6 +1,6 @@
 --[==[
 @ The |print_pen| subroutine illustrates these conventions by
-reconstructing the vertices of a polygon from \MF\'s complicated
+reconstructing the vertices of a polygon from \MF\'s complicated --'
 internal offset representation.
 @<Declare subroutines for printing expressions@>=
 ]==]
@@ -123,7 +123,7 @@ function print_specification(c,h)
    local offset_list = {}
    local path_list ={}
    local bezier_octant
-
+   local pen_key = ''
    local temp1 = mflua.print_specification.temp1
 
    cur_spec=c
@@ -141,7 +141,14 @@ function print_specification(c,h)
    beziers['offsets'] = offsets
    beziers['octant_number'] = octant_number[octant]
    beziers['pen'] = _get_pen(LUAGLOBALGET_cur_pen())  
-
+   
+   for i,v in ipairs(beziers['pen']) do  
+     --print(  "BEZ pen=",i,v)  
+     pen_key = pen_key..v
+   end
+   if not(mflua.pen[pen_key] == nil) then
+      table.foreach(mflua.pen[pen_key],print)
+   end   
    --
    --res = res .. "%% cur_pen " .. tostring(LUAGLOBALGET_cur_pen()) .."\n"
    --res = res .. string.format("%%%% current octant %s, octant number %s, offset %s\n",octant_dir[LUAGLOBALGET_octant()],octant_number[octant],print_int(n))

@@ -162,11 +162,15 @@ local function _draw_curves(valid_curves)
 				  _eval(p,shifted),_eval(q,shifted))
 	 str=str .. "drawoptions(withcolor (0.5,0.5,0)  withpen pencircle scaled 0.1pt);\n"
 	 str=str .. string.format("draw p1; %% %s\n",res)
+         str=str .. string.format("drawdot%s;drawdot%s;\n", _eval(p,shifted),_eval(q,shifted))
+
       else
 	 str=str .. string.format("path p[]; p1:=%s .. controls %s and %s .. %s;\n",
 				  _eval(p,shifted),_eval(c1,shifted),_eval(c2,shifted),_eval(q,shifted))
 	 str=str .. "drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.1pt);\n"
 	 str=str .. string.format("draw p1; %% %s\n",res)
+         str=str .. string.format("drawdot%s;drawdot%s;\n", _eval(p,shifted),_eval(q,shifted))
+
       end
    end
    return str
