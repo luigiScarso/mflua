@@ -4215,15 +4215,18 @@ aminusb:=pythadd(txx-tyy,tyx+txy);aplusb:=pythadd(txx+tyy,tyx-txy);
 majoraxis:=halfp(aminusb+aplusb);minoraxis:=halfp(abs(aplusb-aminusb));
 if majoraxis=minoraxis then theta:=0 else theta:=half(narg(txx-tyy,tyx+
 txy)+narg(txx+tyy,tyx-txy));freenode(q,7);
+mfluaPREmakeellipse(majoraxis,minoraxis,theta,tx,ty,0);
 q:=makeellipse(majoraxis,minoraxis,theta);
 if(tx<>0)or(ty<>0)then{867:}begin p:=q;
 repeat mem[p+1].int:=mem[p+1].int+tx;mem[p+2].int:=mem[p+2].int+ty;
-p:=mem[p].hh.rh;until p=q;end{:867};end{:866};curexp:=makepen(q);
-50:tossknotlist(q);curtype:=6;end;{:865}{871:}{872:}procedure knownpair;
-var p:halfword;begin if curtype<>14 then begin disperr(0,809);
-begin helpptr:=5;helpline[4]:=810;helpline[3]:=811;helpline[2]:=812;
-helpline[1]:=813;helpline[0]:=814;end;putgetflusherror(0);curx:=0;
-cury:=0;end else begin p:=mem[curexp+1].int;
+p:=mem[p].hh.rh;until p=q;end{:867};
+mfluaPOSTmakeellipse(majoraxis,minoraxis,theta,tx,ty,q);end{:866};
+curexp:=makepen(q);50:tossknotlist(q);curtype:=6;end;
+{:865}{871:}{872:}procedure knownpair;var p:halfword;
+begin if curtype<>14 then begin disperr(0,809);begin helpptr:=5;
+helpline[4]:=810;helpline[3]:=811;helpline[2]:=812;helpline[1]:=813;
+helpline[0]:=814;end;putgetflusherror(0);curx:=0;cury:=0;
+end else begin p:=mem[curexp+1].int;
 {873:}if mem[p].hh.b0=16 then curx:=mem[p+1].int else begin disperr(p,
 815);begin helpptr:=5;helpline[4]:=816;helpline[3]:=811;
 helpline[2]:=812;helpline[1]:=813;helpline[0]:=814;end;putgeterror;

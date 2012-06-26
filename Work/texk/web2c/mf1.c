@@ -4254,6 +4254,7 @@ materializepen ( )
     else theta = half ( narg ( txx - tyy , tyx + txy ) + narg ( txx + tyy , 
     tyx - txy ) ) ;
     freenode ( q , 7 ) ;
+    mfluaPREmakeellipse ( majoraxis , minoraxis , theta , tx , ty , 0 ) ;
     q = makeellipse ( majoraxis , minoraxis , theta ) ;
     if ( ( tx != 0 ) || ( ty != 0 ) ) 
     {
@@ -4264,6 +4265,7 @@ materializepen ( )
 	p = mem [p ].hhfield .v.RH ;
       } while ( ! ( p == q ) ) ;
     } 
+    mfluaPOSTmakeellipse ( majoraxis , minoraxis , theta , tx , ty , q ) ;
   } 
   curexp = makepen ( q ) ;
   lab50: tossknotlist ( q ) ;
