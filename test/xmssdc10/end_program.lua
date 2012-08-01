@@ -93,7 +93,7 @@ local function _get_envelopes_and_pens(char)
 	       if string.len(last_point) > 0 and not(last_point == _eval(p,shifted)) then 
 		  -- DELETE THIS ?
 		  res = '1'
-		  --valid_curves[#valid_curves+1] ={last_point,last_point,_eval(p,shifted),_eval(p,shifted),'(0,0)',res}
+		  valid_curves[#valid_curves+1] ={last_point,last_point,_eval(p,shifted),_eval(p,shifted),'(0,0)',res}
 		  last_point = _eval(p,shifted)
 		  last_point_with_offset={p,shifted}
 		  res = ''
@@ -102,7 +102,7 @@ local function _get_envelopes_and_pens(char)
 	       if string.len(last_point) > 0 and not(last_point == _eval(p,shifted)) then 
 		  -- DELETE THIS ?
 		  res ='2'
-		  --valid_curves[#valid_curves+1] ={last_point,last_point,_eval(p,shifted),_eval(p,shifted),'(0,0)',res}
+		  valid_curves[#valid_curves+1] ={last_point,last_point,_eval(p,shifted),_eval(p,shifted),'(0,0)',res}
 		  last_point = _eval(q,shifted)
 		  last_point_with_offset={q,shifted}
 	       end
