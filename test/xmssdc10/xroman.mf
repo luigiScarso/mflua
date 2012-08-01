@@ -1,0 +1,22 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE roman.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% The Computer Modern Roman family of fonts (by D. E. Knuth, 1979--1985)
+
+font_coding_scheme:="TeX text";
+mode_setup; font_setup;
+
+input romanu;  % upper case (majuscules)
+input romanl;  % lower case (minuscules)
+input romand;  % numerals
+input greeku;  % upper case Greek letters
+input greekl;  % lower case Greek letters
+
+font_slant slant;
+font_x_height x_height#;
+font_normal_space 6u#+2letter_fit#;
+font_normal_stretch 3u#;
+font_normal_shrink 2u#;
+font_quad 18u#+4letter_fit#;
+font_extra_space 2u#;
+bye.
