@@ -134,6 +134,7 @@ local function _get_envelopes_and_pens(char)
 	       local limit_pen = #pen
 	       --pen[#pen+1] = pen[1]
 	       --local key = ''
+	       local pen_c1=nil
 	       for l=1,limit_pen do 
 		  res ='4'
 		  --key=key..pen[l]
@@ -150,41 +151,32 @@ local function _get_envelopes_and_pens(char)
 	 valid_curves[#valid_curves+1] ={last_point,last_point,first_point,first_point,'(0,0)',res}
       end 
    end --    for m=1,#char['envelope'] 
+   print("BEZ return")
    return valid_curves,valid_curves_pen,pen_over_knots
 end
 
-local function _get_beziers_of_pen(valid_curves_p)
+local function _get_beziers_of_pen(pen_over_knots)
    --
    --
-   --
+   -- 	       
    local  valid_curves_p_bez = {}
-   local pen_with_shift = {}
+   local pen_ellipse = {}
    local mflua_exe = mflua.mflua_exe or './mf' 
-   if #valid_curves_p==0 then
-      return {}   
+   for i,v in ipairs(pen_over_knots) do
+      --v = {p,c1,c2,q,'(0,0)',res,pen}
+      local shifted, pen = v[1],v[7]
+      local key = table.concat(pen)
+      print("BEZ pen=",key,mflua.pen[key])
+      pen_ellipse[shifted] = mflua.pen[key]
    end
-   for i,bezier in ipairs(valid_curves_p) do
-      local p,c1,c2,q,shifted,res = bezier[1],bezier[2],bezier[3],bezier[4],bezier[5],bezier[6]
-      --print("BEZ i=",i,shifted)
-      if pen_with_shift[shifted] == nil then 
-	 pen_with_shift[shifted]=p
-      else
-	 pen_with_shift[shifted]=pen_with_shift[shifted]..p
-      end
-   end
-   pen_ellipse = {}
-   for k,v in pairs(pen_with_shift) do
-      --print("BEZ pen_with_shift = ",k,v)
-      pen_ellipse[k] = mflua.pen[v]
-   end
-   local _set_poly_done = {}
+   --local _set_poly_done = {}
    for k,v in pairs(pen_ellipse) do
       local shift = k
       --print("BEZ shift=",shift)
       local major_axis__minor_axis,theta,tx__ty = v[1],v[2],v[3]
       --print("BEZ pen_ellipse = ",k,major_axis__minor_axis,theta,tx__ty)
       -- First time of  major_axis__minor_axis..theta..tx__ty
-      if _set_poly_done[major_axis__minor_axis..theta..tx__ty] == nil then
+      if mflua.set_poly_done[major_axis__minor_axis..theta..tx__ty] == nil then
 	 local match=string.gmatch(major_axis__minor_axis,"[%d\.]+")
 	 local major_axis, minor_axis = match(),match()
 	 local mfstring = string.format(
@@ -202,26 +194,25 @@ local function _get_beziers_of_pen(valid_curves_p)
 	 --print("BEZ unlock LOCK_ELLIPSE")
 	 mflua.unlock("LOCK_ELLIPSE")
 	 local curves = dofile('poly_to_bezier.lua')
-	 _set_poly_done[major_axis__minor_axis..theta..tx__ty] = curves
+	 mflua.set_poly_done[major_axis__minor_axis..theta..tx__ty] = curves
 	 valid_curves_p_bez[shift] = {}
 	 for _,vv in pairs(curves) do
 	    local p,c1,c2,q,offset= vv[1],vv[2],vv[3],vv[4],vv[5]
 	    valid_curves_p_bez[shift][#valid_curves_p_bez[shift]+1] = {p,c1,c2,q,offset}
-	    --print("BEZ curves are",p,c1,c2,q,offset)
+	    print("BEZ curves are",p,c1,c2,q,offset,shift)
 	 end
       else -- already seen
-	 local curves =  _set_poly_done[major_axis__minor_axis..theta..tx__ty] 
+	 local curves =  mflua.set_poly_done[major_axis__minor_axis..theta..tx__ty] 
 	 valid_curves_p_bez[shift] = {}
 	 for _,vv in pairs(curves) do
 	    local p,c1,c2,q,offset= vv[1],vv[2],vv[3],vv[4],vv[5]
 	    valid_curves_p_bez[shift][#valid_curves_p_bez[shift]+1] = {p,c1,c2,q,offset}
-	    --print("BEZ curves are",p,c1,c2,q,offset)
+	    print("BEZ curves are",p,c1,c2,q,offset,shift)
 	 end
       end -- if _set_poly_done[major_axis__minor_axis..theta..tx__ty] == nil then
    end
    return valid_curves_p_bez
 end
-
 
 
 local function _draw_curves(valid_curves,withdots)
@@ -368,7 +359,10 @@ function end_program()
       --for i,curve in ipairs(valid_curves_e) do local p,c1,c2,q,offset,res = curve[1],curve[2],curve[3],curve[4],curve[5],curve[6] print(p,c1,c2,q,offset,res)  end
 
       --for i,curve in ipairs(valid_curves_p) do local p,c1,c2,q,offset,res = curve[1],curve[2],curve[3],curve[4],curve[5],curve[6] print(p,c1,c2,q,offset,res)  end
-      valid_curves_p_bez = _get_beziers_of_pen(valid_curves_p)
+      --valid_curves_p_bez = _get_beziers_of_pen(valid_curves_p)
+      valid_curves_p_bez = _get_beziers_of_pen(pen_over_knots)
+
+
 
 
       print("BEZ DRAW")
