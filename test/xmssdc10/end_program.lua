@@ -165,15 +165,25 @@ local function _get_beziers_of_pen(pen_over_knots)
    for i,v in ipairs(pen_over_knots) do
       --v = {p,c1,c2,q,'(0,0)',res,pen}
       local shifted, pen = v[1],v[7]
+      local delta_offset = '(0,0)'
+      --print("BEZ mflua.round1(shifted)=",shifted,mflua.floor(shifted))
+      --shifted = mflua.floor(shifted)
+      --
+      -- Uh ... why ?
+      -- 
+      if #pen==40 then  delta_offset ='(-0.5,-0.5)' end
+
       local key = table.concat(pen)
-      print("BEZ pen=",key,mflua.pen[key])
-      pen_ellipse[shifted] = mflua.pen[key]
+      print("BEZ pen=",key,table.concat(mflua.pen[key]),#pen,shifted)
+      pen_ellipse[shifted] = {mflua.pen[key],delta_offset}
    end
-   --local _set_poly_done = {}
+
+
    for k,v in pairs(pen_ellipse) do
       local shift = k
-      --print("BEZ shift=",shift)
-      local major_axis__minor_axis,theta,tx__ty = v[1],v[2],v[3]
+      --print("BEZ shift=",k,shift,mflua.round0(shift))
+      local major_axis__minor_axis,theta,tx__ty = v[1][1],v[1][2],v[1][3]
+      local delta_offset =  v[2]
       --print("BEZ pen_ellipse = ",k,major_axis__minor_axis,theta,tx__ty)
       -- First time of  major_axis__minor_axis..theta..tx__ty
       if mflua.set_poly_done[major_axis__minor_axis..theta..tx__ty] == nil then
@@ -181,9 +191,9 @@ local function _get_beziers_of_pen(pen_over_knots)
 	 local major_axis, minor_axis = match(),match()
 	 local mfstring = string.format(
 	    "batchmode;\n"..
-	    "fill fullcircle xscaled (%s) yscaled (%s) rotated (%s) shifted %s;\n"..
-	    "shipit;\n"..   
- 	    "bye.\n",   
+	       "fill fullcircle xscaled (%s) yscaled (%s)  rotated (%s) shifted %s;\n"..
+	       "shipit;\n"..   
+	       "bye.\n",   
 	    major_axis, minor_axis,theta,tx__ty)
 	 mflua.lock("LOCK_ELLIPSE")
 	 local file_name = "poly_to_bezier.mf"
@@ -198,16 +208,18 @@ local function _get_beziers_of_pen(pen_over_knots)
 	 valid_curves_p_bez[shift] = {}
 	 for _,vv in pairs(curves) do
 	    local p,c1,c2,q,offset= vv[1],vv[2],vv[3],vv[4],vv[5]
+	    offset = _eval(offset,delta_offset)
 	    valid_curves_p_bez[shift][#valid_curves_p_bez[shift]+1] = {p,c1,c2,q,offset}
-	    print("BEZ curves are",p,c1,c2,q,offset,shift)
+	    --print("BEZ curves are",p,c1,c2,q,offset,shift)
 	 end
       else -- already seen
 	 local curves =  mflua.set_poly_done[major_axis__minor_axis..theta..tx__ty] 
 	 valid_curves_p_bez[shift] = {}
 	 for _,vv in pairs(curves) do
 	    local p,c1,c2,q,offset= vv[1],vv[2],vv[3],vv[4],vv[5]
+	    offset = _eval(offset,delta_offset)
 	    valid_curves_p_bez[shift][#valid_curves_p_bez[shift]+1] = {p,c1,c2,q,offset}
-	    print("BEZ curves are",p,c1,c2,q,offset,shift)
+	    --print("BEZ curves are",p,c1,c2,q,offset,shift)
 	 end
       end -- if _set_poly_done[major_axis__minor_axis..theta..tx__ty] == nil then
    end
@@ -224,7 +236,7 @@ local function _draw_curves(valid_curves,withdots)
    if withdots == nil then with_dots=true end
    if #valid_curves>0 then
       str = "drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.1pt);\n"
-      str = str .. "path p[];\n"
+      str = str .. "path p;\n"
    else
       return str
    end
@@ -235,22 +247,18 @@ local function _draw_curves(valid_curves,withdots)
       --str = str .. string.format('label("%s",%s);\n',res,_eval(p,shifted))
 
       if c1 == nil and c2 == nil then 
-	 str=str .. string.format("p%03d:=%s .. %s;\n",i,
-				  _eval(p,shifted),_eval(q,shifted))
-	 --str=str .. "drawoptions(withcolor (0.5,0.5,0)  withpen pencircle scaled 0.1pt);\n"
-	 --str=str .. string.format("draw p1; % %s\n",res)
-	 str=str .. string.format("draw p%03d;\n",i)
+	 str=str .. string.format("p:=%s .. %s;%% %03d\n",p,q,i)
+	 str=str .. string.format("draw p shifted %s;%% %03d\n",shifted,i)
+
 	 if with_dots then 
-	    str=str .. string.format("drawdot%s;drawdot%s;\n", _eval(p,shifted),_eval(q,shifted))
+	    str=str .. string.format("drawdot%s shifted %s;drawdot%s shifted %s;\n", p,shifted,q,shifted)
 	 end
       else
-	 str=str .. string.format("p%03d:=%s .. controls %s and %s .. %s;\n",i,
-				  _eval(p,shifted),_eval(c1,shifted),_eval(c2,shifted),_eval(q,shifted))
-	 --str=str .. "drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.1pt);\n"
-	 --str=str .. string.format("draw p1; %% %s\n",res)
-	 str=str .. string.format("draw p%03d;\n",i)
+	 str=str .. string.format("p:=%s .. controls %s and %s .. %s;%% %03d\n", p,c1,c2,q,i)
+	 str=str .. string.format("draw p shifted %s;%% %03d\n",shifted,i)
 	 if with_dots then 
-	    str=str .. string.format("drawdot%s;drawdot%s;\n", _eval(p,shifted),_eval(q,shifted))
+	    str=str .. string.format("drawdot%s shifted %s;drawdot%s shifted %s;\n", p,shifted,q,shifted)
+
 	 end
       end
    end
@@ -267,27 +275,33 @@ local function _draw_curves_of_pens(valid_curves_p_bez,withdots)
    local with_dots = withdots
    if withdots == nil then with_dots=true end
 
-   str = "drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.1pt);\n"
-   str = str .. "path pp[];\n"
+   str = "drawoptions(withcolor (1,0,0)  withpen pencircle scaled 0.1pt);\n"
+   str = str .. "path pp;\n"
    
    for shift, curves in pairs(valid_curves_p_bez) do
+      str = str.."%% SHIFT="..shift.."\n"
       for _,curve in ipairs(curves) do
 	 local p,c1,c2,q,offset = curve[1],curve[2],curve[3],curve[4],curve[5]
 	 local shifted = _eval(offset,shift)
+	 --shifted = _eval(shifted,'(-0.5,-0.5)')
+
 	 i=i+1
 	 if c1 == nil and c2 == nil then 
-	    str=str .. string.format("pp%03d:=%s .. %s;\n",i,
-				     _eval(p,shifted),_eval(q,shifted))
-	    str=str .. string.format("draw pp%03d;\n",i)
+	    --str=str .. string.format("pp%03d:=%s .. %s;\n",i,_eval(p,shifted),_eval(q,shifted))
+	    --str=str .. string.format("draw pp%03d;\n",i)
+	    str=str .. string.format("pp:=%s .. %s;%% %03d\n",i,p,q)
+	    str=str .. string.format("draw pp shifted %s;%% %03d\n",shifted,i)
+
 	    if with_dots then 
-	       str=str .. string.format("drawdot%s;drawdot%s;\n", _eval(p,shifted),_eval(q,shifted))
+	       --str=str .. string.format("drawdot%s;drawdot%s;\n", _eval(p,shifted),_eval(q,shifted))
+	       str=str .. string.format("drawdot%s shifted %s;drawdot%sshifted %s;\n", p,shifted,q,shifted)
+
 	    end
 	 else
-	    str=str .. string.format("pp%03d:=%s .. controls %s and %s .. %s;\n",i,
-				     _eval(p,shifted),_eval(c1,shifted),_eval(c2,shifted),_eval(q,shifted))
-	    str=str .. string.format("draw pp%03d;\n",i)
+	    str=str .. string.format("pp:=%s .. controls %s and %s .. %s;%% %03d\n",p,c1,c2,q,i)
+	    str=str .. string.format("draw pp shifted %s;%% %03d\n",shifted ,i)
 	    if with_dots then 
-	       str=str .. string.format("drawdot%s;drawdot%s;\n", _eval(p,shifted),_eval(q,shifted))
+	       str=str .. string.format("drawdot%s shifted %s;drawdot%s shifted %s;\n", p,shifted,q,shifted)
 	    end
 	 end
       end
@@ -380,10 +394,11 @@ function end_program()
       f:write(res)
       f:write("\n\\stopMPpage%%%% END EDGES\n")
       --
-      res = _draw_curves(valid_curves_c)  
+      res = ''
+      res = res .. _draw_curves(valid_curves_c)  
       res = res .. _draw_curves(valid_curves_e)  
       res = res .. _draw_curves(pen_over_knots)  
-      --res = res  .. res_pens
+      res = res .. res_pens
       res = res .. _draw_curves_of_pens(valid_curves_p_bez)  
 
       f:write("\\startMPpage%%%% BEGIN CURVES\n")
