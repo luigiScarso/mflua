@@ -151,7 +151,7 @@ local function _get_envelopes_and_pens(char)
 	 valid_curves[#valid_curves+1] ={last_point,last_point,first_point,first_point,'(0,0)',res}
       end 
    end --    for m=1,#char['envelope'] 
-   print("BEZ return")
+   --print("BEZ return")
    return valid_curves,valid_curves_pen,pen_over_knots
 end
 
@@ -174,7 +174,7 @@ local function _get_beziers_of_pen(pen_over_knots)
       if #pen==40 then  delta_offset ='(-0.5,-0.5)' end
 
       local key = table.concat(pen)
-      print("BEZ pen=",key,table.concat(mflua.pen[key]),#pen,shifted)
+      --print("BEZ pen=",key,table.concat(mflua.pen[key]),#pen,shifted)
       pen_ellipse[shifted] = {mflua.pen[key],delta_offset}
    end
 
