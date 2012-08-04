@@ -2,7 +2,7 @@ local function _get_contours(char)
    --
    --
    --
-   print("BEZ _get_contours")
+   print("BEZ _get_contours (end_program_poly_to_bezier)")
    local res = ''
    local beziers = char['contour'] or  {}
    local offset = '(0,0)'

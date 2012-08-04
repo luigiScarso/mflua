@@ -524,6 +524,7 @@ mflua.threshold_merge_segments =  5e-5 -- _merge_segments
 mflua.threshold_join_curves =  0.049 -- _build_cycles try and error
 
 
+mflua.set_poly_done={}
 
 mflua.mflua_exe = './mf'
 mflua.turningnumber_file='mflua_tn'
@@ -590,7 +591,11 @@ function mflua.round2(p) local w=string.gmatch(p,"[-0-9.]+");local p p={w(),w()}
 function mflua.round1(p) local w=string.gmatch(p,"[-0-9.]+");local p p={w(),w()};return string.format("(%6.1f,%6.1f)",tostring(p[1]),tostring(p[2]) )end
 function mflua.round0(p) local w=string.gmatch(p,"[-0-9.]+");local p p={w(),w()};return string.format("(%6.0f,%6.0f)",tostring(p[1]),tostring(p[2]) )end
 
+function mflua.floor(p) local w=string.gmatch(p,"[-0-9.]+");local p p={w(),w()};return string.format("(%d,%d)",math.floor(p[1]),math.floor(p[2]) )end
+
+
 function mflua.round5_table(p) return {tonumber(string.format("%6.5f",tostring(p[1]))),tonumber(string.format("%6.5f",tostring(p[2])))} end
+
 
 
 function mflua.vec(a,b) return {b[1]-a[1],b[2]-a[2]} end
