@@ -300,7 +300,9 @@ local function _get_beziers_of_pen(pen_over_knots)
       if #pen==40 then  delta_offset ='(-0.5,-0.5)' end
       local key = table.concat(pen)
       --print("BEZ pen=",key,table.concat(mflua.pen[key]),#pen,shifted)
-      pen_ellipse[shifted] = {mflua.pen[key],delta_offset}
+      if mflua.pen[key] ~=nil then 
+        pen_ellipse[shifted] = {mflua.pen[key],delta_offset}
+      end
    end
    for k,v in pairs(pen_ellipse) do
       local shift = k
@@ -407,7 +409,7 @@ local function _draw_curves(valid_curves,withdots,withoptions)
       _t[#_t+1]=with_options.."\n"
       _t[#_t+1]="path p;\n"
    else
-      return str
+      return ''
    end
    for i,bezier in ipairs(valid_curves) do
       local p,c1,c2,q,shifted,res = bezier[1],bezier[2],bezier[3],bezier[4],bezier[5],bezier[6]
