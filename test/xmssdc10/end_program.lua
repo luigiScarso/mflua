@@ -9,6 +9,15 @@ local function _eval(q,offset)
    return string.format("(%s,%s)",qx+xo,qy+yo)
 end
 
+local function _eval_neg(q,offset)
+   local qx,qy,xo,yo
+   local w 
+   w=string.gmatch(q,"[-0-9.]+"); qx,qy=w(),w()
+   w=string.gmatch(offset,"[-0-9.]+"); xo,yo=w(),w()
+   return string.format("(%s,%s)",qx-xo,qy-yo)
+end
+
+
 local function _eval_tonumber(q,offset)
    local qx,qy,xo,yo
    local w 
@@ -28,6 +37,28 @@ local function _coord_table_to_str(p,c1,c2,q,shifted)
    return p,c1,c2,q,shifted
 end
 
+local function _pen_normalizer(pen,offset,flag)
+   -- This particular pen path 
+   -- has not c1 and c2
+   --
+   local p,q,res
+   local _t={}
+   if flag==true then 
+      -- adapt the pen to a p,c1,c2,q,shifted,res
+      for m,curve in ipairs(pen) do
+	 p,q,res = curve[1],curve[2],curve[3]
+	 _t[#_t+1]={_eval(p,offset),nil,nil,_eval(q,offset),'(0,0)',res}
+      end       
+   else
+      -- take standard bezier and return a compressed form p,q,res
+      -- with a *NEGATIVE* offset
+      for m,curve in ipairs(pen) do
+	 p,q,res = curve[1],curve[4],curve[6]
+	 _t[#_t+1]={_eval_neg(p,offset),nil,nil,_eval_neg(q,offset),res}
+      end
+   end
+   return _t
+end
 
 
 local function _draw_curve_tostring(p,c1,c2,q,shifted,options)
@@ -36,6 +67,9 @@ local function _draw_curve_tostring(p,c1,c2,q,shifted,options)
    return opt..string.format("draw (%s .. controls %s and %s .. %s) shifted %s;\n",
 			     p,c1,c2,q,shifted)
 end
+
+
+
 
 
 local function _decasteljau(p,c1,c2,q,t)
@@ -160,11 +194,13 @@ local function _decasteljau_bisection(curve,array,level)
 end
 
 
-local function _remove_internal_curves(curves,pixels)
+local function _remove_useless_curves(curves,pixels,flag)
    --
-   --
-   --
-   print("BEZ _remove_internal_curves")
+   -- Remove the curves that are completely inside or outside 
+   -- the edge structure. Note that some curves are near the frontier, 
+   -- and they are not removed
+
+   --print("BEZ _remove_useless_curves")
    local p,c1,c2,q,shifted
    local _curves = {}
    local array,Curves
@@ -172,6 +208,8 @@ local function _remove_internal_curves(curves,pixels)
    for i,curve in ipairs(curves) do 
       array={}
       p,c1,c2,q,shifted =curve[1],curve[2],curve[3],curve[4],curve[5]
+      --print("BEZ p,c1,c2,q,shifted=",p,c1,c2,q,shifted)
+      -- straight line 
       if c1==nil and c2==nil then
 	 c1,c2 = p,q
       end
@@ -182,9 +220,84 @@ local function _remove_internal_curves(curves,pixels)
       array[#array+1]=q
       array = _decasteljau_bisection({p,c1,c2,q},array,0)
       local d =0.0
-      local delete_curve = true
-      for i,v in ipairs(array) do
-	 local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
+      local delete_curve = false
+
+      --very small curve
+      if(math.floor(d+p[1])==math.floor(d+q[1])) and (math.floor(d+p[2])==math.floor(d+q[2]))then
+	    delete_curve=true
+      end
+
+      -- curves that for sure  are inside 
+      if delete_curve==false then
+	 for i,v in ipairs(array) do
+	    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
+	    if pixels[Y-1] ~= nil and pixels[Y] ~=nil and pixels[Y+1]~=nil then
+	       local cond1,cond2,cond3 = 
+		  (pixels[Y-1][X-1]~=nil and pixels[Y-1][X]~=nil and pixels[Y-1][X+1]~=nil),
+	       (pixels[Y][X-1]~=nil and pixels[Y][X]~=nil and pixels[Y][X+1]~=nil), 
+	       (pixels[Y+1][X-1]~=nil and pixels[Y+1][X]~=nil and pixels[Y+1][X+1]~=nil) ;
+	       if  cond1 and cond2 and cond3 then
+		  -- OK 
+		  delete_curve = true
+	       else
+		  delete_curve = false
+		  break
+	       end 
+	    else
+	       -- X Y is near the frontier (inside or outside), or on the frontier 
+	       delete_curve = false
+	       break 
+	    end
+	 end
+      end
+      -- curves that for sure  are outside
+      if delete_curve==false then
+	 local outside_counter = 0
+	 for i,v in ipairs(array) do
+	    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
+	    --print("BEZ X,Y",X,Y)
+	    local cond1,cond2,cond3 =
+	       (pixels[Y-1]==nil) or ((pixels[Y-1]~=nil) and (pixels[Y-1][X-1]==nil and pixels[Y-1][X]==nil and pixels[Y-1][X+1]==nil)),
+	    (pixels[Y]  ==nil) or ((pixels[Y]  ~=nil) and (pixels[Y][X-1]  ==nil and pixels[Y][X]  ==nil and pixels[Y][X+1]  ==nil)),
+	    (pixels[Y+1]==nil) or ((pixels[Y+1]~=nil) and (pixels[Y+1][X-1]==nil and pixels[Y+1][X]==nil and pixels[Y+1][X+1]==nil))
+	    if cond1 and cond2 and cond3 then
+	       outside_counter=outside_counter+1
+	    end
+	 end
+	 --print("BEZ,#array,outside_counter",#array,outside_counter)
+	 if outside_counter == #array then
+	    delete_curve = true
+	 end
+      end      
+
+      -- curves from the pen that are mostly outside
+      if delete_curve==false and flag=='pen' then
+	 local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
+	 local cond1,cond2,cond3 =
+	    (pixels[Y-1]==nil) or ((pixels[Y-1]~=nil) and (pixels[Y-1][X-1]==nil and pixels[Y-1][X]==nil and pixels[Y-1][X+1]==nil)),
+	 (pixels[Y]  ==nil) or ((pixels[Y]  ~=nil) and (pixels[Y][X-1]  ==nil and pixels[Y][X]  ==nil and pixels[Y][X+1]  ==nil)),
+	 (pixels[Y+1]==nil) or ((pixels[Y+1]~=nil) and (pixels[Y+1][X-1]==nil and pixels[Y+1][X]==nil and pixels[Y+1][X+1]==nil))
+	 if cond1 and cond2 and cond3 then
+	    delete_curve = true
+	 end
+	 if delete_curve==false then
+	    X,Y = math.floor(d+q[1]),math.floor(d+q[2])
+	    cond1,cond2,cond3 =
+	       (pixels[Y-1]==nil) or ((pixels[Y-1]~=nil) and (pixels[Y-1][X-1]==nil and pixels[Y-1][X]==nil and pixels[Y-1][X+1]==nil)),
+	    (pixels[Y]  ==nil) or ((pixels[Y]  ~=nil) and (pixels[Y][X-1]  ==nil and pixels[Y][X]  ==nil and pixels[Y][X+1]  ==nil)),
+	    (pixels[Y+1]==nil) or ((pixels[Y+1]~=nil) and (pixels[Y+1][X-1]==nil and pixels[Y+1][X]==nil and pixels[Y+1][X+1]==nil))
+	    if cond1 and cond2 and cond3 then
+	       delete_curve = true
+	    end
+	 end
+      end
+
+
+      -- curves from the pen that have p inside and q on the border (or viceversa)
+      if delete_curve==false and flag=='pen' then
+	 -- Why d=0.5 ?
+	 d=0.5
+	 local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
 	 if pixels[Y-1] ~= nil and pixels[Y] ~=nil and pixels[Y+1]~=nil then
 	    local cond1,cond2,cond3 = 
 	       (pixels[Y-1][X-1]~=nil and pixels[Y-1][X]~=nil and pixels[Y-1][X+1]~=nil),
@@ -192,23 +305,76 @@ local function _remove_internal_curves(curves,pixels)
 	    (pixels[Y+1][X-1]~=nil and pixels[Y+1][X]~=nil and pixels[Y+1][X+1]~=nil) ;
 	    if  cond1 and cond2 and cond3 then
 	       -- OK 
-	    else
-	       delete_curve = false
-	       break
-	    end 
-	 else
-	    -- X Y is near the frontier (inside or outside), or on the frontier 
-	    delete_curve = false
-	    break 
+	       delete_curve = true
+	       --print("BEZ (p) DELETE i="..i,X,Y,p[1],p[2])
+	    end
 	 end
+	 X,Y = math.floor(d+q[1]),math.floor(d+q[2])
+	 if pixels[Y-1] ~= nil and pixels[Y] ~=nil and pixels[Y+1]~=nil then
+	    local cond1,cond2,cond3 = 
+	       (pixels[Y-1][X-1]~=nil and pixels[Y-1][X]~=nil and pixels[Y-1][X+1]~=nil),
+	    (pixels[Y][X-1]~=nil and pixels[Y][X]~=nil and pixels[Y][X+1]~=nil), 
+	    (pixels[Y+1][X-1]~=nil and pixels[Y+1][X]~=nil and pixels[Y+1][X+1]~=nil) ;
+	    if cond1 and cond2 and cond3 then
+	       -- OK 
+	       delete_curve = true
+	       --print("BEZ (q) DELETE i="..i)
+	    end
+	 end
+	 -- if delete_curve ==false then
+	 --    local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
+	 --    local x,y 
+	 --    _t[#_t+1]=string.format("label( \"p%s\", (%s,%s2));\n",i,(X+1/8),(Y+1/8))
+	 --    x,y = X,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
+	 -- 				      x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X+1,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
+	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X-1,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
+	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
+	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X+1,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
+	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X-1,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
+	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
+	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X+1,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
+	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X-1,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
+	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
+
+	 --    X,Y = math.floor(d+q[1]),math.floor(d+q[2])
+	 --    _t[#_t+1]=string.format("label( \"q%s\", (%s,%s2));\n",i,(X-1/8),(Y-1/8))
+	 --    x,y = X,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
+	 -- 				      x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X+1,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
+	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X-1,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
+	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
+	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X+1,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
+	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X-1,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
+	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
+	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X+1,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
+	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
+	 --    x,y = X-1,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
+	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
+         -- end 
       end
+
+
       if delete_curve then
 	 --print("BEZ DELETE THIS CURVE")
       else
 	 _curves[#_curves+1] = curve 
       end
 
-    -- DEBUG######################## 
+   -- DEBUG######################## 
    -- _t[#_t+1]='drawoptions(withcolor (0.4,0.3,1)  withpen pencircle scaled 0.08pt);ahlength :=  0.15;\n'
    -- local d =0.0
    -- for i,v in ipairs(array) do
@@ -400,7 +566,7 @@ local function _get_envelopes_and_pens(char)
    end --    for m=1,#char['envelope'] 
    --print("BEZ return")
    return valid_curves,valid_curves_pen,pen_over_knots,valid_curves_pen_by_offset
-end
+end --_get_envelopes_and_pens 
 
 local function _get_beziers_of_pen(pen_over_knots)
    --
@@ -498,8 +664,8 @@ local function _remove_envelope_curves_in_pen(valid_curves_e,valid_curves_p_by_o
 	    end       
 	    --if ((P==p_e)and (Q==q_e)) or ((Q==p_e)and (Q==q_e)) then
 	    if _tt[P_e] and _tt[Q_e] then
-	       --print("drawoptions(withcolor (1,0,1)  withpen pencircle scaled 1pt);")
-	       --print(string.format("draw (%s .. controls %s and %s .. %s) shifted %s;",p_e,c1_e,c2_e,q_e,shifted_e))
+	     --print("drawoptions(withcolor (1,0,1)  withpen pencircle scaled 1pt);")
+	     --print(string.format("draw (%s .. controls %s and %s .. %s) shifted %s;",p_e,c1_e,c2_e,q_e,shifted_e))
 	       _t[i]=false
 	    end
 	    --print("BEZ ---")
@@ -516,13 +682,15 @@ end
 
 
 
-local function _draw_curves(valid_curves,withdots,withoptions)
+local function _draw_curves(valid_curves,withdots,withoptions,withlabels)
    --
    --
    --
    local _t={}
    local with_dots = withdots
    local with_options = withoptions
+   local with_labels = withlabels
+
    if withdots == nil then with_dots=true end
    if withoptions ==nil then  
       with_options = "drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.1pt);"
@@ -536,11 +704,13 @@ local function _draw_curves(valid_curves,withdots,withoptions)
    end
    for i,bezier in ipairs(valid_curves) do
       local p,c1,c2,q,shifted,res = bezier[1],bezier[2],bezier[3],bezier[4],bezier[5],bezier[6]
-      if with_dots then 
-	 _t[#_t+1]=string.format("draw %s withpen pencircle scaled 0.2pt shifted %s; ", p,shifted)
-	 _t[#_t+1]=string.format("draw %s withpen pencircle scaled 0.2pt shifted %s; ", q,shifted)
+      if with_labels == true then
+	 _t[#_t+1]=string.format("label (\"%s\") (0.5(%s+%s)+%s+(0.5,0));\n", i,p,q,shifted)
       end
-
+      if with_dots then 
+	 _t[#_t+1]=string.format("draw %s withpen pencircle scaled 0.2pt shifted %s;%% p\n", p,shifted)
+	 _t[#_t+1]=string.format("draw %s withpen pencircle scaled 0.2pt shifted %s;%% q\n", q,shifted)
+      end
       if c1 == nil and c2 == nil then 
 	 _t[#_t+1]=string.format("p:=%s -- %s;%% %03d\n",p,q,i)
 	 _t[#_t+1]=string.format("draw p shifted %s;%% %03d\n",shifted,i)
@@ -678,43 +848,54 @@ function end_program()
 
       -- get envelopes
       valid_curves_e,valid_curves_p,pen_over_knots,valid_curves_p_by_offset = _get_envelopes_and_pens(char)
-      --for i,curve in ipairs(valid_curves_e) do local p,c1,c2,q,offset,res = curve[1],curve[2],curve[3],curve[4],curve[5],curve[6] print(p,c1,c2,q,offset,res)  end
-
-      --for i,curve in ipairs(valid_curves_p) do local p,c1,c2,q,offset,res = curve[1],curve[2],curve[3],curve[4],curve[5],curve[6] print(p,c1,c2,q,offset,res)  end
-      --valid_curves_p_bez = _get_beziers_of_pen(valid_curves_p)
+      
       valid_curves_p_bez = _get_beziers_of_pen(pen_over_knots)
-
 
       valid_curves_e = 
 	 _remove_envelope_curves_in_pen(valid_curves_e,valid_curves_p_by_offset)
+      
 
+
+      valid_curves_e = 
+	  _remove_useless_curves(valid_curves_e,pixels)
 
       valid_curves_c = 
-	  _remove_internal_curves(valid_curves_c,pixels)
-
+	  _remove_useless_curves(valid_curves_c,pixels)
       
-      valid_curves_e = 
-	  _remove_internal_curves(valid_curves_e,pixels)
+
+      valid_curves_p = 
+	  _remove_useless_curves(valid_curves_p,pixels)
+
 
       local valid_curves_p_bez_t = {}
+      --local _ty={}
+      --for k, _ in pairs(valid_curves_p_bez) do _ty[#_ty+1]=k end 
+      --local tu=2
+      --for k,curves in pairs({[_ty[tu]]=valid_curves_p_bez[_ty[tu]]}) do
       for k,curves in pairs(valid_curves_p_bez) do
-	 local _c = _remove_internal_curves(curves,pixels)
+	 local _c
+	 _c = _remove_useless_curves(curves,pixels,'pen')
 	 if #_c>0 then valid_curves_p_bez_t[k] = _c end
       end
       valid_curves_p_bez = valid_curves_p_bez_t
 
-      valid_curves_p = 
-	  _remove_internal_curves(valid_curves_p,pixels)
-
-
-
-      -- local _t = {}
-      -- for k,curves in pairs(valid_curves_p_bez) do _t[#_t+1]=k end
-      -- local _res =  _remove_internal_curves(valid_curves_p_bez[_t[1]],pixels)
+      local valid_curves_p_by_offset_t = {}
+      for offset,array_of_pens in pairs(valid_curves_p_by_offset) do
+	 --
+	 -- We can have more pens for an offset
+	 --
+	 local _tt={}
+	 for l,pen in ipairs(array_of_pens) do
+	    local curves=_pen_normalizer(pen,offset,true)
+	    local _c = _remove_useless_curves(curves,pixels,'pen')
+	    if #_c>0 then _tt[#_tt+1]= _pen_normalizer(_c,offset,false) end
+	 end
+	 if #_tt>0 then valid_curves_p_by_offset_t[offset]= _tt end
+      end
+      valid_curves_p_by_offset = valid_curves_p_by_offset_t 
 
 
       print("BEZ DRAW")
-      
       --[==[ Not necessary any more ##################
       --local res_pens = _draw_curves(valid_curves_p,true,
       --"drawoptions(withcolor (0,1,1)  withpen pencircle scaled 0.01pt);")    
@@ -732,23 +913,24 @@ function end_program()
       --f:write("\n\\stopMPpage%%%% END EDGES\n")
       --##############################]==]
       res = ''
-      
+
       res = res .. _draw_pixels(pixels)
-      --res = res .. _res 
 
       res = res .. _draw_curves(valid_curves_c,false,
 				"drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.01pt);")    
+
       res = res .. _draw_curves(valid_curves_e,true,
 				"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.08pt);")      
+
       --res = res .. _draw_curves(pen_over_knots,true,
        --				"drawoptions(withcolor (0.5,0.2,0)  withpen pencircle scaled 0.1pt);")  
-      local res_pens = _draw_curves(valid_curves_p,true,
-				    "drawoptions(withcolor (0,0.5,0.5)  withpen pencircle scaled 0.05pt);")    
 
-      res = res .. res_pens
+      --local res_pens = _draw_curves(valid_curves_p,true,
+	--			    "drawoptions(withcolor (0,0.5,0.5)  withpen pencircle scaled 0.05pt);")    
+      --res = res .. res_pens
+      
       res = res .. _draw_curves_of_pens(valid_curves_p_bez,true,
 					"drawoptions(withcolor (1,0,0)  withpen pencircle scaled 0.01pt);")  
-
 
       f:write("\\startMPpage%%%% BEGIN CURVES\n")
       f:write(res)
