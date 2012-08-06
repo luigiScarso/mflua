@@ -17,6 +17,26 @@ local function _eval_tonumber(q,offset)
    return {tonumber(qx+xo),tonumber(qy+yo)}
 end
 
+local function _coord_table_to_str(p,c1,c2,q,shifted)
+   local p,c1,c2,shifted=p,c1,c2,q,shifted
+   if shifted==nil then shifted={0,0} end
+   p = string.format("(%s,%s)",p[1],p[2]) 
+   c1 = string.format("(%s,%s)",c1[1],c1[2])
+   c2 = string.format("(%s,%s)",c2[1],c2[2])
+   q = string.format("(%s,%s)",q[1],q[2])
+   shifted = string.format("(%s,%s)",shifted[1],shifted[2])
+   return p,c1,c2,q,shifted
+end
+
+
+
+local function _draw_curve_tostring(p,c1,c2,q,shifted,options)
+   local opt = options
+   if opt == nil then opt="drawoptions(withcolor (1,0,1)  withpen pencircle scaled 1.5pt);\n" end
+   return opt..string.format("draw (%s .. controls %s and %s .. %s) shifted %s;\n",
+			     p,c1,c2,q,shifted)
+end
+
 
 local function _decasteljau(p,c1,c2,q,t)
    local b00,b01,b02,b03 =  {},{},{},{}
@@ -28,10 +48,10 @@ local function _decasteljau(p,c1,c2,q,t)
    --
    -- de Casteljau Algorithm
    -- 
-   -- print(string.format("BEZ p=(%s,%s)",p[1],p[2]))
-   -- print(string.format("BEZ c1=(%s,%s)",c1[1],c1[2]))
-   -- print(string.format("BEZ c2=(%s,%s)",c2[1],c2[2]))
-   -- print(string.format("BEZ q=(%s,%s)",q[1],q[2]))
+   --print(string.format("BEZ p=(%s,%s)",p[1],p[2]))
+   --print(string.format("BEZ c1=(%s,%s)",c1[1],c1[2]))
+   --print(string.format("BEZ c2=(%s,%s)",c2[1],c2[2]))
+   --print(string.format("BEZ q=(%s,%s)",q[1],q[2]))
 
    b00={tonumber(p[1]),tonumber(p[2]) }
    b01={tonumber(c1[1]),tonumber(c1[2]) } 
@@ -108,6 +128,108 @@ local function pixel_map(edges)
    end
    return pixel
 end
+
+
+local function _decasteljau_bisection(curve,array,level)
+   --
+   --
+   --
+   if level==15 then return array end
+   level=level+1
+
+   local p,c1,c2,q =  curve[1],curve[2],curve[3],curve[4]
+   local x,y,p0,c10,c20,q0,c11,c21,q1 = _decasteljau(p,c1,c2,q,1/2)
+   local p1=q0
+   local d =0
+   --print("BEZ #array="..#array,string.format("p=(%s,%s),q=(%s,%s),(x,y)=(%s,%s)",p[1],p[2],q[1],q[2],x,y))
+   if math.floor(p[1]+d)==math.floor(x+d) and math.floor(p[2]+d)==math.floor(y+d) then
+      --print("BEZ ===> p",x,y,level,#array)
+      return array
+   end
+   if math.floor(q[1]+d)==math.floor(x+d) and math.floor(q[2]+d)==math.floor(y+d) then
+      --print("BEZ ===> q",x,y,level,#array)
+      return array
+   end
+
+   array[#array+1]={x,y}
+   --print("array["..#array.."]=",array[#array][1],array[#array][2])
+   array=_decasteljau_bisection({p0,c10,c20,q0},array,level)
+   array=_decasteljau_bisection({p1,c11,c21,q1},array,level)
+   return array
+   --_coord_table_to_str(p,c1,c2,q,shifted)
+end
+
+
+local function _remove_internal_curves(curves,pixels)
+   --
+   --
+   --
+   print("BEZ _remove_internal_curves")
+   local p,c1,c2,q,shifted
+   local _curves = {}
+   local array,Curves
+   local _t={};_t[#_t+1]=''
+   for i,curve in ipairs(curves) do 
+      array={}
+      p,c1,c2,q,shifted =curve[1],curve[2],curve[3],curve[4],curve[5]
+      if c1==nil and c2==nil then
+	 c1,c2 = p,q
+      end
+      --print("BEZ i",i,p,q,shifted)
+      p,c1,c2,q = 
+	 _eval_tonumber(p,shifted),_eval_tonumber(c1,shifted),_eval_tonumber(c1,shifted),_eval_tonumber(q,shifted)
+      array[#array+1]=p
+      array[#array+1]=q
+      array = _decasteljau_bisection({p,c1,c2,q},array,0)
+      local d =0.0
+      local delete_curve = true
+      for i,v in ipairs(array) do
+	 local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
+	 if pixels[Y-1] ~= nil and pixels[Y] ~=nil and pixels[Y+1]~=nil then
+	    local cond1,cond2,cond3 = 
+	       (pixels[Y-1][X-1]~=nil and pixels[Y-1][X]~=nil and pixels[Y-1][X+1]~=nil),
+	    (pixels[Y][X-1]~=nil and pixels[Y][X]~=nil and pixels[Y][X+1]~=nil), 
+	    (pixels[Y+1][X-1]~=nil and pixels[Y+1][X]~=nil and pixels[Y+1][X+1]~=nil) ;
+	    if  cond1 and cond2 and cond3 then
+	       -- OK 
+	    else
+	       delete_curve = false
+	       break
+	    end 
+	 else
+	    -- X Y is near the frontier (inside or outside), or on the frontier 
+	    delete_curve = false
+	    break 
+	 end
+      end
+      if delete_curve then
+	 --print("BEZ DELETE THIS CURVE")
+      else
+	 _curves[#_curves+1] = curve 
+      end
+
+    -- DEBUG######################## 
+   -- _t[#_t+1]='drawoptions(withcolor (0.4,0.3,1)  withpen pencircle scaled 0.08pt);ahlength :=  0.15;\n'
+   -- local d =0.0
+   -- for i,v in ipairs(array) do
+   --    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
+   --    _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.9,0.9,0.9);\n",
+   -- 			      X,Y,X+1,Y,X+1,Y+1,X,Y+1)
+   --    _t[#_t+1]=string.format("label( \"%s\", (%s,%s2));\n",i,(2*X+1)/2,(2*Y+1)/2)
+   -- end
+   -- for i,v in ipairs(array) do
+   --    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
+   --    _t[#_t+1]=string.format("draw (%s,%s) withpen pencircle scaled 0.08pt withcolor (0.4,0.3,1);\n",v[1],v[2])
+   --    _t[#_t+1]=string.format("draw (%s,%s) withpen pencircle scaled 0.08pt withcolor (0.4,0.3,0);\n",X,Y)
+   --    --_t[#_t+1]=string.format("label( \"%s\", (%s+0.1,%s+0.1));\n",i,X,Y)
+   --    --_t[#_t+1]=string.format("drawarrow (%s,%s) --(%s,%s) ;\n",v[1],v[2],X,Y)
+   -- end
+   --##########################DEBUG
+   end --for i,curve in ipairs(curves) do 
+   return _curves --,table.concat(_t) 
+   --return table.concat(_t) 
+end
+
 
 local function _get_contours(char)
    --
@@ -221,10 +343,7 @@ local function _get_envelopes_and_pens(char)
 	 --knots_set = {} 
          if #knots>0 then 
 	    --print("BEZ #knots="..#knots)
-	    for k=1,#knots do -- should be this but it's too much slow. and broke s of ccr5  By the way, it must be 	       set for sym.mf .
-	       -- a solution is to use #knots when #knots is small
-	       -- for _,k in ipairs({1,math.floor(#knots/2)}) do
-	       -- for idx,k in ipairs({1,math.floor(#knots/2),1+math.floor(#knots/2),#knots}) do
+	    for k=1,#knots do 
 	       local key =''
 	       local key_1 =''
 	       local go_on = true
@@ -287,7 +406,8 @@ local function _get_beziers_of_pen(pen_over_knots)
    --
    --
    -- 	       
-   local  valid_curves_p_bez = {}
+   print("BEZ _get_beziers_of_pen")
+   local valid_curves_p_bez = {}
    local pen_ellipse = {}
    local mflua_exe = mflua.mflua_exe or './mf' 
    for i,v in ipairs(pen_over_knots) do
@@ -300,8 +420,8 @@ local function _get_beziers_of_pen(pen_over_knots)
       if #pen==40 then  delta_offset ='(-0.5,-0.5)' end
       local key = table.concat(pen)
       --print("BEZ pen=",key,table.concat(mflua.pen[key]),#pen,shifted)
-      if mflua.pen[key] ~=nil then 
-        pen_ellipse[shifted] = {mflua.pen[key],delta_offset}
+      if mflua.pen[key] ~= nil then
+	 pen_ellipse[shifted] = {mflua.pen[key],delta_offset}
       end
    end
    for k,v in pairs(pen_ellipse) do
@@ -334,6 +454,7 @@ local function _get_beziers_of_pen(pen_over_knots)
 	 for _,vv in pairs(curves) do
 	    local p,c1,c2,q,offset= vv[1],vv[2],vv[3],vv[4],vv[5]
 	    offset = _eval(offset,delta_offset)
+	    offset = _eval(offset,shift)
 	    valid_curves_p_bez[shift][#valid_curves_p_bez[shift]+1] = {p,c1,c2,q,offset}
 	    --print("BEZ curves are",p,c1,c2,q,offset,shift)
 	 end
@@ -343,6 +464,7 @@ local function _get_beziers_of_pen(pen_over_knots)
 	 for _,vv in pairs(curves) do
 	    local p,c1,c2,q,offset= vv[1],vv[2],vv[3],vv[4],vv[5]
 	    offset = _eval(offset,delta_offset)
+	    offset = _eval(offset,shift)
 	    valid_curves_p_bez[shift][#valid_curves_p_bez[shift]+1] = {p,c1,c2,q,offset}
 	    --print("BEZ curves are",p,c1,c2,q,offset,shift)
 	 end
@@ -393,6 +515,7 @@ local function _remove_envelope_curves_in_pen(valid_curves_e,valid_curves_p_by_o
 end
 
 
+
 local function _draw_curves(valid_curves,withdots,withoptions)
    --
    --
@@ -427,7 +550,7 @@ local function _draw_curves(valid_curves,withdots,withoptions)
 	 _t[#_t+1]=string.format("draw p shifted %s;%% %03d\n",shifted,i)
       end
    end
-   return table.concat(_t)
+   return table.concat(_t) 
 end
 
 
@@ -451,7 +574,7 @@ local function _draw_curves_of_pens(valid_curves_p_bez,withdots,withoptions)
       _t[#_t+1]="%% SHIFT="..shift.."\n"
       for _,curve in ipairs(curves) do
 	 local p,c1,c2,q,offset = curve[1],curve[2],curve[3],curve[4],curve[5]
-	 local shifted = _eval(offset,shift)
+	 local shifted = offset  -- _eval(offset,shift) no more
 	 if with_dots then 
 	    _t[#_t+1]=string.format("draw %s withpen pencircle scaled 0.2pt shifted %s; ", p,shifted)
 	    _t[#_t+1]=string.format("draw %s withpen pencircle scaled 0.2pt shifted %s; ", q,shifted)
@@ -523,7 +646,7 @@ function end_program()
    --print("tfm run:",tfm.run("pen.tfm"))
 
    f:write("\n%%\\starttext\\setupbodyfont[tt,2pt]\\bf\\stoptext %% comment this line to make an empty pdf \n")
-   f:write("\\starttext\n\\setupbodyfont[tt,5pt]\\bf\n")
+   f:write("\\starttext\n\\setupbodyfont[tt,2pt]\\bf\n")
    --f:write("\\starttext\n\\setupbodyfont[tt,4pt]\\bf\n")
    for k,_ in pairs(chartable) do t[#t+1]=k end
    table.sort(t)
@@ -566,13 +689,36 @@ function end_program()
 	 _remove_envelope_curves_in_pen(valid_curves_e,valid_curves_p_by_offset)
 
 
+      valid_curves_c = 
+	  _remove_internal_curves(valid_curves_c,pixels)
+
+      
+      valid_curves_e = 
+	  _remove_internal_curves(valid_curves_e,pixels)
+
+      local valid_curves_p_bez_t = {}
+      for k,curves in pairs(valid_curves_p_bez) do
+	 local _c = _remove_internal_curves(curves,pixels)
+	 if #_c>0 then valid_curves_p_bez_t[k] = _c end
+      end
+      valid_curves_p_bez = valid_curves_p_bez_t
+
+      valid_curves_p = 
+	  _remove_internal_curves(valid_curves_p,pixels)
+
+
+
+      -- local _t = {}
+      -- for k,curves in pairs(valid_curves_p_bez) do _t[#_t+1]=k end
+      -- local _res =  _remove_internal_curves(valid_curves_p_bez[_t[1]],pixels)
 
 
       print("BEZ DRAW")
-
-      local res_pens = _draw_curves(valid_curves_p,true,
-				    "drawoptions(withcolor (0,1,1)  withpen pencircle scaled 0.01pt);")    
-
+      
+      --[==[ Not necessary any more ##################
+      --local res_pens = _draw_curves(valid_curves_p,true,
+      --"drawoptions(withcolor (0,1,1)  withpen pencircle scaled 0.01pt);")    
+      --
       --f:write("\\startMPpage%%%% BEGIN EDGES\n")
       --res = "%% char " .. index .."\n"
       --local pre_res = char['pre_res'] or ""
@@ -584,15 +730,21 @@ function end_program()
       --res = res .. res_pens
       --f:write(res)
       --f:write("\n\\stopMPpage%%%% END EDGES\n")
-      --
+      --##############################]==]
       res = ''
+      
       res = res .. _draw_pixels(pixels)
+      --res = res .. _res 
+
       res = res .. _draw_curves(valid_curves_c,false,
 				"drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.01pt);")    
       res = res .. _draw_curves(valid_curves_e,true,
-				"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.01pt);")      
-      res = res .. _draw_curves(pen_over_knots,true,
-				"drawoptions(withcolor (0.5,0.2,0)  withpen pencircle scaled 0.1pt);")  
+				"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.08pt);")      
+      --res = res .. _draw_curves(pen_over_knots,true,
+       --				"drawoptions(withcolor (0.5,0.2,0)  withpen pencircle scaled 0.1pt);")  
+      local res_pens = _draw_curves(valid_curves_p,true,
+				    "drawoptions(withcolor (0,0.5,0.5)  withpen pencircle scaled 0.05pt);")    
+
       res = res .. res_pens
       res = res .. _draw_curves_of_pens(valid_curves_p_bez,true,
 					"drawoptions(withcolor (1,0,0)  withpen pencircle scaled 0.01pt);")  
