@@ -71,7 +71,6 @@ end
 
 
 
-
 local function _decasteljau(p,c1,c2,q,t)
    local b00,b01,b02,b03 =  {},{},{},{}
    local b10,b11,b12=  {},{},{}
@@ -138,6 +137,20 @@ local function _decasteljau(p,c1,c2,q,t)
    return b30[1],b30[2],b00,b10,b20,b30,b21,b12,b03
 
 end
+
+local function _get_function_PXY(pixels)
+   local P = pixels
+   return function(X,Y)
+	     if P[Y]==nil then 
+		return false 
+	     elseif P[Y][X]==nil then 
+		return false
+	     else
+		return true
+	     end   
+	  end
+end
+
 
 local function pixel_map(edges)
    --
@@ -368,9 +381,67 @@ local function _remove_useless_curves(curves,pixels,flag)
       end
 
 
+      if delete_curve==false and flag=='pen' then
+	 -- Why d=0.5 ?
+	 d=0.5
+	 local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
+	 local P=_get_function_PXY(pixels)
+	 if  ( not(P(X,Y-1)) )
+	     and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))  
+             and ( not(P(X,Y+1)) ) then
+	    delete_curve=true
+	 end
+	 X,Y = math.floor(d+q[1]),math.floor(d+q[2])
+	 if  ( not(P(X,Y-1)) )
+	     and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))  
+             and ( not(P(X,Y+1)) ) then 
+	    delete_curve=true
+	 end
+
+	 
+	 -- local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
+	 -- print("BEZ p: X,Y,p",X.." "..Y,p[1]..' '..p[2])
+	 -- if pixels[Y-1]~= nil then
+	 --    print("BEZ pixels[Y-1][X-1]==",pixels[Y-1][X-1],P(X-1,Y-1))
+	 --    print("BEZ pixels[Y-1][X]==",pixels[Y-1][X],P(X,Y-1))
+	 --    print("BEZ pixels[Y-1][X+1]==",pixels[Y-1][X+1],P(X+1,Y-1))
+	 -- end
+	 -- if pixels[Y]~= nil then
+	 --    print("BEZ pixels[Y][X-1]==",pixels[Y][X-1])
+	 --    print("BEZ pixels[Y][X]==",pixels[Y][X])
+	 --    print("BEZ pixels[Y][X+1]==",pixels[Y][X+1])
+	 -- end
+	 -- if pixels[Y+1]~= nil then
+	 --    print("BEZ pixels[Y+1][X-1]==",pixels[Y+1][X-1])
+	 --    print("BEZ pixels[Y+1][X]==",pixels[Y+1][X])
+	 --    print("BEZ pixels[Y+1][X+1]==",pixels[Y+1][X+1])
+	 -- end
+
+
+	 -- local X,Y = math.floor(d+q[1]),math.floor(d+q[2])
+	 -- print("BEZ q: X,Y,q",X.." "..Y,q[1]..' '..q[2])
+	 -- if pixels[Y-1]~= nil then
+	 --    print("BEZ pixels[Y-1][X-1]==",pixels[Y-1][X-1])
+	 --    print("BEZ pixels[Y-1][X]==",pixels[Y-1][X])
+	 --    print("BEZ pixels[Y-1][X+1]==",pixels[Y-1][X+1])
+	 -- end
+	 -- if pixels[Y]~= nil then
+	 --    print("BEZ pixels[Y][X-1]==",pixels[Y][X-1])
+	 --    print("BEZ pixels[Y][X]==",pixels[Y][X])
+	 --    print("BEZ pixels[Y][X+1]==",pixels[Y][X+1])
+	 -- end
+	 -- if pixels[Y+1]~= nil then
+	 --    print("BEZ pixels[Y+1][X-1]==",pixels[Y+1][X-1])
+	 --    print("BEZ pixels[Y+1][X]==",pixels[Y+1][X])
+	 --    print("BEZ pixels[Y+1][X+1]==",pixels[Y+1][X+1])
+	 -- end
+	 
+      end
+
       if delete_curve then
-	 --print("BEZ DELETE THIS CURVE")
+	 --print("BEZ DELETE THIS CURVE "..i)
       else
+	 --print("BEZ KEEP THIS CURVE "..i)
 	 _curves[#_curves+1] = curve 
       end
 
@@ -868,16 +939,18 @@ function end_program()
 
 
       local valid_curves_p_bez_t = {}
-      --local _ty={}
-      --for k, _ in pairs(valid_curves_p_bez) do _ty[#_ty+1]=k end 
-      --local tu=2
-      --for k,curves in pairs({[_ty[tu]]=valid_curves_p_bez[_ty[tu]]}) do
+      -- local _ty={}
+      -- for k, _ in pairs(valid_curves_p_bez) do _ty[#_ty+1]=k end 
+      -- local tu=3 -- 3,10
+      -- for k,curves in pairs({[_ty[tu]]=valid_curves_p_bez[_ty[tu]]}) do
       for k,curves in pairs(valid_curves_p_bez) do
 	 local _c
 	 _c = _remove_useless_curves(curves,pixels,'pen')
 	 if #_c>0 then valid_curves_p_bez_t[k] = _c end
       end
       valid_curves_p_bez = valid_curves_p_bez_t
+
+
 
       local valid_curves_p_by_offset_t = {}
       for offset,array_of_pens in pairs(valid_curves_p_by_offset) do
@@ -915,22 +988,24 @@ function end_program()
       res = ''
 
       res = res .. _draw_pixels(pixels)
-
-      res = res .. _draw_curves(valid_curves_c,false,
-				"drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.01pt);")    
-
-      res = res .. _draw_curves(valid_curves_e,true,
-				"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.08pt);")      
-
-      --res = res .. _draw_curves(pen_over_knots,true,
-       --				"drawoptions(withcolor (0.5,0.2,0)  withpen pencircle scaled 0.1pt);")  
-
-      --local res_pens = _draw_curves(valid_curves_p,true,
-	--			    "drawoptions(withcolor (0,0.5,0.5)  withpen pencircle scaled 0.05pt);")    
-      --res = res .. res_pens
       
-      res = res .. _draw_curves_of_pens(valid_curves_p_bez,true,
-					"drawoptions(withcolor (1,0,0)  withpen pencircle scaled 0.01pt);")  
+      -- Contours 
+      res = res .. _draw_curves(valid_curves_c,false,"drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.01pt);")    
+
+      -- Envelopes
+      res = res .. _draw_curves(valid_curves_e,true,"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.08pt);")      
+
+      -- Support of pens
+      --res = res .. _draw_curves(pen_over_knots,true,"drawoptions(withcolor (0.5,0.2,0)  withpen pencircle scaled 0.1pt);")  
+
+      -- Polygonal version of pens
+      --local res_pens = _draw_curves(valid_curves_p,true,"drawoptions(withcolor (0,0.5,0.5)  withpen pencircle scaled 0.05pt);")    
+      --res = res .. res_pens
+
+      
+      -- Pens
+      res = res .. _draw_curves_of_pens(valid_curves_p_bez,true,"drawoptions(withcolor (1,0,0)  withpen pencircle scaled 0.01pt);")  
+
 
       f:write("\\startMPpage%%%% BEGIN CURVES\n")
       f:write(res)
