@@ -26,6 +26,19 @@ local function _eval_tonumber(q,offset)
    return {tonumber(qx+xo),tonumber(qy+yo)}
 end
 
+local function  _neighbourhood_inside(x,y,radious,func)
+   local r = math.floor(radious+0.5)
+   local P = func
+   local res = true
+   for Y=y-r,y+r do
+      for X=x-r,x+r do
+	 res = res and P(X,Y)
+      end
+   end
+   return res
+end
+
+
 local function _coord_table_to_str(p,c1,c2,q,shifted)
    local p,c1,c2,shifted=p,c1,c2,q,shifted
    if shifted==nil then shifted={0,0} end
@@ -59,6 +72,8 @@ local function _pen_normalizer(pen,offset,flag)
    end
    return _t
 end
+
+
 
 
 local function _draw_curve_tostring(p,c1,c2,q,shifted,options)
@@ -168,7 +183,7 @@ local function pixel_map(edges)
 	 local xsb,xse = xr[j][3],xr[j+1][3]
 	 if xsb>0 then 
 	    for x=xb,xe do
-	       pixel[tonumber(v[1])][x+x_off]=true
+	       pixel[tonumber(v[1])-y_off][x-x_off]=true
 	    end
 	 end
       end
@@ -218,6 +233,9 @@ local function _remove_useless_curves(curves,pixels,flag)
    local _curves = {}
    local array,Curves
    local _t={};_t[#_t+1]=''
+   -- P(X,Y)= true iff pixels[Y]~=nil and pixels[Y][X]~=nil
+   local P=_get_function_PXY(pixels)
+   --regex pixels\[\([[:alnum:]-+]+\)\]\[\([[:alnum:]-+]+\)\] *~=nil
    for i,curve in ipairs(curves) do 
       array={}
       p,c1,c2,q,shifted =curve[1],curve[2],curve[3],curve[4],curve[5]
@@ -246,9 +264,9 @@ local function _remove_useless_curves(curves,pixels,flag)
 	    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
 	    if pixels[Y-1] ~= nil and pixels[Y] ~=nil and pixels[Y+1]~=nil then
 	       local cond1,cond2,cond3 = 
-		  (pixels[Y-1][X-1]~=nil and pixels[Y-1][X]~=nil and pixels[Y-1][X+1]~=nil),
-	       (pixels[Y][X-1]~=nil and pixels[Y][X]~=nil and pixels[Y][X+1]~=nil), 
-	       (pixels[Y+1][X-1]~=nil and pixels[Y+1][X]~=nil and pixels[Y+1][X+1]~=nil) ;
+		  (P(X-1,Y-1) and P(X,Y-1) and P(X+1,Y-1)),
+	       (P(X-1,Y) and P(X,Y) and P(X+1,Y)), 
+	       (P(X-1,Y+1) and P(X,Y+1) and P(X+1,Y+1)) ;
 	       if  cond1 and cond2 and cond3 then
 		  -- OK 
 		  delete_curve = true
@@ -269,10 +287,11 @@ local function _remove_useless_curves(curves,pixels,flag)
 	 for i,v in ipairs(array) do
 	    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
 	    --print("BEZ X,Y",X,Y)
+	    -- must be simplified 
 	    local cond1,cond2,cond3 =
-	       (pixels[Y-1]==nil) or ((pixels[Y-1]~=nil) and (pixels[Y-1][X-1]==nil and pixels[Y-1][X]==nil and pixels[Y-1][X+1]==nil)),
-	    (pixels[Y]  ==nil) or ((pixels[Y]  ~=nil) and (pixels[Y][X-1]  ==nil and pixels[Y][X]  ==nil and pixels[Y][X+1]  ==nil)),
-	    (pixels[Y+1]==nil) or ((pixels[Y+1]~=nil) and (pixels[Y+1][X-1]==nil and pixels[Y+1][X]==nil and pixels[Y+1][X+1]==nil))
+	       (pixels[Y-1]==nil) or ((pixels[Y-1]~=nil) and (not(P(X-1,Y-1)) and not(P(X,Y-1)) and not(P(X+1,Y-1)))),
+	    (pixels[Y]  ==nil) or ((pixels[Y]  ~=nil) and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))),
+	    (pixels[Y+1]==nil) or ((pixels[Y+1]~=nil) and (not(P(X-1,Y+1)) and not(P(X,Y+1)) and not(P(X+1,Y+1))))
 	    if cond1 and cond2 and cond3 then
 	       outside_counter=outside_counter+1
 	    end
@@ -286,19 +305,20 @@ local function _remove_useless_curves(curves,pixels,flag)
       -- curves from the pen that are mostly outside
       if delete_curve==false and flag=='pen' then
 	 local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
+	 -- must be simplified 
 	 local cond1,cond2,cond3 =
-	    (pixels[Y-1]==nil) or ((pixels[Y-1]~=nil) and (pixels[Y-1][X-1]==nil and pixels[Y-1][X]==nil and pixels[Y-1][X+1]==nil)),
-	 (pixels[Y]  ==nil) or ((pixels[Y]  ~=nil) and (pixels[Y][X-1]  ==nil and pixels[Y][X]  ==nil and pixels[Y][X+1]  ==nil)),
-	 (pixels[Y+1]==nil) or ((pixels[Y+1]~=nil) and (pixels[Y+1][X-1]==nil and pixels[Y+1][X]==nil and pixels[Y+1][X+1]==nil))
+	    (pixels[Y-1]==nil) or ((pixels[Y-1]~=nil) and (not(P(X-1,Y-1)) and not(P(X,Y-1)) and not(P(X+1,Y-1)))),
+	 (pixels[Y]  ==nil) or ((pixels[Y]  ~=nil) and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))),
+	 (pixels[Y+1]==nil) or ((pixels[Y+1]~=nil) and (not(P(X-1,Y+1)) and not(P(X,Y+1)) and not(P(X+1,Y+1))))
 	 if cond1 and cond2 and cond3 then
 	    delete_curve = true
 	 end
 	 if delete_curve==false then
 	    X,Y = math.floor(d+q[1]),math.floor(d+q[2])
 	    cond1,cond2,cond3 =
-	       (pixels[Y-1]==nil) or ((pixels[Y-1]~=nil) and (pixels[Y-1][X-1]==nil and pixels[Y-1][X]==nil and pixels[Y-1][X+1]==nil)),
-	    (pixels[Y]  ==nil) or ((pixels[Y]  ~=nil) and (pixels[Y][X-1]  ==nil and pixels[Y][X]  ==nil and pixels[Y][X+1]  ==nil)),
-	    (pixels[Y+1]==nil) or ((pixels[Y+1]~=nil) and (pixels[Y+1][X-1]==nil and pixels[Y+1][X]==nil and pixels[Y+1][X+1]==nil))
+	       (pixels[Y-1]==nil) or ((pixels[Y-1]~=nil) and (not(P(X-1,Y-1)) and not(P(X,Y-1)) and not(P(X+1,Y-1)))),
+	    (pixels[Y]  ==nil) or ((pixels[Y]  ~=nil) and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))),
+	    (pixels[Y+1]==nil) or ((pixels[Y+1]~=nil) and (not(P(X-1,Y+1)) and not(P(X,Y+1)) and not(P(X+1,Y+1))))
 	    if cond1 and cond2 and cond3 then
 	       delete_curve = true
 	    end
@@ -309,31 +329,35 @@ local function _remove_useless_curves(curves,pixels,flag)
       -- curves from the pen that have p inside and q on the border (or viceversa)
       if delete_curve==false and flag=='pen' then
 	 -- Why d=0.5 ?
+	 --
+	 -- TODO: not delete but replace  with an appropriate subcurve
+	 --
+	 local X,Y,cond1,cond2
 	 d=0.5
-	 local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
-	 if pixels[Y-1] ~= nil and pixels[Y] ~=nil and pixels[Y+1]~=nil then
-	    local cond1,cond2,cond3 = 
-	       (pixels[Y-1][X-1]~=nil and pixels[Y-1][X]~=nil and pixels[Y-1][X+1]~=nil),
-	    (pixels[Y][X-1]~=nil and pixels[Y][X]~=nil and pixels[Y][X+1]~=nil), 
-	    (pixels[Y+1][X-1]~=nil and pixels[Y+1][X]~=nil and pixels[Y+1][X+1]~=nil) ;
-	    if  cond1 and cond2 and cond3 then
-	       -- OK 
-	       delete_curve = true
-	       --print("BEZ (p) DELETE i="..i,X,Y,p[1],p[2])
-	    end
+	 X,Y = math.floor(d+p[1]),math.floor(d+p[2])
+	 cond1 = _neighbourhood_inside(X,Y,1,P)
+	 d=0
+	 X,Y = math.floor(d+p[1]),math.floor(d+p[2])
+	 cond2 = _neighbourhood_inside(X,Y,1,P)
+	 if cond1 and cond2  then
+	    -- OK 
+	    delete_curve = true
+	    --print("BEZ (p) DELETE i="..i,X,Y,p[1],p[2])
 	 end
+	 d=0.5
 	 X,Y = math.floor(d+q[1]),math.floor(d+q[2])
-	 if pixels[Y-1] ~= nil and pixels[Y] ~=nil and pixels[Y+1]~=nil then
-	    local cond1,cond2,cond3 = 
-	       (pixels[Y-1][X-1]~=nil and pixels[Y-1][X]~=nil and pixels[Y-1][X+1]~=nil),
-	    (pixels[Y][X-1]~=nil and pixels[Y][X]~=nil and pixels[Y][X+1]~=nil), 
-	    (pixels[Y+1][X-1]~=nil and pixels[Y+1][X]~=nil and pixels[Y+1][X+1]~=nil) ;
-	    if cond1 and cond2 and cond3 then
-	       -- OK 
-	       delete_curve = true
-	       --print("BEZ (q) DELETE i="..i)
-	    end
+	 cond1 = _neighbourhood_inside(X,Y,1,P)
+	 d=0
+	 X,Y = math.floor(d+q[1]),math.floor(d+q[2])
+	 cond2 = _neighbourhood_inside(X,Y,1,P)
+	 if cond1 and cond2  then
+	    -- OK 
+	    delete_curve = true
+	    --print("BEZ (p) DELETE i="..i,X,Y,p[1],p[2])
 	 end
+
+
+
 	 -- if delete_curve ==false then
 	 --    local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
 	 --    local x,y 
@@ -377,7 +401,7 @@ local function _remove_useless_curves(curves,pixels,flag)
 	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
 	 --    x,y = X-1,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
 	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
-         -- end 
+	 --end 
       end
 
 
@@ -385,17 +409,16 @@ local function _remove_useless_curves(curves,pixels,flag)
 	 -- Why d=0.5 ?
 	 d=0.5
 	 local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
-	 local P=_get_function_PXY(pixels)
 	 if  ( not(P(X,Y-1)) )
 	     and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))  
              and ( not(P(X,Y+1)) ) then
-	    delete_curve=true
+	     delete_curve=true
 	 end
 	 X,Y = math.floor(d+q[1]),math.floor(d+q[2])
 	 if  ( not(P(X,Y-1)) )
 	     and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))  
              and ( not(P(X,Y+1)) ) then 
-	    delete_curve=true
+	     delete_curve=true
 	 end
 
 	 
@@ -921,7 +944,6 @@ function end_program()
       valid_curves_e,valid_curves_p,pen_over_knots,valid_curves_p_by_offset = _get_envelopes_and_pens(char)
       
       valid_curves_p_bez = _get_beziers_of_pen(pen_over_knots)
-
       valid_curves_e = 
 	 _remove_envelope_curves_in_pen(valid_curves_e,valid_curves_p_by_offset)
       
@@ -967,24 +989,24 @@ function end_program()
       end
       valid_curves_p_by_offset = valid_curves_p_by_offset_t 
 
-
       print("BEZ DRAW")
-      --[==[ Not necessary any more ##################
-      --local res_pens = _draw_curves(valid_curves_p,true,
-      --"drawoptions(withcolor (0,1,1)  withpen pencircle scaled 0.01pt);")    
-      --
-      --f:write("\\startMPpage%%%% BEGIN EDGES\n")
-      --res = "%% char " .. index .."\n"
-      --local pre_res = char['pre_res'] or ""
-      --res = res .. pre_res .."\n"
-      --local v_res = char['res'] or ""
-      --res = res .. v_res .."\n"
-      --local post_res = char['post_res'] or ""
-      --res = res .. post_res .."\n"
-      --res = res .. res_pens
-      --f:write(res)
-      --f:write("\n\\stopMPpage%%%% END EDGES\n")
-      --##############################]==]
+      -- Not necessary any more ################## 
+      -- local res_pens = _draw_curves(valid_curves_p,true,
+      -- "drawoptions(withcolor (0,1,1)  withpen pencircle scaled 0.01pt);")    
+
+      
+      -- f:write("\\startMPpage%%%% BEGIN EDGES\n")
+      -- res = "%% char " .. index .."\n"
+      -- local pre_res = char['pre_res'] or ""
+      -- res = res .. pre_res .."\n"
+      -- local v_res = char['res'] or ""
+      -- res = res .. v_res .."\n"
+      -- local post_res = char['post_res'] or ""
+      -- res = res .. post_res .."\n"
+      -- res = res .. res_pens
+      -- f:write(res)
+      -- f:write("\n\\stopMPpage%%%% END EDGES\n")
+      --##############################
       res = ''
 
       res = res .. _draw_pixels(pixels)
