@@ -38,6 +38,19 @@ local function  _neighbourhood_inside(x,y,radious,func)
    return res
 end
 
+local function  _neighbourhood_outside(x,y,radious,func)
+   local r = math.floor(radious+0.5)
+   local P = func
+   local res = false
+   for Y=y-r,y+r do
+      for X=x-r,x+r do
+	 res = res or P(X,Y)
+      end
+   end
+   return not(res)
+end
+
+
 
 local function _coord_table_to_str(p,c1,c2,q,shifted)
    local p,c1,c2,shifted=p,c1,c2,q,shifted
@@ -359,72 +372,32 @@ local function _remove_useless_curves(curves,pixels,flag)
 	    delete_curve = true
 	    --print("BEZ (p) DELETE i="..i,X,Y,p[1],p[2])
 	 end
-
-	 -- if delete_curve ==false then
-	 --    local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
-	 --    local x,y 
-	 --    _t[#_t+1]=string.format("label( \"p%s\", (%s,%s2));\n",i,(X+1/8),(Y+1/8))
-	 --    x,y = X,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
-	 -- 				      x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X+1,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
-	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X-1,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
-	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
-	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X+1,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
-	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X-1,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
-	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
-	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X+1,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
-	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X-1,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor red;\n",
-	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
-
-	 --    X,Y = math.floor(d+q[1]),math.floor(d+q[2])
-	 --    _t[#_t+1]=string.format("label( \"q%s\", (%s,%s2));\n",i,(X-1/8),(Y-1/8))
-	 --    x,y = X,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
-	 -- 				      x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X+1,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
-	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X-1,Y;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
-	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
-	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X+1,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
-	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X-1,Y+1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
-	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
-	 -- 					x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X+1,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
-	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
-	 --    x,y = X-1,Y-1;_t[#_t+1]=string.format("draw (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withpen pencircle scaled 0.01 pt withcolor blue;\n",
-	 -- 					  x,y,x+1,y,x+1,y+1,x,y+1)
-	 --end 
       end
 
 
       if delete_curve==false and flag=='pen' then
+	 -- not(P(x,y)) means P(x,y) is outside the pixels map
 	 -- Why d=0.5 ?
 	 d=0.5
 	 local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
-	 if  ( not(P(X,Y-1)) )
-	     and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))  
-             and ( not(P(X,Y+1)) ) then
-	     delete_curve=true
+	 if  ( not(P(X,Y-1)) ) and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))    and ( not(P(X,Y+1)) ) then
+	    delete_curve=true
 	 end
 	 X,Y = math.floor(d+q[1]),math.floor(d+q[2])
-	 if  ( not(P(X,Y-1)) )
-	 and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))  
-             and ( not(P(X,Y+1)) ) then 
-	     delete_curve=true
+	 if  ( not(P(X,Y-1)) )	 and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))   and ( not(P(X,Y+1)) ) then 
+	    delete_curve=true
 	 end
-
-	 
       end
+
+      
+      -- cut a curve to delete the part that is inside
+      --if delete_curve==false  then
+	 --d=0
+	 --local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
+
+      --end
+      
+
 
       if delete_curve then
 	 --print("BEZ DELETE THIS CURVE "..i)
@@ -436,11 +409,19 @@ local function _remove_useless_curves(curves,pixels,flag)
       -- DEBUG######################## 
       if delete_curve==false then 
 	 _t[#_t+1]='drawoptions(withcolor (0.4,0.3,1)  withpen pencircle scaled 0.08pt);ahlength :=  0.15;\n'
-	 local d =0.0
+	 local d =0
 	 for i,v in ipairs(array) do
 	    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
-	    _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.9,0.9,0.9);\n",
-				    X,Y,X+1,Y,X+1,Y+1,X,Y+1)
+	    if (_neighbourhood_inside(X,Y,2,P))  then 
+	       _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.4,0.9,0.9);\n",
+				       X,Y,X+1,Y,X+1,Y+1,X,Y+1)
+	    elseif  _neighbourhood_outside(X,Y,2,P) then 
+	       _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.9,0.4,0.9);\n",
+				       X,Y,X+1,Y,X+1,Y+1,X,Y+1)
+	    else
+	       _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.9,0.9,0.9);\n",
+				       X,Y,X+1,Y,X+1,Y+1,X,Y+1)
+	    end
 	    _t[#_t+1]=string.format("label( \"%s\", (%s,%s));\n",i-1,(2*X+1)/2,(2*Y+1)/2)
 	 end
 	 for i,v in ipairs(array) do
@@ -909,6 +890,7 @@ function end_program()
       valid_curves_e,valid_curves_p,pen_over_knots,valid_curves_p_by_offset = _get_envelopes_and_pens(char)
       
       valid_curves_p_bez = _get_beziers_of_pen(pen_over_knots)
+
       valid_curves_e = 
 	 _remove_envelope_curves_in_pen(valid_curves_e,valid_curves_p_by_offset)
       
