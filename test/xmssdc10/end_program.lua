@@ -192,11 +192,12 @@ local function pixel_map(edges)
 end
 
 
-local function _decasteljau_bisection(curve,array,level)
+local function _decasteljau_bisection(curve,array,level,time)
    --
    --
    --
-   if level==15 then return array end
+
+   if level==32 then return array end
    level=level+1
 
    local p,c1,c2,q =  curve[1],curve[2],curve[3],curve[4]
@@ -213,10 +214,10 @@ local function _decasteljau_bisection(curve,array,level)
       return array
    end
 
-   array[#array+1]={x,y}
+   array[#array+1]={x,y,(time[1]+time[2])/2}
    --print("array["..#array.."]=",array[#array][1],array[#array][2])
-   array=_decasteljau_bisection({p0,c10,c20,q0},array,level)
-   array=_decasteljau_bisection({p1,c11,c21,q1},array,level)
+   array=_decasteljau_bisection({p0,c10,c20,q0},array,level,{time[1],(time[1]+time[2])/2})
+   array=_decasteljau_bisection({p1,c11,c21,q1},array,level,{(time[1]+time[2])/2,time[2]})
    return array
    --_coord_table_to_str(p,c1,c2,q,shifted)
 end
@@ -247,9 +248,9 @@ local function _remove_useless_curves(curves,pixels,flag)
       --print("BEZ i",i,p,q,shifted)
       p,c1,c2,q = 
 	 _eval_tonumber(p,shifted),_eval_tonumber(c1,shifted),_eval_tonumber(c1,shifted),_eval_tonumber(q,shifted)
-      array[#array+1]=p
-      array[#array+1]=q
-      array = _decasteljau_bisection({p,c1,c2,q},array,0)
+      array[#array+1]={p[1],p[2],0}
+      array = _decasteljau_bisection({p,c1,c2,q},array,0,{0,1})
+      array[#array+1]={q[1],q[2],1}
       local d =0.0
       local delete_curve = false
 
@@ -257,6 +258,9 @@ local function _remove_useless_curves(curves,pixels,flag)
       if(math.floor(d+p[1])==math.floor(d+q[1])) and (math.floor(d+p[2])==math.floor(d+q[2]))then
 	    delete_curve=true
       end
+
+      -- sort array by time
+      table.sort(array,function(e1,e2) return e1[3]<e2[3] end)
 
       -- curves that for sure  are inside 
       if delete_curve==false then
@@ -356,8 +360,6 @@ local function _remove_useless_curves(curves,pixels,flag)
 	    --print("BEZ (p) DELETE i="..i,X,Y,p[1],p[2])
 	 end
 
-
-
 	 -- if delete_curve ==false then
 	 --    local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
 	 --    local x,y 
@@ -416,48 +418,11 @@ local function _remove_useless_curves(curves,pixels,flag)
 	 end
 	 X,Y = math.floor(d+q[1]),math.floor(d+q[2])
 	 if  ( not(P(X,Y-1)) )
-	     and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))  
+	 and (not(P(X-1,Y)) and not(P(X,Y)) and not(P(X+1,Y)))  
              and ( not(P(X,Y+1)) ) then 
 	     delete_curve=true
 	 end
 
-	 
-	 -- local X,Y = math.floor(d+p[1]),math.floor(d+p[2])
-	 -- print("BEZ p: X,Y,p",X.." "..Y,p[1]..' '..p[2])
-	 -- if pixels[Y-1]~= nil then
-	 --    print("BEZ pixels[Y-1][X-1]==",pixels[Y-1][X-1],P(X-1,Y-1))
-	 --    print("BEZ pixels[Y-1][X]==",pixels[Y-1][X],P(X,Y-1))
-	 --    print("BEZ pixels[Y-1][X+1]==",pixels[Y-1][X+1],P(X+1,Y-1))
-	 -- end
-	 -- if pixels[Y]~= nil then
-	 --    print("BEZ pixels[Y][X-1]==",pixels[Y][X-1])
-	 --    print("BEZ pixels[Y][X]==",pixels[Y][X])
-	 --    print("BEZ pixels[Y][X+1]==",pixels[Y][X+1])
-	 -- end
-	 -- if pixels[Y+1]~= nil then
-	 --    print("BEZ pixels[Y+1][X-1]==",pixels[Y+1][X-1])
-	 --    print("BEZ pixels[Y+1][X]==",pixels[Y+1][X])
-	 --    print("BEZ pixels[Y+1][X+1]==",pixels[Y+1][X+1])
-	 -- end
-
-
-	 -- local X,Y = math.floor(d+q[1]),math.floor(d+q[2])
-	 -- print("BEZ q: X,Y,q",X.." "..Y,q[1]..' '..q[2])
-	 -- if pixels[Y-1]~= nil then
-	 --    print("BEZ pixels[Y-1][X-1]==",pixels[Y-1][X-1])
-	 --    print("BEZ pixels[Y-1][X]==",pixels[Y-1][X])
-	 --    print("BEZ pixels[Y-1][X+1]==",pixels[Y-1][X+1])
-	 -- end
-	 -- if pixels[Y]~= nil then
-	 --    print("BEZ pixels[Y][X-1]==",pixels[Y][X-1])
-	 --    print("BEZ pixels[Y][X]==",pixels[Y][X])
-	 --    print("BEZ pixels[Y][X+1]==",pixels[Y][X+1])
-	 -- end
-	 -- if pixels[Y+1]~= nil then
-	 --    print("BEZ pixels[Y+1][X-1]==",pixels[Y+1][X-1])
-	 --    print("BEZ pixels[Y+1][X]==",pixels[Y+1][X])
-	 --    print("BEZ pixels[Y+1][X+1]==",pixels[Y+1][X+1])
-	 -- end
 	 
       end
 
@@ -468,25 +433,27 @@ local function _remove_useless_curves(curves,pixels,flag)
 	 _curves[#_curves+1] = curve 
       end
 
-   -- DEBUG######################## 
-   -- _t[#_t+1]='drawoptions(withcolor (0.4,0.3,1)  withpen pencircle scaled 0.08pt);ahlength :=  0.15;\n'
-   -- local d =0.0
-   -- for i,v in ipairs(array) do
-   --    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
-   --    _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.9,0.9,0.9);\n",
-   -- 			      X,Y,X+1,Y,X+1,Y+1,X,Y+1)
-   --    _t[#_t+1]=string.format("label( \"%s\", (%s,%s2));\n",i,(2*X+1)/2,(2*Y+1)/2)
-   -- end
-   -- for i,v in ipairs(array) do
-   --    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
-   --    _t[#_t+1]=string.format("draw (%s,%s) withpen pencircle scaled 0.08pt withcolor (0.4,0.3,1);\n",v[1],v[2])
-   --    _t[#_t+1]=string.format("draw (%s,%s) withpen pencircle scaled 0.08pt withcolor (0.4,0.3,0);\n",X,Y)
-   --    --_t[#_t+1]=string.format("label( \"%s\", (%s+0.1,%s+0.1));\n",i,X,Y)
-   --    --_t[#_t+1]=string.format("drawarrow (%s,%s) --(%s,%s) ;\n",v[1],v[2],X,Y)
-   -- end
+      -- DEBUG######################## 
+      if delete_curve==false then 
+	 _t[#_t+1]='drawoptions(withcolor (0.4,0.3,1)  withpen pencircle scaled 0.08pt);ahlength :=  0.15;\n'
+	 local d =0.0
+	 for i,v in ipairs(array) do
+	    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
+	    _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.9,0.9,0.9);\n",
+				    X,Y,X+1,Y,X+1,Y+1,X,Y+1)
+	    _t[#_t+1]=string.format("label( \"%s\", (%s,%s));\n",i-1,(2*X+1)/2,(2*Y+1)/2)
+	 end
+	 for i,v in ipairs(array) do
+	    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
+	    _t[#_t+1]=string.format("draw (%s,%s) withpen pencircle scaled 0.08pt withcolor (0.4,0.3,1);\n",v[1],v[2])
+	    --_t[#_t+1]=string.format("draw (%s,%s) withpen pencircle scaled 0.08pt withcolor (0.4,0.3,0);\n",X,Y)
+	    --_t[#_t+1]=string.format("label( \"%s\", (%s+0.1,%s+0.1));\n",i,X,Y)
+	    --_t[#_t+1]=string.format("drawarrow (%s,%s) --(%s,%s) ;\n",v[1],v[2],X,Y)
+	 end
+      end
    --##########################DEBUG
    end --for i,curve in ipairs(curves) do 
-   return _curves --,table.concat(_t) 
+   return _curves ,table.concat(_t) 
    --return table.concat(_t) 
 end
 
@@ -858,7 +825,7 @@ end
 
 local function _draw_pixels(pixels)
    local res = ''
-   res = res .. "drawoptions(withcolor (0.8,0.8,0.8) withpen pencircle scaled 0.01pt);\n" 
+   res = res .. "drawoptions(withcolor (0.6,0.6,0.6) withpen pencircle scaled 0.01pt);\n" 
    local _t={}
    for y,v in pairs(pixels) do
       --print("BEZ row=",row)
@@ -926,11 +893,9 @@ function end_program()
       local valid_curves = {}
       local index = t[i]
       local char= chartable[index]
-      -- useful to have, but unused
-      -- because edges are stored in
-      -- char['pre_res'] by print_edges.lua
       local edges = char['edges']
       local ye_map = {}
+      local temp_res = ''
       for i,v in ipairs(edges[1][1]) do ye_map[v[1]] = i  end
       char['edges_map'] = ye_map 
 
@@ -948,16 +913,23 @@ function end_program()
 	 _remove_envelope_curves_in_pen(valid_curves_e,valid_curves_p_by_offset)
       
 
+      local _temp_res =''
 
-      valid_curves_e = 
+      valid_curves_c,_temp_res = 
+	  _remove_useless_curves(valid_curves_c,pixels)
+       
+       temp_res = temp_res .. _temp_res
+
+      valid_curves_e,_temp_res = 
 	  _remove_useless_curves(valid_curves_e,pixels)
 
-      valid_curves_c = 
-	  _remove_useless_curves(valid_curves_c,pixels)
-      
+       temp_res = temp_res .. _temp_res      
+
 
       valid_curves_p = 
 	  _remove_useless_curves(valid_curves_p,pixels)
+
+       temp_res = temp_res .. _temp_res
 
 
       local valid_curves_p_bez_t = {}
@@ -966,9 +938,9 @@ function end_program()
       -- local tu=3 -- 3,10
       -- for k,curves in pairs({[_ty[tu]]=valid_curves_p_bez[_ty[tu]]}) do
       for k,curves in pairs(valid_curves_p_bez) do
-	 local _c
-	 _c = _remove_useless_curves(curves,pixels,'pen')
-	 if #_c>0 then valid_curves_p_bez_t[k] = _c end
+	 local _c,_r
+	 _c,_r = _remove_useless_curves(curves,pixels,'pen')
+	 if #_c>0 then valid_curves_p_bez_t[k] = _c ; temp_res = temp_res.._r end
       end
       valid_curves_p_bez = valid_curves_p_bez_t
 
@@ -988,7 +960,6 @@ function end_program()
 	 if #_tt>0 then valid_curves_p_by_offset_t[offset]= _tt end
       end
       valid_curves_p_by_offset = valid_curves_p_by_offset_t 
-
       print("BEZ DRAW")
       -- Not necessary any more ################## 
       -- local res_pens = _draw_curves(valid_curves_p,true,
@@ -1009,11 +980,11 @@ function end_program()
       --##############################
       res = ''
 
+      res = res .. temp_res
       res = res .. _draw_pixels(pixels)
       
       -- Contours 
       res = res .. _draw_curves(valid_curves_c,false,"drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.01pt);")    
-
       -- Envelopes
       res = res .. _draw_curves(valid_curves_e,true,"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.08pt);")      
 
