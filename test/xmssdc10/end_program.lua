@@ -908,7 +908,7 @@ function end_program()
        temp_res = temp_res .. _temp_res      
 
 
-      valid_curves_p = 
+      valid_curves_p, _temp_res = 
 	  _remove_useless_curves(valid_curves_p,pixels)
 
        temp_res = temp_res .. _temp_res

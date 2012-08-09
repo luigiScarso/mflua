@@ -1,4 +1,4 @@
 batchmode;
-fill fullcircle xscaled (35) yscaled (35) rotated (0) shifted (0,0);
+fill fullcircle xscaled (12) yscaled (12)  rotated (0) shifted (0,0);
 shipit;
 bye.
