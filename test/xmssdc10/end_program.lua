@@ -260,7 +260,7 @@ local function _remove_useless_curves(curves,pixels,flag)
       end
       --print("BEZ i",i,p,q,shifted)
       p,c1,c2,q = 
-	 _eval_tonumber(p,shifted),_eval_tonumber(c1,shifted),_eval_tonumber(c1,shifted),_eval_tonumber(q,shifted)
+	 _eval_tonumber(p,shifted),_eval_tonumber(c1,shifted),_eval_tonumber(c2,shifted),_eval_tonumber(q,shifted)
       array[#array+1]={p[1],p[2],0}
       array = _decasteljau_bisection({p,c1,c2,q},array,0,{0,1})
       array[#array+1]={q[1],q[2],1}
