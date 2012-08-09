@@ -924,7 +924,7 @@ function end_program()
       valid_curves_p,_temp_res = 
 	  _remove_useless_curves(valid_curves_p,pixels)
 
-       temp_res = temp_res .. _temp_res
+       --temp_res = temp_res .. _temp_res
 
 
       local valid_curves_p_bez_t = {}
