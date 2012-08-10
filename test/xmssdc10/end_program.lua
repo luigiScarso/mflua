@@ -394,7 +394,7 @@ local function _remove_useless_curves(curves,pixels,flag)
       
       -- cut a curve to delete the part that is inside or outside 
       -- 
-      if delete_curve==false  then
+      if delete_curve==false then
 	 local initial,drop,keep=-1,0,1
 	 local state =initial
 	 d=0
@@ -404,7 +404,7 @@ local function _remove_useless_curves(curves,pixels,flag)
 	 for i,v in ipairs(array) do
 	    X,Y,time = math.floor(d+v[1]),math.floor(d+v[2]),v[3]
 	    --print("BEZ X,Y,time=",X,Y,time)
-	    if _neighbourhood_inside(X,Y,2,P) or _neighbourhood_outside(X,Y,2,P) then 
+	    if _neighbourhood_inside(X,Y,2,P) or _neighbourhood_outside(X,Y,1,P) then 
 	       --X,Y is inside or outside, new state will be "drop"
 	       --print("BEZ next is a drop ,state=", state, "#time_array"..#time_array)
 	       if state == initial then 
@@ -457,28 +457,31 @@ local function _remove_useless_curves(curves,pixels,flag)
 	       --local function _e(arg) return _eval(mflua.number_to_string_round5(arg),'(0,0)') end
 	       --print("BEZ p,c1,c2,q=",_e(p),_e(c1),_e(c2),_e(q))
 	       for i=1,#time_array,2 do
-		  --print("BEZ ----")
+		 --print("BEZ ----")
 		  local ti,tii=time_array[i][3],time_array[i+1][3]
-		  local P,C1,C2,Q
-		  -- right part
-		  _,_,_,_,_, P,C1,C2,Q = _decasteljau(p,c1,c2,q,ti)
-		  --print("BEZ P,C1,C2,Q=",_e(P),_e(C1),_e(C2),_e(Q))
-		  --_,_,_P,C1,C2,Q,_,_,_ = _decasteljau(P,C1,C2,Q,(tii-ti)/(1-ti))
-		  -- left part of the right part
-		  _,_,_P,C1,C2,Q = _decasteljau(P,C1,C2,Q,(tii-ti)/(1-ti))
-		  --print("BEZ i, ti, tii,P,C1,C2,Q=",(i+1)/2,ti,(tii-ti)/(1-ti), _e(P),_e(C1),_e(C2),_e(Q))
-		  local _temp_array = {}
-		  for i,v in ipairs(curve) do _temp_array[#_temp_array+1]=v end
-		  _temp_array[1]=mflua.number_to_string_round5(P)
-		  _temp_array[2]=mflua.number_to_string_round5(C1)
-		  _temp_array[3]=mflua.number_to_string_round5(C2)
-		  _temp_array[4]=mflua.number_to_string_round5(Q)
-		  _temp_array[5]='(0,0)' -- shift is already included
-		  additional_array[#additional_array+1]=_temp_array
+		  if ti<1 then 
+		     local P,C1,C2,Q
+		     -- right part
+		     _,_,_,_,_, P,C1,C2,Q = _decasteljau(p,c1,c2,q,ti)
+		     --print("BEZ P,C1,C2,Q=",_e(P),_e(C1),_e(C2),_e(Q))
+		     --_,_,_P,C1,C2,Q,_,_,_ = _decasteljau(P,C1,C2,Q,(tii-ti)/(1-ti))
+		     -- left part of the right part
+		     _,_,_P,C1,C2,Q = _decasteljau(P,C1,C2,Q,(tii-ti)/(1-ti))
+		     --print("BEZ i, ti, tii,ti==1",(i+1)/2,ti,tii,ti==1)
+		     --print("BEZ i, ti, tii,P,C1,C2,Q=",(i+1)/2,ti,(tii-ti)/(1-ti), _e(P),_e(C1),_e(C2),_e(Q))
+		     local _temp_array = {}
+		     for i,v in ipairs(curve) do _temp_array[#_temp_array+1]=v end
+		     _temp_array[1]=mflua.number_to_string_round5(P)
+		     _temp_array[2]=mflua.number_to_string_round5(C1)
+		     _temp_array[3]=mflua.number_to_string_round5(C2)
+		     _temp_array[4]=mflua.number_to_string_round5(Q)
+		     _temp_array[5]='(0,0)' -- shift is already included
+		     additional_array[#additional_array+1]=_temp_array
+		  end
 	       end --for
 	    end -- if math.mod(#time_array,2)~=0
 	 end --#time_array > 0
-      end -- if #time_array > 0 
+      end 
       
 
 
@@ -486,11 +489,11 @@ local function _remove_useless_curves(curves,pixels,flag)
 	 --print("BEZ DELETE THIS CURVE "..i)
       else
 	 --print("BEZ KEEP THIS CURVE "..i)
-	 _curves[#_curves+1] = curve  -- add array 
+	 _curves[#_curves+1] = curve  -- TODO add its decasteljau array 
       end
 
       for i,additional_curve in ipairs(additional_array) do 
-	 _curves[#_curves+1] = additional_curve -- add its array 
+	 _curves[#_curves+1] = additional_curve -- TODO add its decasteljau array 
       end
 
 
@@ -1048,6 +1051,7 @@ function end_program()
 	 for l,pen in ipairs(array_of_pens) do
 	    local curves=_pen_normalizer(pen,offset,true)
 	    local _c = _remove_useless_curves(curves,pixels,'pen')
+	    -- We must reinsert the offset 
 	    if #_c>0 then _tt[#_tt+1]= _pen_normalizer(_c,offset,false) end
 	 end
 	 if #_tt>0 then valid_curves_p_by_offset_t[offset]= _tt end
