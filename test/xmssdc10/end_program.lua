@@ -184,8 +184,9 @@ local function pixel_map(edges)
    --
    --
    --
+   if edges == nil then return nil end 
    local pixel = {}
-   print(edges[1][2],edges[1][3])
+   --print(edges[1][2],edges[1][3])
    local y = edges[1][1]
    local x_off,y_off = edges[1][2],edges[1][3]
    --print("BEZ offset=",x_off,y_off)
@@ -246,12 +247,13 @@ local function _remove_useless_curves(curves,pixels,flag)
    --print("BEZ _remove_useless_curves")
    local p,c1,c2,q,shifted
    local _curves = {}
-   local array,Curves
+   local array,additional_array
    local _t={};_t[#_t+1]=''
    -- P(X,Y)= true iff pixels[Y]~=nil and pixels[Y][X]~=nil
    local P=_get_function_PXY(pixels)
    for i,curve in ipairs(curves) do 
-      array={}
+      array,additional_array={},{}
+      
       p,c1,c2,q,shifted =curve[1],curve[2],curve[3],curve[4],curve[5]
       --print("BEZ p,c1,c2,q,shifted=",p,c1,c2,q,shifted)
       -- straight line 
@@ -390,16 +392,93 @@ local function _remove_useless_curves(curves,pixels,flag)
       end
 
       
-      -- cut a curve to delete the part that is inside
+      -- cut a curve to delete the part that is inside or outside 
+      -- 
       if delete_curve==false  then
+	 local initial,drop,keep=-1,0,1
+	 local state =initial
 	 d=0
-	 local X0,Y0 = math.floor(d+array[1][1]),math.floor(d+array[1][2])
-	 -- keep left, drop right part of the curve
-	 if P(X0,Y0) then
-
+	 local X,Y,time = math.floor(d+array[1][1]),math.floor(d+array[1][2]),0
+	 local time_array = {}
+	 --print("BEZ i="..i)
+	 for i,v in ipairs(array) do
+	    X,Y,time = math.floor(d+v[1]),math.floor(d+v[2]),v[3]
+	    --print("BEZ X,Y,time=",X,Y,time)
+	    if _neighbourhood_inside(X,Y,2,P) or _neighbourhood_outside(X,Y,2,P) then 
+	       --X,Y is inside or outside, new state will be "drop"
+	       --print("BEZ next is a drop ,state=", state, "#time_array"..#time_array)
+	       if state == initial then 
+		  state=drop
+	       elseif state == drop then 
+		  -- do nothing i.e. eat it
+	       else --  a transition from "keep" to "drop"
+		  time_array[#time_array+1]={v[1],v[2],time} -- end
+		  state = drop 
+	       end
+	    else 
+	       --print("BEZ next is a keep ,state=", state, "#time_array"..#time_array)
+	       -- X,Y is on the frontier, new state will be "keep"
+	       if state == initial then
+		  state=keep
+		  time_array[#time_array+1]={v[1],v[2],time} -- start
+	       elseif state == keep then 
+		  -- do nothing, stay here
+	       else -- a transition from  "drop" to "keep"
+		  time_array[#time_array+1]={v[1],v[2],time} -- start
+		  state = keep 
+	       end
+	    end 
+	    end -- for i,v in ipairs(array) 
+	 --print("BEZ #time_array ="..#time_array)
+	 if state == keep then
+	    time_array[#time_array+1]={q[1],q[2],1} -- end
 	 end
+	 --print("BEZ #time_array ="..#time_array)
+	 --print("BEZ time_array[1][3], time_array[2][3]",time_array[1][3], time_array[2][3])
 
-      end
+	 if #time_array > 1 and not(time_array[1][3]==0 and time_array[2][3]==1) then 
+	    if math.mod(#time_array,2)~=0 then
+	       print("! Error on splitting a curve:found an open time interval",#time_array)
+	    else
+	       --print("BEZ delete_curve",time_array[1][3],time_array[2][3])
+	       delete_curve = true 
+	       --
+	       --                               ti<=t'<=1    
+	       --                 ┏━━━━━━━━━━━━━━━━━━━━━━►
+	       -- p....╳╳╳╳╳╳╳╳╳╳╳▉▉▉▉▉▉▉▉▉▉╳╳╳╳╳╳╳╳╳╳...q
+	       --      ●   drop   ●  keep  ●  drop   ●
+	       -- 0                ti       tii           1 
+
+	       --  0<=t'<=(tii-ti)/(1-ti)
+	       -- ◄━━━━━━━━━┓
+	       --  ▉▉▉▉▉▉▉▉▉▉╳╳╳╳╳╳╳╳╳╳...q
+	       --  ●  keep  ●  drop   ●
+	       -- 0        tii        1 
+	       --local function _e(arg) return _eval(mflua.number_to_string_round5(arg),'(0,0)') end
+	       --print("BEZ p,c1,c2,q=",_e(p),_e(c1),_e(c2),_e(q))
+	       for i=1,#time_array,2 do
+		  --print("BEZ ----")
+		  local ti,tii=time_array[i][3],time_array[i+1][3]
+		  local P,C1,C2,Q
+		  -- right part
+		  _,_,_,_,_, P,C1,C2,Q = _decasteljau(p,c1,c2,q,ti)
+		  --print("BEZ P,C1,C2,Q=",_e(P),_e(C1),_e(C2),_e(Q))
+		  --_,_,_P,C1,C2,Q,_,_,_ = _decasteljau(P,C1,C2,Q,(tii-ti)/(1-ti))
+		  -- left part of the right part
+		  _,_,_P,C1,C2,Q = _decasteljau(P,C1,C2,Q,(tii-ti)/(1-ti))
+		  --print("BEZ i, ti, tii,P,C1,C2,Q=",(i+1)/2,ti,(tii-ti)/(1-ti), _e(P),_e(C1),_e(C2),_e(Q))
+		  local _temp_array = {}
+		  for i,v in ipairs(curve) do _temp_array[#_temp_array+1]=v end
+		  _temp_array[1]=mflua.number_to_string_round5(P)
+		  _temp_array[2]=mflua.number_to_string_round5(C1)
+		  _temp_array[3]=mflua.number_to_string_round5(C2)
+		  _temp_array[4]=mflua.number_to_string_round5(Q)
+		  _temp_array[5]='(0,0)' -- shift is already included
+		  additional_array[#additional_array+1]=_temp_array
+	       end --for
+	    end -- if math.mod(#time_array,2)~=0
+	 end --#time_array > 0
+      end -- if #time_array > 0 
       
 
 
@@ -407,26 +486,35 @@ local function _remove_useless_curves(curves,pixels,flag)
 	 --print("BEZ DELETE THIS CURVE "..i)
       else
 	 --print("BEZ KEEP THIS CURVE "..i)
-	 _curves[#_curves+1] = curve 
+	 _curves[#_curves+1] = curve  -- add array 
       end
+
+      for i,additional_curve in ipairs(additional_array) do 
+	 _curves[#_curves+1] = additional_curve -- add its array 
+      end
+
 
       -- DEBUG######################## 
       if delete_curve==false then 
 	 _t[#_t+1]='drawoptions(withcolor (0.4,0.3,1)  withpen pencircle scaled 0.08pt);ahlength :=  0.15;\n'
 	 local d =0
-	 for i,v in ipairs(array) do
-	    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
+	 for j,v in ipairs(array) do
+	    local X,Y,tag = math.floor(d+v[1]),math.floor(d+v[2]),''
 	    if (_neighbourhood_inside(X,Y,2,P))  then 
+	       tag=i -- inside
 	       _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.4,0.9,0.9);\n",
 				       X,Y,X+1,Y,X+1,Y+1,X,Y+1)
 	    elseif  _neighbourhood_outside(X,Y,2,P) then 
+	       tag=i -- outside
 	       _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.9,0.4,0.9);\n",
 				       X,Y,X+1,Y,X+1,Y+1,X,Y+1)
 	    else
+	       tag=i -- frontier
 	       _t[#_t+1]=string.format("fill (%s,%s)--(%s,%s)--(%s,%s)--(%s,%s)--cycle withcolor(0.9,0.9,0.9);\n",
 				       X,Y,X+1,Y,X+1,Y+1,X,Y+1)
 	    end
-	    _t[#_t+1]=string.format("label( \"%s\", (%s,%s));\n",i,(2*X+1)/2,(2*Y+1)/2)
+	    _t[#_t+1]=string.format("label( \"%s\", (%s,%s));\n",j,X+1/4,Y+1-1/4)
+	    _t[#_t+1]=string.format("label( \"%s\", (%s,%s));\n",tag,X+3/4,Y+1/4)
 	 end
 	 for i,v in ipairs(array) do
 	    local X,Y = math.floor(d+v[1]),math.floor(d+v[2])
@@ -747,12 +835,13 @@ local function _draw_curves(valid_curves,withdots,withoptions,withlabels)
 
    if withdots == nil then with_dots=true end
    if withoptions ==nil then  
-      with_options = "drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.1pt);"
+      with_options = "drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.1pt);ahlength :=  0.15;"
    end
 
    if #valid_curves>0 then
       _t[#_t+1]=with_options.."\n"
       _t[#_t+1]="path p;\n"
+      _t[#_t+1]="path q;\n"
    else
       return ''
    end
@@ -767,11 +856,15 @@ local function _draw_curves(valid_curves,withdots,withoptions,withlabels)
       end
       if c1 == nil and c2 == nil then 
 	 _t[#_t+1]=string.format("p:=%s -- %s;%% %03d\n",p,q,i)
+	 _t[#_t+1]=string.format("q:= subpath(0,0.5) of p;%% %03d\n",i)
+	 _t[#_t+1]=string.format("drawarrow  q shifted %s;%% %03d\n",shifted,i)
 	 _t[#_t+1]=string.format("draw p shifted %s;%% %03d\n",shifted,i)
 
       else
 	 _t[#_t+1]=string.format("p:=%s .. controls %s and %s .. %s;%% %03d\n", p,c1,c2,q,i)
-	 _t[#_t+1]=string.format("draw p shifted %s;%% %03d\n",shifted,i)
+	 _t[#_t+1]=string.format("q:= subpath(0,0.5) of p;%% %03d\n",i)
+	 _t[#_t+1]=string.format("drawarrow  q shifted %s;%% %03d\n",shifted,i)
+	 _t[#_t+1]=string.format("draw  p shifted %s;%% %03d\n",shifted,i)
       end
    end
    return table.concat(_t) 
@@ -862,7 +955,7 @@ function end_program()
    -- some mflua instances cannot have this file open
    if f==nil then return end
 
-   
+
    local res = ""
    local t = {}
    local tfm;
@@ -887,20 +980,24 @@ function end_program()
       local index = t[i]
       local char= chartable[index]
       local edges = char['edges']
-      local ye_map = {}
       local temp_res = ''
-      for i,v in ipairs(edges[1][1]) do ye_map[v[1]] = i  end
-      char['edges_map'] = ye_map 
+
+      --local ye_map = {}
+      --for i,v in ipairs(edges[1][1]) do ye_map[v[1]] = i  end
+      --char['edges_map'] = ye_map 
 
       pixels=pixel_map(edges)
+      if pixels == nil then print("! No pixels available: end") return end 
 
       -- get contours
       valid_curves_c =  _get_contours(char)
       --for i,curve in ipairs(valid_curves_c) do local p,c1,c2,q,offset,res = curve[1],curve[2],curve[3],curve[4],curve[5],curve[6] print(p,c1,c2,q,offset,res)  end
 
-      -- get envelopes
+      -- get envelopes and the polygonal versions of the pens
       valid_curves_e,valid_curves_p,pen_over_knots,valid_curves_p_by_offset = _get_envelopes_and_pens(char)
+
       
+      -- get a bezier version of the pens
       valid_curves_p_bez = _get_beziers_of_pen(pen_over_knots)
 
       valid_curves_e = 
@@ -909,19 +1006,20 @@ function end_program()
 
       local _temp_res =''
 
+      valid_curves_e,_temp_res = 
+	 _remove_useless_curves(valid_curves_e,pixels)
+       temp_res = temp_res .. _temp_res      
+
+--[==[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━►
+◄━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--]==]
+
       valid_curves_c,_temp_res = 
 	 --_remove_useless_curves({valid_curves_c[2]},pixels)
 	 _remove_useless_curves(valid_curves_c,pixels)
        temp_res = temp_res .. _temp_res
 
 
-
-      valid_curves_e,_temp_res = 
-	  _remove_useless_curves(valid_curves_e,pixels)
-       temp_res = temp_res .. _temp_res      
-
-
-      valid_curves_p,_temp_res = 
+       valid_curves_p,_temp_res = 
 	  _remove_useless_curves(valid_curves_p,pixels)
 
        --temp_res = temp_res .. _temp_res
@@ -956,8 +1054,6 @@ function end_program()
       end
       valid_curves_p_by_offset = valid_curves_p_by_offset_t 
 
-
-
       print("BEZ DRAW")
       -- Not necessary any more ################## 
       -- local res_pens = _draw_curves(valid_curves_p,true,
@@ -978,14 +1074,16 @@ function end_program()
       --##############################
       res = ''
 
-      res = res .. temp_res
+      --res = res .. temp_res
       
-      res = res .. _draw_pixels(pixels)
+      -- Pixels WARNING it's huge at 7200dpi !!
+      --res = res .. _draw_pixels(pixels)
       
       -- Contours 
       res = res .. _draw_curves(valid_curves_c,true,"drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.01pt);")    
+
       -- Envelopes
-      res = res .. _draw_curves(valid_curves_e,true,"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.08pt);")      
+      res = res .. _draw_curves(valid_curves_e,true,"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.08pt);;ahlength := 1;",true)      
 
       -- Support of pens
       --res = res .. _draw_curves(pen_over_knots,true,"drawoptions(withcolor (0.5,0.2,0)  withpen pencircle scaled 0.1pt);")  
@@ -997,7 +1095,7 @@ function end_program()
       
       -- Pens
       res = res .. _draw_curves_of_pens(valid_curves_p_bez,true,"drawoptions(withcolor (1,0,0)  withpen pencircle scaled 0.01pt);")  
-      
+
 
       f:write("\\startMPpage%%%% BEGIN CURVES\n")
       f:write(res)

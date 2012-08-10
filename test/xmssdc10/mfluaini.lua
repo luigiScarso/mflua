@@ -481,6 +481,8 @@ Use with care !
 ]==]
 
 mflua = {}
+mflua.max_recursion_level = 32
+
 mflua.bit = 7 -- should be 4 
 mflua.pen = {} -- collect bezier curves of the pens
 
@@ -596,6 +598,7 @@ function mflua.floor(p) local w=string.gmatch(p,"[-0-9.]+");local p p={w(),w()};
 
 function mflua.round5_table(p) return {tonumber(string.format("%6.5f",tostring(p[1]))),tonumber(string.format("%6.5f",tostring(p[2])))} end
 
+function mflua.number_to_string_round5(p) return string.format("(%6.5f,%6.5f)",p[1],p[2])  end
 
 
 function mflua.vec(a,b) return {b[1]-a[1],b[2]-a[2]} end
@@ -617,21 +620,6 @@ if io.open('LOCK1')==nil and io.open('LOCK_ELLIPSE')==nil then
    mflua.print_specification.filename  = "envelope.tex"
    mflua.print_specification.outfile1  = io.open(mflua.print_specification.filename,'w')
 end
-
-
---[==[
- font=fontforge.font()
-> font.fullname  ="A font"
-> font.fontname  ="AFont"
-> font.familyname="A Font"
->
-> A=font.createChar("A")
-> A.importOutlines("A.svg")
-> A.removeOverlap()
-> A.simplify()
->
-> font.save()
-]==]
 
 
 
