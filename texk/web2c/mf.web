@@ -1,3 +1,8 @@
+% This program is MFLua, strictly based on the METAFONT 2.718281 source code.
+% It still *doesn't* use the  change file *ch as it should -- one day will be.
+% What follow are the original comments of METAFONT 2.718281. 
+
+
 % This program is copyright (C) 1984 by D. E. Knuth; all rights are reserved.
 % Copying of this file is authorized only if (1) you are D. E. Knuth, or if
 % (2) you make absolutely no changes to your copy. (The WEB system provides
@@ -11011,6 +11016,7 @@ are not the furthest left in any row.
 
 @<Insert a line segment dually to approach the correct offset@>=
 begin xx:=x_coord(r)+x_coord(w); yy:=y_coord(r)+y_coord(w)+half_unit;
+mflua_print_transition_line_from(xx,yy-half_unit);
 @!stat if internal[tracing_edges]>unity then
   begin print_nl("@@ transition line "); print_int(k); print(", from ");
 @:]]]\AT!_trans_}{\.{\AT! transition line...}@>
