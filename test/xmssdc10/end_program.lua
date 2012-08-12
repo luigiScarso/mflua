@@ -860,13 +860,13 @@ local function _draw_curves(valid_curves,withdots,withoptions,withlabels)
       if c1 == nil and c2 == nil then 
 	 _t[#_t+1]=string.format("p:=%s -- %s;%% %03d\n",p,q,i)
 	 _t[#_t+1]=string.format("q:= subpath(0,0.5) of p;%% %03d\n",i)
-	 _t[#_t+1]=string.format("drawarrow  q shifted %s;%% %03d\n",shifted,i)
+	 --_t[#_t+1]=string.format("drawarrow  q shifted %s;%% %03d\n",shifted,i)
 	 _t[#_t+1]=string.format("draw p shifted %s;%% %03d\n",shifted,i)
 
       else
 	 _t[#_t+1]=string.format("p:=%s .. controls %s and %s .. %s;%% %03d\n", p,c1,c2,q,i)
 	 _t[#_t+1]=string.format("q:= subpath(0,0.5) of p;%% %03d\n",i)
-	 _t[#_t+1]=string.format("drawarrow  q shifted %s;%% %03d\n",shifted,i)
+	 --_t[#_t+1]=string.format("drawarrow  q shifted %s;%% %03d\n",shifted,i)
 	 _t[#_t+1]=string.format("draw  p shifted %s;%% %03d\n",shifted,i)
       end
    end
@@ -1087,7 +1087,7 @@ function end_program()
       res = res .. _draw_curves(valid_curves_c,true,"drawoptions(withcolor (0,0,0)  withpen pencircle scaled 0.01pt);")    
 
       -- Envelopes
-      res = res .. _draw_curves(valid_curves_e,true,"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.08pt);;ahlength := 1;",true)      
+      res = res .. _draw_curves(valid_curves_e,true,"drawoptions(withcolor (0,0,1)  withpen pencircle scaled 0.02pt);;ahlength := 1;",true)      
 
       -- Support of pens
       --res = res .. _draw_curves(pen_over_knots,true,"drawoptions(withcolor (0.5,0.2,0)  withpen pencircle scaled 0.1pt);")  
