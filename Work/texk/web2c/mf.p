@@ -2593,6 +2593,7 @@ for n:=1 to n1-n0+1 do envmove[n]:=mm1;envmove[0]:=mm0;moveptr:=0;
 m:=mm0{:519};r:=p;while true do begin if r=q then smoothtop:=moveptr;
 while mem[r].hh.b1<>k do{521:}begin xx:=mem[r+1].int+mem[w+1].int;
 yy:=mem[r+2].int+mem[w+2].int+32768;
+mfluaprinttransitionlinefrom(xx,yy-32768);
 ifdef('STAT')if internal[10]>65536 then begin printnl(586);printint(k);
 print(587);unskew(xx,yy-32768,octant);printtwo(curx,cury);end;
 endif('STAT')if mem[r].hh.b1<k then begin decr(k);w:=mem[w].hh.lh;
