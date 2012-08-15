@@ -10738,6 +10738,7 @@ zdualmoves ( h , p , q )
 	xp = mem [r + 1 ].cint + mem [w + 1 ].cint ;
 	yp = mem [r + 2 ].cint + mem [w + 2 ].cint + 32768L ;
       } 
+      mfluaprinttransitionlineto ( xp , yp - 32768L ) ;
 	;
 #ifdef STAT
       if ( internal [10 ]> 65536L ) 

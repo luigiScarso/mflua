@@ -2609,6 +2609,7 @@ if ty<65536 then goto 31;yy:=yy+65536;end;
 31:if m<envmove[moveptr]then envmove[moveptr]:=m;end;end{:522};
 end else begin incr(k);w:=mem[w].hh.rh;xp:=mem[r+1].int+mem[w+1].int;
 yp:=mem[r+2].int+mem[w+2].int+32768;end;
+mfluaprinttransitionlineto(xp,yp-32768);
 ifdef('STAT')if internal[10]>65536 then begin print(584);
 unskew(xp,yp-32768,octant);printtwo(curx,cury);printnl(261);end;
 endif('STAT')m:=floorunscaled(xp-xycorr[octant]);
