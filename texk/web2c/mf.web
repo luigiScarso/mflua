@@ -11032,6 +11032,7 @@ if right_type(r)<k then
 else  begin incr(k); w:=link(w);
   xp:=x_coord(r)+x_coord(w); yp:=y_coord(r)+y_coord(w)+half_unit;
   end;
+mflua_print_transition_line_to(xp,yp-half_unit);
 stat if internal[tracing_edges]>unity then
   begin print(" to ");
   print_two_true(xp,yp-half_unit);
